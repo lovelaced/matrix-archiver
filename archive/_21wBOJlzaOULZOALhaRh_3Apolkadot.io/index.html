@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-04-25 03:28 UTC</small></p>
+<p><small>last updated 2025-04-26 03:23 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -2288,6 +2288,21 @@ The beefy signatures aren’t likely to be aggregated on-chain. </div>
 <div class='msg reply'><time>2025-04-24 10:16</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Any updates to this? Till now we only have pull protocol. I guess each assurer have to request chunks when it receives report? 
 
 Shouldn&#x27;t the guarantor itself ensure that each validator receives chunk when it is erasure coded as per GP?</div>
+<div class='msg reply'><time>2025-04-25 13:12</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: David Emett: Do you have any updates on this?</div>
+<div class='msg reply'><time>2025-04-25 13:15</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Almost certainly there will be a push protocol in the final network protocol. Not intending to change SNP though.</div>
+<div class='msg reply'><time>2025-04-25 13:16</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Alright. Thanks for the confirmation.</div>
+<div class='msg reply'><time>2025-04-25 15:51</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: David Emett: Could you please elaborate on how is shard index mapped to a particular validator at time of distribution? Like which particular validator will recive which particular shard?</div>
+<div class='msg reply'><time>2025-04-25 15:54</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Hmm good question, not sure if this is documented anywhere!</div>
+<div class='msg reply'><time>2025-04-25 16:07</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: So shard index = ((core index * systematic threshold) + val index) % num vals, will add this to the SNP doc</div>
+<div class='msg reply'><time>2025-04-25 16:08</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: core index meaning the core the package was refined on</div>
+<div class='msg reply'><time>2025-04-25 16:09</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: systematic threshold meaning the minimum number of shards required to reconstruct, this is 342 with the &quot;full&quot; params, 2 with the &quot;tiny&quot; params</div>
+<div class='msg reply'><time>2025-04-25 16:34</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I&#x27;ve added a section to the SNP doc covering this, see <a href="https://github.com/zdave-parity/jam-np/blob/main/simple.md" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/blob/main/simple.md</a></div>
+<div class='msg reply'><time>2025-04-25 16:34</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: (&quot;Shard assignment&quot; section)</div>
+<div class='msg reply'><time>2025-04-25 17:36</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Oh good to know! I previously assumed shard index = validator index.</div>
+<div class='msg reply'><time>2025-04-25 17:37</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Thanks a ton!!</div>
+<div class='msg reply'><time>2025-04-25 17:53</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: &gt;shard index = validator index
+
+in that case few initial nodes will receive too many requests to handle, and they will form most traffic for an epoch for responding to them.</div>
 <div class='msg'><time>2024-10-11 14:26</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: AFAIK Gav does not intend to include this initial &quot;simple&quot; network protocol in the Gray Paper; only the full network protocol will be included, once it has been defined</div>
 <div class='msg'><time>2024-10-11 14:27</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: So as far as the simple protocol is concerned, the linked repo can be considered definitive</div>
 <div class='msg'><time>2024-10-11 15:25</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: &gt; &lt;@dave:parity.io&gt; I&#x27;ve uploaded a more fleshed out definition of the &quot;simple&quot; network protocol for JAM here: <a href="https://github.com/zdave-parity/jam-np/blob/main/simple.md" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/blob/main/simple.md</a>
