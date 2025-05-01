@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-04-28 03:30 UTC</small></p>
+<p><small>last updated 2025-05-01 03:33 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -5569,6 +5569,10 @@ exporting a segment to be imported)
 if you were the &quot;generator&quot; of  CE140 justification(i.e someone requested the justification from you), wouldn&#x27;t you also need to fetch the raw &quot;s&quot; from your sibling&#x27;s just to provide a co-path to the segment shard that you are responsible to store?</div>
 <div class='msg reply'><time>2025-04-23 22:03</time>&ensp;<span class='u' style='color:#c377dd'>mkchung</span>: I think I&#x27;m confused as why &quot;S&quot; not being hashed before building the segments root</div>
 <div class='msg reply'><time>2025-04-24 16:52</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: No you only need to know what was returned from CE137 originally. You are providing a path to a root for a list of shards with an index, not for all shards of a given segment. Refer back to s\_clubs in your availability specifier. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-04-28 15:46</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Sorry, missed these messages earlier. s is the full sequence of segments shards with the given shard index yes. These are all provided in CE 137 (the <code>[Segment Shard]</code>), you should not need to request data from another node to handle a CE 140 request. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-04-28 15:47</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: FWIW the segments root is _not_ involved here, the justifications returned by CE 140 are justifications from the returned segment shards to the erasure root</div>
+<div class='msg reply'><time>2025-04-28 15:52</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: As Jason says look at s_clubs</div>
+<div class='msg reply'><time>2025-04-28 15:53</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I&#x27;ve opened a PR to (hopefully) improve the wording: <a href="https://github.com/gavofyork/graypaper/pull/345" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/345</a></div>
 <div class='msg'><time>2025-04-22 18:33</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: We have found our development life has improved with the &quot;metadata&quot; attached to preimages, specifically when the preimage is for service code, because we can then have tools show that metadata as strings like &quot;fib&quot; and &quot;gameoflife&quot;.   Can we get the same for workpackages+bundles so that we can attach metadata like &quot;fib(93)&quot;, &quot;gameoflife(314)&quot;, or should that be in the payload as a mere convention?</div>
 <div class='msg'><time>2025-04-22 19:56</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Another quick request: Would you mind assigning <code>provide</code> a number like 17 or 27, and perhaps starting historical\_lookup at 32 or 64 or 128? That would leave a bit of space between the two big groups of host functions for &quot;one more&quot;.
  <span class="edited">(edited)</span></div>
@@ -5720,3 +5724,109 @@ I am not sure what it is trying to imply.</div>
 <div class='msg'><time>2025-04-26 17:40</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: For the function definition (D.4), it seems like k could  have (much) fewer than 248 bits, e.g. in the case where there are many elements of the preimage lookup for any service account. Since in this case the keys for all of these in the serialized state will have the same first 8 bytes, so by the time we are computing the leaf value for one of these keys we will have cleaved off at least 64 bits, leaving fewer than 192 bits for k, if I understand correctly  </div>
 <div class='msg'><time>2025-04-26 17:40</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Should we be padding with zeroes in such cases to compute bits(k)…248?</div>
 <div class='msg'><time>2025-04-26 17:47</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Ah, nevermind. This is why we also have the key in the rhs of the map, so we remember the original non-cleaved key</div>
+<div class='msg'><time>2025-04-28 07:58</time>&ensp;<span class='u' style='color:#ad33c0'>kianenigma</span>: I noticed from (latex) comments in <a href="https://github.com/gavofyork/graypaper/pull/285" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/285</a> that the encoding of the new statistics state components vary between u16, u32, and u64. Yet, in the state serialization section, they are not covered: <a href="https://graypaper.fluffylabs.dev/#/cc517d7/39dd0139e901?v=0.6.5" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/cc517d7/39dd0139e901?v=0.6.5</a> 
+
+Is this something that is not finalized yet, or are they mentioned in another section and I am missing it? 
+
+For example, I could guess that gas always serialized as u64 but didn&#x27;t have a prior reference to know e.g. extrinsic count is encoded as u16.</div>
+<div class='msg'><time>2025-04-28 09:31</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The state serialisation for the latter two components is the general (variable size integer) encoding.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-04-28 16:07</time>&ensp;<span class='u' style='color:#cb735c'>prasad-kumkar</span>: Should argument <code>a</code> from <a href="https://graypaper.fluffylabs.dev/#/cc517d7/2c05022c0702?v=0.6.5" target="_blank" rel="noopener">argument invocation function</a> be encoded with p before passing in <a href="https://graypaper.fluffylabs.dev/#/cc517d7/2b64022b6402?v=0.6.5" target="_blank" rel="noopener">program initialization function</a>, as its being decoding from <code>p</code> as described in <a href="https://graypaper.fluffylabs.dev/#/cc517d7/2bb1022bc102?v=0.6.5" target="_blank" rel="noopener">A.37</a> ? As noted:
+
+&gt; Given some p which is appropriately encoded together with some argument data a, we can define program code c, registers ω and ram μ through the standard initialization decoder function Y <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-04-28 19:14</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Should we expect to be able to handle bad blocks for M1? Or are all blocks presumed valid?</div>
+<div class='msg reply'><time>2025-04-28 19:25</time>&ensp;<span class='u' style='color:#825bc4'>jay_ztc</span>: +&quot;handle forks&quot; to this question <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-04-28 21:07</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: IMO M1 is just STF, state in, new state out. there is no concept of a block chain to be considered</div>
+<div class='msg reply'><time>2025-04-28 21:10</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: so you should detect if a block is bad (purely using the provided input state), but no need to care about forks because it is stateless</div>
+<div class='msg'><time>2025-04-28 21:09</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: &gt; &lt;@ascriv:matrix.org&gt; Should we expect to be able to handle bad blocks for M1? Or are all blocks presumed valid?
+
+Be prepared for bad blocks. A lot of bad blocks :)</div>
+<div class='msg'><time>2025-04-29 13:22</time>&ensp;<span class='u' style='color:#95c05f'>qinwenwang</span>: JAM Gray Paper Chinese Version has been updated to 0.6.5 accordingly <a href="https://www.lollipop.builders/JAM-Graypaper-Chinese.pdf" target="_blank" rel="noopener">https://www.lollipop.builders/JAM-Graypaper-Chinese.pdf</a></div>
+<div class='msg'><time>2025-04-29 18:41</time>&ensp;<span class='u' style='color:#825bc4'>jay_ztc</span>: Curious why the state serialization of preimage availabilities specifies that the preimage hash should be hashed? Instead of serializing the preimage hash itself, like in the preimage serialization?
+
+<a href="https://graypaper.fluffylabs.dev/#/cc517d7/397202397202?v=0.6.5" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/cc517d7/397202397202?v=0.6.5</a>
+
+Edit: wording <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-04-30 02:39</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Maybe for super extra care in having no collisions?</div>
+<div class='msg'><time>2025-04-30 02:44</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: I asked the same question before</div>
+<div class='msg'><time>2025-04-30 02:45</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I have a question also about state serialization:
+
+For pending reports serialization, is it the case that the segment count in (11.5) should be serialized using the general natural number encoding? In fact , since E is not subscripted in C(10), shouldn’t all naturals in the work report be encoded in the general way?</div>
+<div class='msg'><time>2025-04-30 02:51</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: But, if we’re going with naturals that are subscripted (like gas values) should always be encoded in the non general way (that seems to be convention?), does that mean the gas values in core and service statistics should not be generally encoded? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-04-30 10:01</time>&ensp;<span class='u' style='color:#4281bb'>jimboj21</span>: I see in 12.20 that P is a return value. From what I can see it is not defined here but is a returned by the accumulation invokable pvm instance. However it does not appear that psi_a function signature has been updated to reflect this </div>
+<div class='msg'><time>2025-04-30 10:07</time>&ensp;<span class='u' style='color:#4281bb'>jimboj21</span>: </div>
+<div class='msg'><time>2025-04-30 12:47</time>&ensp;<span class='u' style='color:#825bc4'>jay_ztc</span>: Anyone else having trouble with the archives site? Only seeing the title: &quot;Archived Rooms&quot;
+
+light inspection reveals the following warning: Error with Permissions-Policy header: Unrecognized feature: &#x27;interest-cohort&#x27;.
+
+<a href="https://paritytech.github.io/matrix-archiver/" target="_blank" rel="noopener">https://paritytech.github.io/matrix-archiver/</a> </div>
+<div class='msg'><time>2025-04-30 12:48</time>&ensp;<span class='u' style='color:#787fdf'>erin</span>: ah thanks for flagging, I&#x27;ll check on it right away</div>
+<div class='msg'><time>2025-04-30 12:58</time>&ensp;<span class='u' style='color:#787fdf'>erin</span>: It&#x27;s now fixed - sorry about that. Looks like the archival process timed out, could have been due to a slow github runner. I&#x27;ve increased the timeout to something quite high now so it should (hopefully) not happen again.</div>
+<div class='msg'><time>2025-04-30 13:15</time>&ensp;<span class='u' style='color:#825bc4'>jay_ztc</span>: &lt;del&gt;Validators won&#x27;t be able to get the preimage hash itself from the serialized state-&gt; Instead they will need to refer to the block extrinsics right? (for any newly-requested, not yet provided preimage).&lt;/del&gt;
+
+What if instead of hashing, we stack the length octets on top of our preimage hash octets? Basically instead of concatenating bytes, we add each of the 4 length octets to each of the first 4 hash octets, and use the result as our state-key?
+
+I&#x27;m thinking if we can avoid the hash operation while meeting the same requirements- we can lessen our perf overhead
+
+edit: wording (duplication)
+edit: strikethrough not-really-relevent edge case of validator requesting state from another validator for reconstruction <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-04-30 13:16</time>&ensp;<span class='u' style='color:#825bc4'>jay_ztc</span>: For context, this was the post from David Emett in Oct 2024:
+
+2024-10-31 22:29 dave: The preimage hash is passed in to eg solicit directly, it&#x27;s trivial to pass in almost-colliding hashes. As the trie key construction function doesn&#x27;t preserve all hash bits, these almost-colliding hashes could actually collide in the trie if they are not hashed beforehand
+</div>
+<div class='msg reply'><time>2025-04-30 13:23</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &gt; &lt;@jay_ztc:matrix.org&gt; Validators won&#x27;t be able to get the preimage hash itself from the serialized state-&gt; Instead they will need to refer to the block extrinsics right? (for any newly-requested, not yet provided preimage).
+&gt; 
+&gt; What if instead of hashing, we stack the length octets on top of our preimage hash octets? Basically instead of concatenating bytes, we add each of the 4 length octets to each of the first 4 hash octets, and use the result as our state-key?
+&gt; 
+&gt; I&#x27;m thinking if we can avoid the hash operation while meeting the same requirements- we can lessen our perf overhead
+&gt; 
+&gt; edit: wording (duplication)
+
+Maybe I&#x27;m not understanding but it seems trivial to generate collisions with this scheme. The requested hash and length are almost unconstrained (the length is somewhat constrained by required deposit I think)</div>
+<div class='msg reply'><time>2025-04-30 13:24</time>&ensp;<span class='u' style='color:#825bc4'>jay_ztc</span>: doh! of course, thank you</div>
+<div class='msg'><time>2025-04-30 13:24</time>&ensp;<span class='u' style='color:#825bc4'>jay_ztc</span>: </div>
+<div class='msg'><time>2025-04-30 14:20</time>&ensp;<span class='u' style='color:#72c147'>luke_fishman</span>: has anyone passes the latest accumulate test vector <code>same_code_different_services-1</code>
+
+in the <code>pre-state</code> there are 2 services: 1729, 1730
+1730 has no &quot;blob&quot; i.e service code
+
+in the <code>post-state</code> service 1730 is removed, only service 1729 remains
+
+i am currently clueless as to how that might have happend
+
+- it could not have ejected itself - since it has no code
+- as far as i can tell, it is not removed from <code>d&amp;#x27;</code>  in <a href="https://graypaper.fluffylabs.dev/#/cc517d7/17fe01170102?v=0.6.5" target="_blank" rel="noopener">12.17</a>
+
+how else can it be removed?
+
+davxy  could you advise? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-04-30 14:21</time>&ensp;<span class='u' style='color:#4281bb'>jimboj21</span>: Luke | Jamixir: I am also stuck trying to get this working currently</div>
+<div class='msg'><time>2025-04-30 14:21</time>&ensp;<span class='u' style='color:#4281bb'>jimboj21</span>: and dont see why it is happening yet</div>
+<div class='msg'><time>2025-04-30 14:22</time>&ensp;<span class='u' style='color:#72c147'>luke_fishman</span>: good to know I&#x27;m not alone on this</div>
+<div class='msg'><time>2025-04-30 15:45</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Seems to be addressed in <a href="https://github.com/gavofyork/graypaper/pull/348" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/348</a>
+And thus likely published in next release of GP (0.6.6).</div>
+<div class='msg'><time>2025-04-30 15:46</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Minor text change near equation: 12.20: change p -&gt; i
+PR: <a href="https://github.com/gavofyork/graypaper/pull/351" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/351</a></div>
+<div class='msg'><time>2025-04-30 15:48</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Some suggested changes to the provide host function: <a href="https://github.com/gavofyork/graypaper/pull/352" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/352</a>
+Fixes: 1) setting registers, 2) setting bold_d (service dictionary)
+
+</div>
+<div class='msg'><time>2025-04-30 18:04</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: The new 0.6.5 gas parameter x\_g in the operand is serialized in <a href="https://graypaper.fluffylabs.dev/#/cc517d7/385f02385f02?v=0.6.5" target="_blank" rel="noopener">C.29</a> not with E\_8 but with <a href="https://graypaper.fluffylabs.dev/#/cc517d7/37a10037a100?v=0.6.5" target="_blank" rel="noopener">C.6</a>, unlike the others that use E\_8 (see C.23, C.26, C.28) -- is this a typo or intended?  Why not make them consistent in one direction or the other? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-04-30 19:28</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: All these encodings will be revisited in due course before 0.7.0 (there’s an issue on the 0.6 milestone page) but until then assume your reading is correct.</div>
+<div class='msg'><time>2025-04-30 20:21</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: &gt; &lt;@luke_fishman:matrix.org&gt; has anyone passes the latest accumulate test vector <code>same_code_different_services-1</code>
+&gt; 
+&gt; in the <code>pre-state</code> there are 2 services: 1729, 1730
+&gt; 1730 has no &quot;blob&quot; i.e service coed
+&gt; 
+&gt; 
+&gt; in the <code>post-state</code> service 1730 is removes, only service 1729 remains
+&gt; 
+&gt; i am currently clueless to how that might have happend
+&gt; - it could not have ejected itself - since it has no code
+&gt; - as far as i can tell, it is not removed from <code>d&amp;#x27;</code>  in <a href="https://graypaper.fluffylabs.dev/#/cc517d7/17fe01170102?v=0.6.5" target="_blank" rel="noopener">12.17</a>
+&gt; 
+&gt; how else can it be removed?
+&gt; 
+&gt; davxy  could you advice?
+&gt; 
+
+I&#x27;ll have a look</div>
