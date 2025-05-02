@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-05-01 03:33 UTC</small></p>
+<p><small>last updated 2025-05-02 03:30 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -7439,4 +7439,16 @@ Mila
 <div class='msg'><time>2025-04-28 23:47</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Here is a JAM Implementer Dune Dashboard Proof-of-Concept 
  <a href="https://dune.com/substrate/jamtestnet" target="_blank" rel="noopener">https://dune.com/substrate/jamtestnet</a>
 Earlier thought we should log all of JAMSNP activity but after thinking about what was really important to a implementer leaderboard and M3 performance, ended up at the above instead -- hope we can discuss how to make this really work next week!</div>
+<div class='msg reply'><time>2025-05-01 20:29</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: This is cool. Will be very useful once we can test on standardized hardware (toaster for example). </div>
+<div class='msg reply'><time>2025-05-01 20:29</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: For the analytics to be a valid comparison, we&#x27;d need some standard test cases defined for each. For example block authoring we need to all be including the same items in the block (same number of tickets, assurances, etc) otherwise the completion times would not be comparable</div>
 <div class='msg'><time>2025-04-29 13:18</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: FYI A small behavioural change has been made to SNP. Previously the SNP spec stated that validators should _not_ announce preimages to each other. This has been changed to state the opposite: validators _should_ announce preimages to each other. See <a href="https://github.com/zdave-parity/jam-np/commit/ebc6139eb89dfaa49f5fa12a5a0abdc1af0bd578." target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/commit/ebc6139eb89dfaa49f5fa12a5a0abdc1af0bd578.</a> The wire protocol is unchanged.</div>
+<div class='msg'><time>2025-05-01 11:55</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: I will present JAM at ETHLisbon next week. Open for ideas of things to share with the ETH community. It will be a 30min talk. Since we still don’t have a full stack running node in Jamixir, I won’t be able to make a quick demo. But I can easily add video snippets / screen recordings to my presentation if anyone sends it to me. </div>
+<div class='msg'><time>2025-05-01 11:58</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I expect we can provide a Linux binary for a PolkaJAM testnet if desired. </div>
+<div class='msg'><time>2025-05-01 16:59</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: We desire a &quot;how to run DOOM with the PolkaJAM testnet&quot; workshop (which we should all like to replace the PolkaJAM part with our own ASAP of course!), which can dual as a &quot;how to sell JAM in a world of mind viruses&quot;.    It is a very good conversation starter as to what really really is going on since most people are naturally like &quot;oh yeah? but what about ethproofs/zkVM/SP1/...?&quot;   Must this be public?</div>
+<div class='msg'><time>2025-05-01 17:16</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: We still have a Workshop slot available on May 7th. If gav or anyone else in the PolkaJAM team could give this DOOM on JAM workshop , I can use it on my presentation at ETHLisbon (and other scheduled talks to come). </div>
+<div class='msg'><time>2025-05-01 17:25</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: That would be terrific.  We have enough stuff to transform <a href="https://docs.jamcha.in" target="_blank" rel="noopener">https://docs.jamcha.in</a> into a more direct competitor of <a href="https://docs.succinct.xyz/docs/sp1/getting-started/quickstart" target="_blank" rel="noopener">https://docs.succinct.xyz/docs/sp1/getting-started/quickstart</a> (this is the &quot;competitor&quot; I know and understand, probably you all have others) and similar -- Not sure if this transformation should be done by JAM implementers in community-driven way (any binary should be able to replace or compose with the other) OR from W3F+Parity central. 
+
+A little push and coordination to turn that &quot;OR&quot; into an &quot;AND&quot; would go a long way?
+
+Our 2-core testnet can do 12-16 hours processing thousands of fib/fib2/gameoflife/megatron WPs (486 work packages per hour) and then something bad happens =(  but its not very sexy to lookat relative to DOOM =) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-01 20:30</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: </div>
