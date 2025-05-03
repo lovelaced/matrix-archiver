@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-05-02 03:30 UTC</small></p>
+<p><small>last updated 2025-05-03 03:27 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -5848,3 +5848,18 @@ Since A.36 only checks whether there exists a **c**, **o**, **w**, <code>z</code
 <div class='msg'><time>2025-05-01 20:01</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: For instruction 104, doesn’t this actually get the trailing (not leading) zeros as it’s defined? For example if wA is 0x1, B_8 will be 1 followed by 0s, and so the formula will evaluate to 0, when it should be 63 <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-05-01 20:06</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: We should be using the big endian representation of wA in 104-107 unless I’m mistaken </div>
 <div class='msg'><time>2025-05-01 22:48</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Made a pr www.github.com/gavofyork/graypaper/pull/357 <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-02 08:51</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Merged a fix</div>
+<div class='msg'><time>2025-05-02 11:16</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: I am a bit confused about the terminology used in CE 139/140 (<a href="https://docs.jamcha.in/knowledge/advanced/simple-networking/spec#ce-139140-segment-shard-request):" target="_blank" rel="noopener">https://docs.jamcha.in/knowledge/advanced/simple-networking/spec#ce-139140-segment-shard-request):</a>
+the GP specifies very well the concept of &quot;segment&quot;. It doesn&#x27;t use the word &quot;shard&quot; - are they the same concept? Also, CE139 define 12 bytes segment shards. But the GP segment sizes are 684 bytes. Where do 12 comes from? Where are shards defined in the GP? </div>
+<div class='msg'><time>2025-05-02 11:19</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: segments are 4104 bytes and can be reconstructed by 342 validators each presenting their 12 byte <em>shard</em> (and its index)</div>
+<div class='msg'><time>2025-05-02 12:29</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: &gt; &lt;@gav:polkadot.io&gt; segments are 4104 bytes and can be reconstructed by 342 validators each presenting their 12 byte <em>shard</em> (and its index)
+
+Thanks. Then In tiny testnets (6 nodes, 2 cores) each shard has 2052 bytes? So shard size is 4104 / [number of cores]?</div>
+<div class='msg'><time>2025-05-02 12:36</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Yes indeed. </div>
+<div class='msg'><time>2025-05-02 15:51</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: image.png</div>
+<div class='msg'><time>2025-05-02 15:52</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: You might find the above useful (if you spot an error, please advise!)</div>
+<div class='msg'><time>2025-05-02 17:21</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Hey all. With having M2 pretty much complete at this point I&#x27;m now trying to wrap my head around how to build the required  recompiler. Based on my research so far, it looks like I could generate RISC-V machine code, add an ELF header, then use a linker to produce the final ELF file, and finally execute that ELF (somehow) as a background process. Am I heading in the right direction, or am I way off and should just wait for Jan’s talk?</div>
+<div class='msg'><time>2025-05-02 17:23</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Nope. My talk next week should contain the bare basics that should let you get started on writing one.</div>
+<div class='msg'><time>2025-05-02 17:25</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Alright I&#x27;ll hold off for now. I&#x27;m no longer going to be able to make it to jam experience so I really hope this is available to watch online afterwards</div>
+<div class='msg'><time>2025-05-02 17:26</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: I will also share the slides so even if you can&#x27;t watch the talk they should be useful.</div>
+<div class='msg'><time>2025-05-02 17:26</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Thanks!</div>
