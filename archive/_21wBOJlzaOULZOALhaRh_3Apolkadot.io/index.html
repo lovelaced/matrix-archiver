@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-05-05 03:31 UTC</small></p>
+<p><small>last updated 2025-05-06 03:30 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -5805,6 +5805,12 @@ Work packages can declare a prerequisite work package. This will be enforced for
 <div class='msg reply'><time>2025-02-20 05:56</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@alice_und_bob:matrix.org&gt; hm, so who decides on the ordering of the processing of work packages (or the resulting accumulations) in cases where there is no path-dependence constraining it?
 
 Refine is asynchronous, stateless and really has no order. </div>
+<div class='msg reply'><time>2025-05-05 16:09</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: hey, coming back to this question. 
+
+I try to understand who eventually determines to order of WP accumulation.
+
+Let&#x27;s say WPs don&#x27;t define a pre-requisite other WP, is the order then determined in the accumulate stage from the leader?</div>
+<div class='msg reply'><time>2025-05-05 20:08</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It’s determined by the service’s Accumulate logic. From JAM’s perspective there is no order. Because it doesn’t impose any kind of sequence or loop like transactive systems.  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-02-17 23:46</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Does anyone have a  polkatool or JAM Rust SDK built &quot;null authorizer&quot; which matches <a href="https://x.com/the_seraya/status/1891521159209824381" target="_blank" rel="noopener">https://x.com/the_seraya/status/1891521159209824381</a> that we can basically standardize on amongst ourselves</div>
 <div class='msg reply'><time>2025-02-17 23:50</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: See <a href="https://crates.io/crates/jam-null-authorizer," target="_blank" rel="noopener">https://crates.io/crates/jam-null-authorizer,</a> though I&#x27;m not sure if the build is reproducible or not, so not sure if you will get the same hash every time</div>
 <div class='msg reply'><time>2025-02-18 00:04</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: The latest &quot;0.1.12&quot; looks to have not changed in the last couple of months, thank you!  <a href="https://github.com/jam-duna/jamtestnet/blob/main/services/parity/jam-null-authorizer/src/main.rs" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/blob/main/services/parity/jam-null-authorizer/src/main.rs</a>
@@ -7470,3 +7476,26 @@ Cisco put one review comment and then I can subsequently rename the page to PVM<
 Sure! </div>
 <div class='msg'><time>2025-05-04 16:50</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: ima_bf46e03.jpeg</div>
 <div class='msg'><time>2025-05-04 16:51</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: JAM Experience - all set! </div>
+<div class='msg'><time>2025-05-05 15:36</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: JAM Doom replication:
+ <a href="https://www.youtube.com/watch?v=ltWMjg2EHS8" target="_blank" rel="noopener">https://www.youtube.com/watch?v=ltWMjg2EHS8</a></div>
+<div class='msg reply'><time>2025-05-05 15:48</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: just watched 5 times to confirm that wu ignored the second enemy </div>
+<div class='msg'><time>2025-05-05 15:55</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Unwatchable </div>
+<div class='msg'><time>2025-05-05 16:10</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: hey, coming back to this question --&gt; <a href="https://matrix.to/#/!wBOJlzaOULZOALhaRh:polkadot.io/$tMICwJ4QJLhbaG4P0gH7DyDM8j67XmiHbs\_dheO\_hGM?via=polkadot.io&amp;via=matrix.org&amp;via=parity.io" target="_blank" rel="noopener">https://matrix.to/#/!wBOJlzaOULZOALhaRh:polkadot.io/$tMICwJ4QJLhbaG4P0gH7DyDM8j67XmiHbs\_dheO\_hGM?via=polkadot.io&amp;via=matrix.org&amp;via=parity.io</a>
+
+I try to understand who eventually determines to order of WP accumulation.
+
+Let&#x27;s say a WP doesn&#x27;t define a pre-requisite other WP, is the order then determined in the accumulate stage from the leader? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-05 17:16</time>&ensp;<span class='u' style='color:#49aebc'>krystian50</span>: 
+Hi everyone!
+At Fluffy Labs, we’ve recently kicked off a new project aimed at searching though JAM resources.
+
+It already includes a few features:
+    •    Integration with the JAM Channels Archive (thanks to erin !)
+    •    Integration with the Graypaper
+    •    A few search options to explore the data
+
+We’re still in the early development phase and actively experimenting, so the UI is evolving quickly - features may appear and disappear. If you have any feedback, we’d love to hear it!
+
+tomusdrw , mateuszsikora and hey_im_stas will be at JAM Experience, so feel free to give them the feedback directly 🙂
+
+🔎  <a href="https://search.fluffylabs.dev" target="_blank" rel="noopener">https://search.fluffylabs.dev</a></div>
