@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-05-06 03:30 UTC</small></p>
+<p><small>last updated 2025-05-07 03:30 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -5811,6 +5811,9 @@ I try to understand who eventually determines to order of WP accumulation.
 
 Let&#x27;s say WPs don&#x27;t define a pre-requisite other WP, is the order then determined in the accumulate stage from the leader?</div>
 <div class='msg reply'><time>2025-05-05 20:08</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It’s determined by the service’s Accumulate logic. From JAM’s perspective there is no order. Because it doesn’t impose any kind of sequence or loop like transactive systems.  <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-05-06 08:18</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: so let&#x27;s say there is a bunch of refined workitems/workresults that reach the service&#x27;s accumulate logic with no defined order.
+
+Is the accumulate stage eventually executed by the leader? Is it the leader who would pick an order if it is not otherwise given? <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-02-17 23:46</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Does anyone have a  polkatool or JAM Rust SDK built &quot;null authorizer&quot; which matches <a href="https://x.com/the_seraya/status/1891521159209824381" target="_blank" rel="noopener">https://x.com/the_seraya/status/1891521159209824381</a> that we can basically standardize on amongst ourselves</div>
 <div class='msg reply'><time>2025-02-17 23:50</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: See <a href="https://crates.io/crates/jam-null-authorizer," target="_blank" rel="noopener">https://crates.io/crates/jam-null-authorizer,</a> though I&#x27;m not sure if the build is reproducible or not, so not sure if you will get the same hash every time</div>
 <div class='msg reply'><time>2025-02-18 00:04</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: The latest &quot;0.1.12&quot; looks to have not changed in the last couple of months, thank you!  <a href="https://github.com/jam-duna/jamtestnet/blob/main/services/parity/jam-null-authorizer/src/main.rs" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/blob/main/services/parity/jam-null-authorizer/src/main.rs</a>
@@ -7499,3 +7502,32 @@ We’re still in the early development phase and actively experimenting, so the 
 tomusdrw , mateuszsikora and hey_im_stas will be at JAM Experience, so feel free to give them the feedback directly 🙂
 
 🔎  <a href="https://search.fluffylabs.dev" target="_blank" rel="noopener">https://search.fluffylabs.dev</a></div>
+<div class='msg'><time>2025-05-06 08:22</time>&ensp;<span class='u' style='color:#ad33c0'>kianenigma</span>: order within the WPs of the same service, or of different services?
+
+Within the same service, it is up to the accumulate code. Each service is accumulated just once during each block. It receives all possibly parallel refines as input, and has to decide what to do with them, and in which order. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-06 08:24</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: what I understand is that there can be an unordered set of WPs reaching the (same) service. So the accumulate logic is confronted with an unordered set. But somehow an order needs to be chosen. What I try to get down to is if the order can be set arbitrarily by the leader or how the order is eventually chosen</div>
+<div class='msg'><time>2025-05-06 08:25</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The block builder has no relevance. </div>
+<div class='msg'><time>2025-05-06 08:26</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: I have an unordered set of WPs. How is the eventual order of accumulation decided? If it is decided by the service, how does it decide the order of the unordered set? And on which machine (set of machines) does this happen?</div>
+<div class='msg'><time>2025-05-06 08:27</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It isn’t</div>
+<div class='msg'><time>2025-05-06 08:27</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Accumulation happens on all full nodes. </div>
+<div class='msg'><time>2025-05-06 08:28</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: And as Kian says, service code executes once per accumulation round, being given access to all work results. </div>
+<div class='msg'><time>2025-05-06 08:28</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It is up to that code to do something with them. </div>
+<div class='msg'><time>2025-05-06 08:28</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: so when the service iterates through the set, it has to pick its own ordering logic? e.g. asc by wp hash?</div>
+<div class='msg'><time>2025-05-06 08:29</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: In principle it could be a commutative operation. </div>
+<div class='msg'><time>2025-05-06 08:29</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Eg addition. Order in that case wouldn’t matter.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-06 08:29</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If some sequential processing were needed, then it could randomise the processing order  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-06 08:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@alice_und_bob:matrix.org&gt; so when the service iterates through the set, it has to pick its own ordering logic? e.g. asc by wp hash?
+
+Yes</div>
+<div class='msg'><time>2025-05-06 08:31</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: okay, I guess my confusion was coming from the assumption of having a transaction-based system; while a service can in principle be transactionless.
+
+but any transaction-based service will pick an ordering-mechanism.
+
+Does the service have access to randomness provided by JAM? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-06 08:39</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It does as of 0.6.6. </div>
+<div class='msg'><time>2025-05-06 15:18</time>&ensp;<span class='u' style='color:#92c76e'>rick</span>: Hi All -- I&#x27;ll be on a panel at Decentralized Lugano on Thursday.
+
+Will also be around on the 9th and 10th for ethDAM. 
+
+ If anyone is attending either event please reach out, would love to meet in person. </div>
+<div class='msg'><time>2025-05-06 17:14</time>&ensp;<span class='u' style='color:#787fdf'>erin</span>: Reminder for anyone in Lisbon, event link for tomorrow: <a href="https://lu.ma/6monb9f9" target="_blank" rel="noopener">https://lu.ma/6monb9f9</a></div>
