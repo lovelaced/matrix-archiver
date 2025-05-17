@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-05-16 03:31 UTC</small></p>
+<p><small>last updated 2025-05-17 03:29 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -7794,9 +7794,77 @@ We’ll start trying to sync with your node.
 If we encounter any issues, we’ll reach out to you.
 Thanks for your response!</div>
 <div class='msg reply'><time>2025-05-15 15:40</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Nice!</div>
+<div class='msg reply'><time>2025-05-16 07:42</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: David Emett: 
+Did you support to use the genesis block to do the block request?</div>
+<div class='msg reply'><time>2025-05-16 07:44</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: There is no genesis block, only a genesis header</div>
+<div class='msg reply'><time>2025-05-16 08:38</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: so the only way to catch up is using direction = 1 ? <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-05-16 08:52</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Sorry I think I misunderstood the original question. I think you should be able to request &quot;ascending&quot; starting from the genesis header</div>
+<div class='msg reply'><time>2025-05-16 08:52</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You can&#x27;t request the block with the genesis header itself though as there is no such block</div>
+<div class='msg reply'><time>2025-05-16 09:00</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: ok I see!
+
+one more question
+are you guys using the same stream for all of the request?
+
+I got this
+How do you determine a peer&#x27;s poor rating?
+<pre><code class=''>2025-05-16 16:54:48 tokio-runtime-worker TRACE jam_node::net::peer_manager  ede7gocrx5435my626w74zmwejyzqw3wvuvwtnzu4sz2lwib4kxaa@127.0.0.1:58178: New incoming connection
+2025-05-16 16:54:48 tokio-runtime-worker TRACE jam_node::net::peer_manager::peer  ede7gocrx5435my626w74zmwejyzqw3wvuvwtnzu4sz2lwib4kxaa@127.0.0.1:40005: Disconnecting: Poor rating
+</code></pre></div>
+<div class='msg reply'><time>2025-05-16 09:07</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: the good news is we got the up0 handshake success and got the new block header!</div>
+<div class='msg reply'><time>2025-05-16 09:32</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &gt; &lt;@shwchg:matrix.org&gt; ok I see!
+&gt; 
+&gt; one more question
+&gt; are you guys using the same stream for all of the request?
+&gt; 
+&gt; I got this
+&gt; How do you determine a peer&#x27;s poor rating?
+&gt; <pre><code class=''>&gt; 2025-05-16 16:54:48 tokio-runtime-worker TRACE jam_node::net::peer_manager  ede7gocrx5435my626w74zmwejyzqw3wvuvwtnzu4sz2lwib4kxaa@127.0.0.1:58178: New incoming connection
+&gt; 2025-05-16 16:54:48 tokio-runtime-worker TRACE jam_node::net::peer_manager::peer  ede7gocrx5435my626w74zmwejyzqw3wvuvwtnzu4sz2lwib4kxaa@127.0.0.1:40005: Disconnecting: Poor rating
+&gt; </code></pre>
+
+Poor rating is likely to be caused by not following the protocol. We&#x27;re planning to change this behaviour so we don&#x27;t disconnect so aggressively, but obviously protocol bugs should be fixed. The first time a peer is disconnected the QUIC &quot;reason phrase&quot; should contain an error message</div>
+<div class='msg reply'><time>2025-05-16 09:33</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The protocol bug could be on our side of course 😅</div>
+<div class='msg reply'><time>2025-05-16 09:35</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Re &quot;using the same stream for all requests&quot;: we use streams as described in the SNP doc, so generally a separate stream for each request</div>
+<div class='msg reply'><time>2025-05-16 09:36</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Note that the block announcement stream is an exception to this: it is stateful and should be kept open</div>
+<div class='msg reply'><time>2025-05-16 09:40</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: we get <code>Application error 0x4 (remote)</code> from our log
+
+and got this from yours
+<pre><code class=''>2025-05-16 17:25:23 tokio-runtime-worker ERROR jam_node::sync  Failed to receive Block: Stream half closed error: Half stream killed
+2025-05-16 17:25:23 tokio-runtime-worker TRACE jam_node::net::peer_manager::peer  ede7gocrx5435my626w74zmwejyzqw3wvuvwtnzu4sz2lwib4kxaa@127.0.0.1:40005: Disconnecting: Misbehaviour: network i/o failed: timed out (5000ms)
+2025-05-16 17:25:23 tokio-runtime-worker TRACE jam_node::net::peer_manager  ede7gocrx5435my626w74zmwejyzqw3wvuvwtnzu4sz2lwib4kxaa@127.0.0.1:54499: New incoming connection
+2025-05-16 17:25:23 tokio-runtime-worker TRACE jam_node::net::peer_manager::peer  ede7gocrx5435my626w74zmwejyzqw3wvuvwtnzu4sz2lwib4kxaa@127.0.0.1:40005: Disconnecting: Poor rating
+</code></pre>
+
+and I didn&#x27;t see our node pop in this kind of log (I guess this is from the server side?)
+<pre><code class=''>2025-05-16 17:25:18 tokio-runtime-worker TRACE jam_node::net  e3r2oc62zwfj3crnuifuvsxvbtlzetk4o5qyhetkhagsc2fgl2oka@127.0.0.1:40000: Opening BlockRequest stream
+</code></pre></div>
+<div class='msg reply'><time>2025-05-16 09:41</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: Maybe we could standardize some error codes
+would that be helpful?</div>
+<div class='msg reply'><time>2025-05-16 10:01</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: It looks like polkajam requested a block then there was a timeout reading it from the stream. Probably we shouldn&#x27;t disconnect in this case, but I would look into what&#x27;s going on there anyway</div>
+<div class='msg reply'><time>2025-05-16 10:05</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &gt; &lt;@shwchg:matrix.org&gt; Maybe we could standardize some error codes
+&gt; would that be helpful?
+
+Yes I think we will include error codes in the network protocol eventually. QUIC supports a &quot;reason phrase&quot; on connection close, which polkajam fills with a human-readable error message. I would recommend printing this in your logs</div>
+<div class='msg reply'><time>2025-05-16 10:09</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: because we fail to request the block from the other node
+I will look for the reason</div>
+<div class='msg reply'><time>2025-05-16 10:11</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You shouldn&#x27;t announce blocks before you have them yourself</div>
+<div class='msg reply'><time>2025-05-16 10:11</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: And have verified them</div>
+<div class='msg reply'><time>2025-05-16 10:12</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: We could maybe relax the verification requirement for validator&lt;-&gt;validator connections</div>
+<div class='msg reply'><time>2025-05-16 10:20</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: yes! let me check it
+thank you!</div>
+<div class='msg reply'><time>2025-05-16 10:44</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: Is there a way to get the logs related to stream dispatch or incoming bytes?</div>
+<div class='msg reply'><time>2025-05-16 10:51</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I think RUST_LOG=trace will give you everything. We use Quinn for QUIC which produces a lot of logs, not sure exactly what as I haven&#x27;t yet spent much time looking through them</div>
 <div class='msg'><time>2025-05-15 02:56</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Published jamduna binaries:
 
 <a href="https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1</a></div>
 <div class='msg'><time>2025-05-15 07:25</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: is the repl interface shown in some of the jam sessions public? looking forward building a repl interface that matches the same commands/args to keep compatibility</div>
 <div class='msg'><time>2025-05-15 10:36</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: We&#x27;ve released a binary here. Source will be released at the same time as polkajam.</div>
 <div class='msg'><time>2025-05-15 14:26</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: </div>
+<div class='msg'><time>2025-05-16 14:05</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: @room
+
+After reviewing the open issues related to compatibility with GP-0.6.5, I&#x27;ve tagged the test vectors for version 0.6.5.
+Everyone is welcome to try them out and report any issues they encounter.
+We&#x27;ll begin integrating 0.6.6 shortly.
+From now on, all changes between tags will be listed in the changelog explicitly.
+
+<a href="https://github.com/davxy/jam-test-vectors/releases/tag/v0.6.5" target="_blank" rel="noopener">https://github.com/davxy/jam-test-vectors/releases/tag/v0.6.5</a></div>
