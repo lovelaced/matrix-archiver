@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-05-18 03:33 UTC</small></p>
+<p><small>last updated 2025-05-19 03:34 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -7854,6 +7854,30 @@ I will look for the reason</div>
 thank you!</div>
 <div class='msg reply'><time>2025-05-16 10:44</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: Is there a way to get the logs related to stream dispatch or incoming bytes?</div>
 <div class='msg reply'><time>2025-05-16 10:51</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I think RUST_LOG=trace will give you everything. We use Quinn for QUIC which produces a lot of logs, not sure exactly what as I haven&#x27;t yet spent much time looking through them</div>
+<div class='msg reply'><time>2025-05-18 06:05</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Can you explain the semantics of this error, or Polkajam&#x27;s [temporal] requirement for incoming tickets 
+
+<pre><code class=''>2025-05-18 05:56:24 Error processing incoming ticket: finality lagging (final: 1969160, curr: 1969164)
+</code></pre>
+</div>
+<div class='msg reply'><time>2025-05-18 06:27</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: We moved our ticket sending operation to the 5th phase of the epoch to avoid the above and I gather from 
+
+<pre><code class=''>2025-05-18 06:23:18 Error processing incoming ticket: current node is not the proxy for the ticket
+</code></pre>
+
+it means all implementations _must_ do the proxying of CE131/132, check?
+ <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-05-18 12:11</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Yes you should implement the proxying stuff described in the SNP doc. Without this the tickets aren&#x27;t really anonymous, kind of defeating the point of Safrole.</div>
+<div class='msg reply'><time>2025-05-18 12:14</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &gt; &lt;@sourabhniyogi:matrix.org&gt; Can you explain the semantics of this error, or Polkajam&#x27;s [temporal] requirement for incoming tickets 
+&gt; 
+&gt; <pre><code class=''>&gt; 2025-05-18 05:56:24 Error processing incoming ticket: finality lagging (final: 1969160, curr: 1969164)
+&gt; </code></pre>
+&gt; 
+
+The timing requirements are described in the SNP doc, though with the really short epochs we have with the &quot;tiny&quot; params some of the constants need adjusting. Will post these later.</div>
+<div class='msg reply'><time>2025-05-18 22:59</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: image.png</div>
+<div class='msg reply'><time>2025-05-18 23:00</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: An explanation would be useful -- it was simple to change to send tickets on phase 4/5 and get 131/132 working. 
+
+</div>
 <div class='msg'><time>2025-05-15 02:56</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Published jamduna binaries:
 
 <a href="https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1</a></div>
@@ -7870,3 +7894,51 @@ From now on, all changes between tags will be listed in the changelog explicitly
 <a href="https://github.com/davxy/jam-test-vectors/releases/tag/v0.6.5" target="_blank" rel="noopener">https://github.com/davxy/jam-test-vectors/releases/tag/v0.6.5</a></div>
 <div class='msg'><time>2025-05-17 14:02</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: image.png</div>
 <div class='msg'><time>2025-05-17 14:04</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: First contact successful, thank you David Emett Jan Bujak for all your help and posting the binaries.  In a 5 Polkajam + 1 jamduna tiny testnet, we can import Polkajam-authored blocks and Polkajam can import jamduna-authored blocks.</div>
+<div class='msg'><time>2025-05-18 16:08</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: I have studied Gray Paper closely, I have also scrutinized all the comments in the issues in <a href="https://github.com/gavofyork/graypaper" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper</a>
+
+Further, I was confused by this mention of XCMP in the context of JAM here: <a href="https://wiki.polkadot.network/learn/learn-jam-chain/#:~:text=run%20excessively%20long.-,XCMP,%C2%B6,-Moving%20on%20to" target="_blank" rel="noopener">https://wiki.polkadot.network/learn/learn-jam-chain/#:~:text=run%20excessively%20long.-,XCMP,%C2%B6,-Moving%20on%20to</a>
+
+And I have a question. I understand that JAM cores should be able to communicate with each other in asynchronous mode. So I assumed that JAM would use XCMv2 and higher versions.
+
+But how will the cores actually communicate with each other?</div>
+<div class='msg'><time>2025-05-18 17:05</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Cores don’t communicate. </div>
+<div class='msg'><time>2025-05-18 17:06</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Services and things which run on top of them may interoperate/communicate. </div>
+<div class='msg'><time>2025-05-18 17:06</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Cores are stateless and isolated with the exception of D3L access. </div>
+<div class='msg'><time>2025-05-18 20:56</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: gav Thank you very much! I would really appreciate it if you could help me clarify this:
+
+Do I understand correctly that a service running in core1 can communicate with a service running in core2?
+
+Will there be some framework to connect services and dApps to each other?
+
+For example, I am considering this kind of usecase:
+- core1 is running a perp protocol (similar to Hyperliquid) or a lending protocol. Dedicating all processes related to their engine in a separate Core allows more speed for platform computation.
+- core2 launched a oracle protocol, whose participants (e.g. providers/reporters/oracles etc) provide price feeds and are responsible for correct calculation of clearing prices based on on-chain and off-chain data sources. 
+- core3 launched a service that holds an auction for liquidator bots (OEV extraction and maximization of profit from liquidations). In addition, it can also run auctions for the best acquiring transactions (like CoW, UnswapX, 1inch Fusion etc).
+
+Will these cores be able to exchange prices and positions information with each other? Or should the connection method for services running in different cores be developed separately?
+
+For example: core1 and core3 receive data from core2, then core3 interacts with positions ( liquidate them) in core1</div>
+<div class='msg'><time>2025-05-18 20:58</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: core is like cpu core, we don&#x27;t usually talk about communication between cpu cores during application development. instead, IPC mechanism will be used for that, e.g. XCMP</div>
+<div class='msg'><time>2025-05-18 20:59</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: and an app can be multi core, or sharing a core with other apps etc</div>
+<div class='msg'><time>2025-05-18 21:00</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: and like PC, a core can&#x27;t really send a message to another core. it is done via register or memory. same thing here</div>
+<div class='msg'><time>2025-05-18 21:02</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: Thank you!
+
+In that case, can different services running in different cores communicate with each other in any standardized way?
+
+For example, as in the case I described above, when different services/protocols are created by different developers</div>
+<div class='msg'><time>2025-05-18 21:03</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: services can send token + memo to other services. this is defined by GP</div>
+<div class='msg'><time>2025-05-18 21:10</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: Do you mean Authorize token that includes opaque data that are included in the work package? Or do you mean a token as a ticker?
+
+I&#x27;m interested in whether any data can be transferred between different services in different cores as messages or something similar (like price feeds).</div>
+<div class='msg'><time>2025-05-18 21:11</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: by token I mean DOT. basically the answer is yes. how depends on the exact use case</div>
+<div class='msg'><time>2025-05-18 21:15</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: Thanks for the clarification! So, does JAM have any built-in native protocol for inter-service messaging similar to how it is implemented in XCM?</div>
+<div class='msg'><time>2025-05-18 21:16</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: I already said, service can send DOT token + a memo message to other services for message passing</div>
+<div class='msg'><time>2025-05-18 21:19</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: So JAM will use a DOT or other native token for JAM, right? Because it looks like it should be some kind of basic gas token for the ecosystem. 
+
+And let&#x27;s say a minimum amount of DOT (0.00001 for example) can be used to transfer information between services (in memo)?</div>
+<div class='msg'><time>2025-05-18 21:19</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: DOT is the native token / gas token</div>
+<div class='msg'><time>2025-05-18 21:23</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: I think it is possible to send 0 DOT and still attach a message with it but someone need to read the GP to confirm <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-18 21:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@xlchen:matrix.org&gt; I think it is possible to send 0 DOT and still attack a message with it but someone need to read the GP to confirm
+
+Indeed it is. </div>
+<div class='msg'><time>2025-05-18 21:52</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: Am I correct in understanding that spam exclusion will occur during the Auditing and Judging process?</div>
