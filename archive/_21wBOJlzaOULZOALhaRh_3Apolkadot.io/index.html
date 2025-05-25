@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-05-24 03:28 UTC</small></p>
+<p><small>last updated 2025-05-25 03:34 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -8303,3 +8303,7 @@ This change _will_ cause breakage, in particular the dev account keys listed her
 <div class='msg'><time>2025-05-23 19:06</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: It depends on the chainspec you&#x27;re using. If you&#x27;re using the one I uploaded then yes, the validators for that use the &quot;well-known&quot; alice/bob/etc keys and you should use one of these for your validator. If you want some of the validators to be polkajam then you should launch polkajam instances manually using --chain and --dev-validator N. polkajam-testnet will launch polkajam instances for all the validator nodes; things will not work properly if you then launch your own validator as it will necessarily have the same ID as one of the polkajam ones</div>
 <div class='msg'><time>2025-05-23 22:45</time>&ensp;<span class='u' style='color:#c377dd'>mkchung</span>: besides key derivation, is blake2b &quot;personal&quot; being used for any other hashing operation, like codec or justifications?</div>
 <div class='msg'><time>2025-05-23 23:23</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I&#x27;ve changed the proposal to no longer use Blake2 personalisation as some Blake2 libraries don&#x27;t support this; see the latest version of the PR here <a href="https://github.com/polkadot-fellows/JIPs/pull/2/files" target="_blank" rel="noopener">https://github.com/polkadot-fellows/JIPs/pull/2/files</a></div>
+<div class='msg'><time>2025-05-24 18:26</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &gt; &lt;@dave:parity.io&gt; Nightly builds of PolkaJam should now be automatically created and uploaded here: <a href="https://github.com/paritytech/polkajam-releases/releases" target="_blank" rel="noopener">https://github.com/paritytech/polkajam-releases/releases</a>
+
+should we tag each release with what version of GP it proports to implement? or can we assume it&#x27;s always on head of main of the graypaper repo?</div>
+<div class='msg'><time>2025-05-24 18:31</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: It&#x27;s certainly not always up to date with the GP. They&#x27;re not currently tagged but you can see the GP version by running <code>polkajam --version</code> <span class="edited">(edited)</span></div>
