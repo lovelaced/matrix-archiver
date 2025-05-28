@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-05-27 03:31 UTC</small></p>
+<p><small>last updated 2025-05-28 03:32 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6015,3 +6015,6 @@ But this probably doesn&#x27;t make much difference in practice I guess. <span c
 <div class='msg'><time>2025-05-23 22:24</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: should we define sbrk for the case when wA = 0?</div>
 <div class='msg'><time>2025-05-24 16:53</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Well remove <code>sbrk</code> pretty soon I believe, wdyt <a href="https://matrix.to/#/@jan:parity.io" target="_blank" rel="noopener">Jan Bujak</a>?</div>
 <div class='msg'><time>2025-05-24 20:31</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Indeed. We will be removing <code>sbrk</code> and replacing it with a host call, so I wouldn&#x27;t waste any effort on handling corner cases with the current <code>sbrk</code>.</div>
+<div class='msg'><time>2025-05-27 15:23</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: Screenshot 2025-05-27 at 16.23.14.png</div>
+<div class='msg'><time>2025-05-27 15:23</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: How should I interpret host call &quot;read&quot; and o = 0 and l = 0? </div>
+<div class='msg'><time>2025-05-27 15:24</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: is this a panic?</div>
