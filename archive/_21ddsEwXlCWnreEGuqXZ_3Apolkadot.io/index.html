@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-05-29 03:32 UTC</small></p>
+<p><small>last updated 2025-05-30 03:32 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6018,3 +6018,22 @@ But this probably doesn&#x27;t make much difference in practice I guess. <span c
 <div class='msg'><time>2025-05-27 15:23</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: Screenshot 2025-05-27 at 16.23.14.png</div>
 <div class='msg'><time>2025-05-27 15:23</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: How should I interpret host call &quot;read&quot; and o = 0 and l = 0? </div>
 <div class='msg'><time>2025-05-27 15:24</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: is this a panic?</div>
+<div class='msg'><time>2025-05-29 09:26</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: No.</div>
+<div class='msg'><time>2025-05-29 09:27</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: \&lt;anything&gt; ...+ 0 is the empty range <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 09:28</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: So N_{anything ...+ 0} is {}</div>
+<div class='msg'><time>2025-05-29 09:28</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: And {} is the subset-or-equal of all sets. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 09:34</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: @room <a href="https://github.com/gavofyork/graypaper/releases/tag/v0.6.7" target="_blank" rel="noopener">GP version 0.6.7</a> released</div>
+<div class='msg'><time>2025-05-29 09:35</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Several smaller alterations here. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 09:36</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This completes almost all of the 0.6 milestone, with the rest just being the sweep of numeric encodings and some tidying to the underlying latex. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 09:37</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: There could be some additional corrections/tweaks once we see this stuff implemented, so there will likely be one or two more releases on the 0.6 series before we move to 0.7. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 09:38</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: One interesting thing which was added is <a href="https://github.com/gavofyork/graypaper/pull/393" target="_blank" rel="noopener">the ability for cores to be owned by services</a></div>
+<div class='msg'><time>2025-05-29 12:23</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2025-05-29 at 1.23.45 PM.png</div>
+<div class='msg'><time>2025-05-29 12:24</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I think 12.22 in 0.6.7 needs to pass the additional 3 U parameters we added <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 12:27</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: from privileged services (chi) presumably</div>
+<div class='msg'><time>2025-05-29 12:29</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: oh nevermind, actually chi just needs to be expanded and placed at the end <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 12:31</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: </div>
+<div class='msg'><time>2025-05-29 12:32</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: </div>
+<div class='msg'><time>2025-05-29 14:07</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2025-05-29 at 3.07.37 PM.png</div>
+<div class='msg'><time>2025-05-29 14:09</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: this part of bless in 0.6.7 should probably be E^-1_4#([u_a+4i...+4] for i in N_C) ? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-29 14:12</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: and I guess now we don&#x27;t need to validate that each of them is in the range of a valid service index, because they&#x27;re limited to 4 bytes <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-05-30 00:38</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Is there any documentation on the extra RPC methods that jamt uses? I noticed it uses a couple additional things on top of JIP-2, like a subscribeSyncStatus method and expects a few extra variables in the parameters object for example. I&#x27;m trying to make it work with one of my nodes.</div>
