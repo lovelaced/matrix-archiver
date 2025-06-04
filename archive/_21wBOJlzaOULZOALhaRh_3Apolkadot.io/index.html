@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-06-03 03:33 UTC</small></p>
+<p><small>last updated 2025-06-04 03:34 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -7898,6 +7898,13 @@ I&#x27;m having a hard time getting polkajam to recognize our chainspec -- it ap
 </code></pre>
 
 Is there some other requirement I&#x27;ve missed?</div>
+<div class='msg reply'><time>2025-06-03 07:38</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Hi David Emett ,
+
+I had a few questions:
+
+1. Certificate validation happens on both sides right when a client node connects to a server (mTLS) or only on client side (TLS). And in particular when each node&#x27;s client has to initiate connection to other node&#x27;s server. In my case I don&#x27;t seem to get direct access to client&#x27;s certificate on server node using quic library.
+2. In jamnp, it&#x27;s mentioned that cert is required and needs to be self signed, but need not be verified. But self signed certificates throw error.
+3. Also, will there be CA certs as mentioned in jamcha docs? as for now we are just providing SAN as per snp. <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-05-15 02:56</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Published jamduna binaries:
 
 <a href="https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1</a></div>
@@ -8469,6 +8476,19 @@ From GP 0.6.7 (§14.17) <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/1c3b
 <div class='msg reply'><time>2025-06-02 22:23</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Should actually be fixed in tonight&#x27;s build 🤞 Apologies!</div>
 <div class='msg reply'><time>2025-06-03 01:40</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Are you able to share the chainspec file used with that WPB? <span class="edited">(edited)</span></div>
 <div class='msg reply'><time>2025-06-03 01:46</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: <a href="https://github.com/jam-duna/jamtestnet/blob/main/chainspecs/jamduna-spec.json" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/blob/main/chainspecs/jamduna-spec.json</a></div>
+<div class='msg reply'><time>2025-06-03 17:59</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Is there a way to get polkajam to report back
+(a) the 6 sclubs when guaranteeing
+(b) its core index, or maybe all 6 validator  core assignments as they switch
+We need some visibility into (a) for getting erasure roots for WPs with exported segments.   For (b), we have found both our impl and polkajam rejecting each other WPs due to not being on the same core just often enough to believe we have our core rotation algorithm slightly wrong.  <code>Failed to validate work package: invalid core: 1 not in [0]</code> Or maybe we want R to be a higher number somehow. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-06-03 18:07</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: (c) for any &quot;Bad Justification&quot; errors that you generate (we see them CE141 [ok!] but also for for CE128 [why, we cannot explain..]), can we get a bit more in the logs (the raw justification you think you got). 
+
+In general, you have excellent logs for us to work with, and other implementers are likely to follow them and get just as &quot;fussy&quot; =)</div>
+<div class='msg reply'><time>2025-06-03 18:27</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Re core rotation there are some test vectors for the shuffle, worth checking that you match these if you haven&#x27;t yet</div>
+<div class='msg reply'><time>2025-06-03 18:30</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: For (a) I assume you have the segment EC test vectors matching now? So the question is about the merkle roots computed from the segment shards?</div>
+<div class='msg reply'><time>2025-06-03 18:34</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Will look into logs later, agree it would be helpful to have trace logs for some of these things</div>
+<div class='msg reply'><time>2025-06-03 20:18</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Yes, we have the shuffle test vector passing, the old davxy EC test vector for the 4104 segment encoding/decoding (theres only one!), as well as real CE137 + CE138 responses decoding back to the bundle EC decoding (BUT only when there aren&#x27;t any segments).  
+
+So yes, for (a) we mean the CDT merkle root computed from the segment shards EC encoding, which is next level.  </div>
 <div class='msg'><time>2025-05-28 07:07</time>&ensp;<span class='u' style='color:#d88e6a'>tony_lollipop</span>: </div>
 <div class='msg'><time>2025-05-28 15:32</time>&ensp;<span class='u' style='color:#3e9d41'>stsoen</span>: Does anyone have the presentation that Gav gave yesterday at ETH Prague? I would be very grateful if someone could share it as a file (not the video, but the presentation itself)</div>
 <div class='msg'><time>2025-05-28 17:06</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: </div>
@@ -8647,3 +8667,81 @@ Since I imagine most of us will FFI into <a href="https://docs.rs/reed-solomon-s
 
 By Rule 1, we do not see a problem with just publishing an efficient reference Rust implementation 
 of any actually required transformations, a confirmation would be useful.  We would appreciate an explanation of why these transformations  are actually required.</div>
+<div class='msg'><time>2025-06-03 07:56</time>&ensp;<span class='u' style='color:#dc865f'>interweb_</span>: I am subscribing to statistics, and I can&#x27;t find the starting point to decode the <code>value</code> array. Could someone please point me to the docs/ref implementation? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-03 07:56</time>&ensp;<span class='u' style='color:#dc865f'>interweb_</span>: image.png</div>
+<div class='msg'><time>2025-06-03 07:58</time>&ensp;<span class='u' style='color:#dc865f'>interweb_</span>: Where I have looked:
+- <a href="https://github.com/w3f/jamtestvectors/blob/master/statistics/statistics.asn" target="_blank" rel="noopener">https://github.com/w3f/jamtestvectors/blob/master/statistics/statistics.asn</a>
+- <a href="https://hackmd.io/@polkadot/jip2" target="_blank" rel="noopener">https://hackmd.io/@polkadot/jip2</a>
+- <a href="https://github.com/gavofyork/graypaper/blob/b499b22b82804ce2e60c719d621320b513196415/text/statistics.tex#L36" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/blob/b499b22b82804ce2e60c719d621320b513196415/text/statistics.tex#L36</a></div>
+<div class='msg'><time>2025-06-03 09:12</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: See the C(13)-&gt; bit in Appendix D of the GP</div>
+<div class='msg'><time>2025-06-03 10:24</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Has anyone done the exercise of scoping out what building a minimal actually useful end-user product powered by jam might look like (e.g. email)? Maybe assuming we’ve already built the middleware required for building apps using regular programming languages etc  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-03 12:58</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: Jan Bujak:
+we have a work item with this code
+
+<pre><code class=''>     :                          @0
+     0: 28 0d 00 00 00           jump @3
+      :                          @1
+     5: 28 13 00 00 00           jump @4
+      :                          @2
+    10: 28 f9 02                 jump @87
+      :                          @3 [export #0: &#x27;refine&#x27;]
+    13: c8 87 07                 a0 = a0 + a1
+    16: 95 77 e0                 a0 = a0 + 0xffffffffffffffe0
+    19: 33 08 20                 a1 = 0x20
+    22: 32 00                    ret
+</code></pre>
+
+but ran into error code 4 in your implementation during refine process <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-03 13:00</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: Is there anything we’ve missed?</div>
+<div class='msg'><time>2025-06-03 13:02</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: looks like <code>polkavm::interpreter</code> charges gas for unexecuted instructions (mb in pre-compiling ?) in <a href="https://github.com/davxy/stuff/blob/6f03f00ed8e0847c8be44b68e5cf6c0323a61ba0/pvm-traces/process\_one\_immediate\_report-1.log#L82-L114," target="_blank" rel="noopener">https://github.com/davxy/stuff/blob/6f03f00ed8e0847c8be44b68e5cf6c0323a61ba0/pvm-traces/process\_one\_immediate\_report-1.log#L82-L114,</a> if this is expected? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-03 13:04</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: OOB error is only returned from <code>peek</code>/<code>poke</code> hostcalls, so I&#x27;m confused what you&#x27;re actually asking about here, as this is code for a toplevel service, and it doesn&#x27;t even do anything.</div>
+<div class='msg reply'><time>2025-06-03 13:13</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: we are passing the pu value into accumulate by using the work results</div>
+<div class='msg reply'><time>2025-06-03 13:13</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: ...I&#x27;m afraid that still doesn&#x27;t tell me anything :P</div>
+<div class='msg reply'><time>2025-06-03 13:15</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: because the log didn&#x27;t show anything about the refine process even I enable the pvm log during refine this item</div>
+<div class='msg reply'><time>2025-06-03 13:15</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: it just came back with the error code 4</div>
+<div class='msg reply'><time>2025-06-03 13:18</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: I am expecting it will show
+<pre><code class=''>Resolving arbitrary jump: 0
+</code></pre>
+but it didn&#x27;t <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-06-03 16:05</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Pardon -- Our bad, we incorrectly interpreted polkajam 0.6.5 work result error codes with 0.6.6 work result error codes, so it wasn&#x27;t an OOB but &quot;BAD&quot;, which we&#x27;re checking why  this would be.   <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-06-03 21:13</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Polkajam seems to be able to absorb our code&#x27;s preimages (because it authors blocks with |E\_P|=1, upon CE142/143 which we validate happily) after using our bootstrap service (new=&gt;write=&gt;transfer), but not fetch it upon demand in a later WP, returning back with BAD.
+
+I tried using CE129 to inspect the whole state (0x0000 ... 0xFFFF..FF) to check if polkajam&#x27;s preimage was in state, but got this:
+
+<pre><code class=''>2025-06-03 14:00:54 tokio-runtime-worker WARN jam_node::chain::state_db  Missing value hash in range proof: [195, 153, 202, 58, 128, 172, 64, 203, 177, 7, 182, 55, 32, 87, 42, 16, 130, 38, 16, 128, 135, 156, 111, 71, 70, 163, 203, 188, 191, 146, 112, 140]
+</code></pre>
+
+Is CE129 supposed to be usable in this way yet?
+
+We coped by putting our { fib, auth\_copy } services in our genesis state for now.
+
+We are able to get a few work packages guaranteed, assured, accumulated (one that creates a new service, another that exports a segment), but any WP that imports the exported segment \[ by (wph, index) \] reliably reports back:
+
+`<pre><code class=''>2025-06-03 13:54:51 tokio-runtime-worker ERROR </code></pre>
+jam_node::chain::guarantors::guarantor  Failed to process package 0xe6420b365310d562...: Import error: Import not found: root Direct(0x590a50a6d3899507...), index 0
+````
+
+In addition, for any WP that exports a segment, we do not get the same segments root or erasure root.  But, if we have no exported segments from our WPs, we get matching erasure roots. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-03 13:04</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: PolkaVM charges gas per basic block, not per instruction.</div>
+<div class='msg reply'><time>2025-06-03 13:06</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: if this also means, that in a block, there is a jump instruction in the middle, even if we jump to other blocks at that point, we still charge the gas of the entire block?</div>
+<div class='msg reply'><time>2025-06-03 13:06</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: You can&#x27;t have a jump instruction in the middle of a basic block.</div>
+<div class='msg reply'><time>2025-06-03 13:08</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: I got you! however, still don&#x27;t get why block 3644-3653 charges gas even though, we should jump to 5326 from 3491 
+
+---
+
+3491 -&gt; jump to 5326
+
+compiling block { 3644-3653 } \&lt;--- why this happens
+
+block {5326 ...} <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-06-03 13:09</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: It&#x27;s not charging gas.</div>
+<div class='msg reply'><time>2025-06-03 13:10</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: &quot;compiling&quot; means that it just compiled the block, and not that it was executed</div>
+<div class='msg reply'><time>2025-06-03 13:11</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: thank you!, I&#x27;ll keep digging other parts! 
+
+our implementation has a 66 gas diff for each of the test vectors in accumulate 😂</div>
+<div class='msg reply'><time>2025-06-03 13:15</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Note that technically even if your implementation charges gas per instruction and not per basic block the final gas amount should still be the same as long as it finishes successfully (that is, if no basic block is interrupted in the middle by e.g. accessing inaccessible memory then whether you charge gas per instruction or per basic block won&#x27;t make a difference)</div>
+<div class='msg reply'><time>2025-06-03 13:23</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: yes we can execute successfully, start/end at the same pc, storage matches, however we take less 66 gas for each of the test vectors...
+
+we are charging host calls per 10 gas as defined in the docs, that the only thing I can do is comparing instructions one by one now to debug it )))</div>
+<div class='msg reply'><time>2025-06-03 13:53</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: hmm, I assume I forgot to sync gas at sort of invocation interactions, debugging the instructions is endless ...</div>
+<div class='msg reply'><time>2025-06-03 18:18</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Is there some way to get a dump of all the registers out of polkajam, prior or after the execution of each compiled block.  </div>
