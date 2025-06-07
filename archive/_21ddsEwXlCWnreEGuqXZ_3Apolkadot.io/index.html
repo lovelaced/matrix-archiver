@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-06-06 03:34 UTC</small></p>
+<p><small>last updated 2025-06-07 03:32 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6160,3 +6160,17 @@ Am I missing some distinction here, or are they meant to serve different purpose
 <div class='msg'><time>2025-06-05 10:03</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Feel free to make an issue or a PR. </div>
 <div class='msg'><time>2025-06-05 13:39</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: typo? <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/33cc0233cc02?v=0.6.7" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/7e6ff6a/33cc0233cc02?v=0.6.7</a></div>
 <div class='msg'><time>2025-06-05 13:40</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: (the <code>v</code> part)</div>
+<div class='msg'><time>2025-06-06 11:03</time>&ensp;<span class='u' style='color:#73caa8'>dvladco</span>: In the <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/2fdb012fdb01?v=0.6.7" target="_blank" rel="noopener">accumulate invocation</a> we pass the new timeslot <code>τ′</code> which according to eq. 6.1 is equivalent to <code>H_t</code> however later in the accumulation invocation we use <code>H_t</code> explicitly. Is there any reason for that? and why not use <code>t</code> which in equivalent to <code>H_t</code>?</div>
+<div class='msg'><time>2025-06-06 11:21</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/37f70137fc01?v=0.6.7" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/7e6ff6a/37f70137fc01?v=0.6.7</a> can someone help me understand the last part of the check where codehash (d_c -&gt;32bytes) is compared to a 32  bit number (x_s -&gt; Service Index ) encoded into 32 byte? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-06 11:22</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: how is that suppoused to work in a real scenario</div>
+<div class='msg'><time>2025-06-06 11:55</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: &gt; &lt;@prematurata:matrix.org&gt; <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/37f70137fc01?v=0.6.7" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/7e6ff6a/37f70137fc01?v=0.6.7</a> can someone help me understand the last part of the check where codehash (d_c -&gt;32bytes) is compared to a 32  bit number (x_s -&gt; Service Index ) encoded into 32 byte?
+
+The service updates it code hash to this value, which indicates it&#x27;s ready to be ejected. There can be only one preimage left for the ejected account, presumably some kind of tombstone.</div>
+<div class='msg'><time>2025-06-06 12:31</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: ah ok</div>
+<div class='msg'><time>2025-06-06 12:31</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: tkz</div>
+<div class='msg'><time>2025-06-06 18:13</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@tomusdrw:matrix.org&gt; The service updates it code hash to this value, which indicates it&#x27;s ready to be ejected. There can be only one preimage left for the ejected account, presumably some kind of tombstone.
+
+They preimage with be the most recent code since the new code hash has no preimage it cannot possibly be removed after the upgrade to a zombie (or, obviously, before)</div>
+<div class='msg'><time>2025-06-06 22:06</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2025-06-07 at 1.06.27 AM.png</div>
+<div class='msg'><time>2025-06-06 22:06</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: for 0.6.7 I noticed that we have serialization components for theta and beta_B in C(16) and C(3) respectively, but the state definition only has B_H and no theta <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-06 22:08</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: why does it seem that we are storing some things which aren&#x27;t considered part of the state?</div>
