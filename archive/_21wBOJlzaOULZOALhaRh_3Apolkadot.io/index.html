@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-06-08 03:38 UTC</small></p>
+<p><small>last updated 2025-06-09 03:37 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -8827,6 +8827,7 @@ we are charging host calls per 10 gas as defined in the docs, that the only thin
 <div class='msg reply'><time>2025-06-07 22:45</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: &gt; &lt;@jan:parity.io&gt; PolkaVM charges gas per basic block, not per instruction.
 
 Is it expected then that everyone charges per block and not per instruction? Otherwise on all non-successful invocations (accessing bad memory, etc) our work results gas used will differ.</div>
+<div class='msg reply'><time>2025-06-08 11:26</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This will be made clear under “gas costs” in 0.7 series.  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-06-04 07:26</time>&ensp;<span class='u' style='color:#bcd429'>subotic</span>: </div>
 <div class='msg'><time>2025-06-04 08:20</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: New batch of import traces: <a href="https://github.com/davxy/jam-test-vectors/pull/70" target="_blank" rel="noopener">PR #70</a>
 
@@ -8925,3 +8926,7 @@ Some questions:
 3. Does it make sense to have a  battery of pvm-to-x86 target outputs as public test vectors for M3 linear recompilation?  Or, can we see polkatool&#x27;s &quot;recompiled x86\_64&quot; output somehow, block by block, or across an entire disassembled .pvm file to check for cases where we are doing a few too many x86\_64 instructions per PVM Instruction?  How do we do this if so?
 4. there are many PVM opcodes (ROT\_R\_64\_IMM, MUL\_UPPER\_S\_S, COUNT\_SET\_BITS\_32, SIGN\_EXTEND\_16, REVERSE\_BYTES ...) that do not yet have a simple test case in the <a href="https://github.com/w3f/jamtestvectors/pull/3" target="_blank" rel="noopener">pvm test vectors</a> like <a href="https://github.com/koute/jamtestvectors/blob/master_pvm_initial/pvm/programs/inst_add_64.json" target="_blank" rel="noopener">inst\_add\_64</a> (powering both interpreter and compiler testing) -- is this something we should expect from you or should we be on our own for this?
 5. Generically, for different recompiler efforts, if in the end, we had exactly one public &quot;best&quot; way to map each PVM instruction to some number of x86\_64 instructions, how do you expect PVM executions (excluding host function calls) to actually differ?   If you expect they will differ very little to none, why not have a single open-source high-performance C recompiler that maps into this &quot;best&quot; way per architecture (starting with x86_64) that we all build and FFI into just like w3f bls+bandersnatch libs? <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-06-08 16:41</time>&ensp;<span class='u' style='color:#bcd429'>subotic</span>: Hey sourabhniyogi, if you are adventurous, here is an open PR with a few more test vectors for some of the mentioned instructions:
+<a href="https://github.com/paritytech/polkavm/pull/258" target="_blank" rel="noopener">https://github.com/paritytech/polkavm/pull/258</a></div>
+<div class='msg'><time>2025-06-08 09:58</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: You know what next cool actually useful &quot;demo&quot; could be? self-hosting, CoreVM running cargo/rustc to compile itself. What would it take? filesystem ✅️, multi-threading ❎️ , wizzardy to get rustc happily compiling to PVM ❓️ </div>
+<div class='msg'><time>2025-06-08 12:05</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: @gav you mentioned in your Mr shift interview you wish you had made polkadot privacy-first from the beginning. Are there plans to make jam with privacy as the default?</div>
