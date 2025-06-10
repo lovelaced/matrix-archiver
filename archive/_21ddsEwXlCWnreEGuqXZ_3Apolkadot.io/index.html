@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-06-09 03:37 UTC</small></p>
+<p><small>last updated 2025-06-10 03:35 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6176,3 +6176,23 @@ They preimage with be the most recent code since the new code hash has no preima
 <div class='msg'><time>2025-06-06 22:08</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: why does it seem that we are storing some things which aren&#x27;t considered part of the state?</div>
 <div class='msg'><time>2025-06-07 15:26</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Yes indeed - that’s a typo and should be beta and theta. </div>
 <div class='msg'><time>2025-06-08 19:48</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: can we please reconsider adding storage key length inside the state merklization value ? It should make the &quot;restore from merklized state&quot; easier. like massively easier to implement.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-09 08:42</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2025-06-09 at 11.42.47 AM.png</div>
+<div class='msg'><time>2025-06-09 08:43</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2025-06-09 at 11.43.00 AM.png</div>
+<div class='msg'><time>2025-06-09 08:43</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: What is the utility of having item markers like E_4(2^32-1) if we set fire to it with a hash when making the state key?</div>
+<div class='msg'><time>2025-06-09 08:47</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I thought they were useful for prefix search too</div>
+<div class='msg'><time>2025-06-09 11:59</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: none i can see indeed </div>
+<div class='msg'><time>2025-06-09 15:59</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Looking at the <a href="https://gist.github.com/zdave-parity/72eb9cfe07756d2c0c13c3064600190d" target="_blank" rel="noopener"><code>dev-spec.json</code></a> from David Emett makes me think that something is off:  
+There is a key <code>00fe00ff00ff00ff93528801297aa9d5702c0d1b92efacb77f07cddd9edd28</code>, which <em>looks</em> like the preimage key for Service 0, but without that hash function applied. Otherwise this key must be an opaque service key, which would be odd to exactly collide with this pattern. </div>
+<div class='msg'><time>2025-06-09 16:00</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: That <code>dev-spec.json</code> doesn&#x27;t have these latest state changes applied, they&#x27;re not implemented in PolkaJam yet</div>
+<div class='msg'><time>2025-06-09 16:01</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Re this, it&#x27;s still important to not have the different C(s, ...) cases collide</div>
+<div class='msg'><time>2025-06-09 16:02</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I think it&#x27;s assumed impossible to request a preimage of length eg 2^32-1 as AIUI you need a deposit proportional to the requested length</div>
+<div class='msg'><time>2025-06-09 16:04</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: I think not having this hash function makes the keys easier understandable, as you can prefix-match on them. I added some tool for this here <a href="https://docs.jamcha.in/advanced/storage/keys" target="_blank" rel="noopener">https://docs.jamcha.in/advanced/storage/keys</a> , but it fails for <code>C(s, ..)</code> because of that hash function.  
+So there is no way to determine whether something is a Service Preimage, Service Storage or Service Preimage Lookup key. All the other C 1-16 and C(255, s) work fine.</div>
+<div class='msg'><time>2025-06-09 16:04</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The hash was added/moved to improve the security margin, see <a href="https://github.com/gavofyork/graypaper/issues/403" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/issues/403</a></div>
+<div class='msg'><time>2025-06-09 16:06</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: It&#x27;s true that you can&#x27;t currently reverse the key mapping done by the C() function</div>
+<div class='msg'><time>2025-06-09 16:13</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &gt; &lt;@dave:parity.io&gt; Re this, it&#x27;s still important to not have the different C(s, ...) cases collide
+
+If it’s just about collisions, we could make the item marker only 1 byte instead of 4. But I think more importantly we can no longer do nice prefix search as @[Oliver Tale-Yazdi] pointed out </div>
+<div class='msg'><time>2025-06-09 16:15</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I presumed that was exactly why we had 4 byte long item markers, so that, interleaved with the 4 byte service index, we have a prefix we can search with </div>
+<div class='msg'><time>2025-06-09 16:23</time>&ensp;<span class='u' style='color:#788ad5'>yu2c</span>: Does <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/3b40013b5801?v=0.6.7" target="_blank" rel="noopener">\\mathcal{E}\_M</a>, serialization of merkle mountain range, have a formal definition somewhere in the graypaper? I couldn’t find where this notation is explicitly defined. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-09 20:01</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: See equation E.9 :)</div>
