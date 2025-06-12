@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-06-11 03:35 UTC</small></p>
+<p><small>last updated 2025-06-12 03:34 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6203,3 +6203,7 @@ If it’s just about collisions, we could make the item marker only 1 byte inste
 <div class='msg'><time>2025-06-10 11:49</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Right now we avoid this extra discriminator by ensuring that there can be no engineered collisions between a_s &amp; a_l by effectively namespacing through those first four bytes of the key-formulae.</div>
 <div class='msg'><time>2025-06-10 11:50</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I don&#x27;t have an especially strong preference for this though - design-wise it&#x27;s a bit of a hangover from when we didn&#x27;t do the hashing at all and it made sense to make the database keys easily reversible. <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-06-10 11:52</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: (To make this truly secure we should really add a requirement that no entries in a\_l may have lengths &gt;= 2^32-2 - without this then we rely solely on economic properties to avoid a collision, and while such properties are reasonable to assume on a public mainnet, they may not be on e.g. a testnet or a permissioned network) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-11 09:48</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Does the cleanroom rule apply also to all things related to networking, or not since it’s sort of external to GP?</div>
+<div class='msg'><time>2025-06-11 10:05</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Networking stuff will eventually be included in the GP so I assume the clean room rule applies</div>
+<div class='msg'><time>2025-06-11 23:52</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Should the first sentence of 11.3 <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/14f70114f701?v=0.6.7" target="_blank" rel="noopener">here</a> be &quot;Every slot, each core has 3 validators.. &quot; rather than &quot;Every block, each core has 3 validators ..&quot;</div>
+<div class='msg'><time>2025-06-12 03:20</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: not every slot have a block, and a slot could have multiple blocks </div>
