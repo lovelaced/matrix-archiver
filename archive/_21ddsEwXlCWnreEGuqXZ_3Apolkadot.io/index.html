@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-06-17 03:35 UTC</small></p>
+<p><small>last updated 2025-06-18 03:34 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6225,3 +6225,26 @@ It is surely doable, we just have to actually do it.  I think a solution between
 
 I wrote a rationale issue on the topic <a href="https://github.com/gavofyork/graypaper/issues/436" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/issues/436</a>  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-06-16 20:00</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Replied. </div>
+<div class='msg'><time>2025-06-17 11:44</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: What is the new state serialization for privileged services? I see this isn&#x27;t yet updated in the <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/3b4e023b5302?v=0.6.7" target="_blank" rel="noopener">GP</a>.
+
+Is it reasonable to assume it&#x27;s going to be something like:
+
+<pre><code class=''>E4(χm, χv) ⌢ E(χa) ⌢ E(χg) 
+</code></pre>
+
+</div>
+<div class='msg'><time>2025-06-17 14:45</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Yes something like this. </div>
+<div class='msg'><time>2025-06-17 15:45</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Is it not?</div>
+<div class='msg'><time>2025-06-17 15:45</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: image.png</div>
+<div class='msg'><time>2025-06-17 15:46</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This is in equation D.2, GP <code>main</code></div>
+<div class='msg'><time>2025-06-17 15:46</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: X\_a is a list, so D.2 is wrong <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-17 15:48</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: No it&#x27;s not:)</div>
+<div class='msg'><time>2025-06-17 15:48</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: See equation C.15</div>
+<div class='msg'><time>2025-06-17 15:51</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: The equation defining X_a is 9.9, and it says X_a is a list; I don&#x27;t understand why C.15 should be involved</div>
+<div class='msg'><time>2025-06-17 16:26</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: chi_a is indeed a sequence. The serialisation function used is defined in multiple parts, depending on the domain.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-17 16:27</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If the domain is a sequence, then C.15 comes into effect. </div>
+<div class='msg'><time>2025-06-17 16:59</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: E_4 doesn&#x27;t rewrite to E, so if the argument is a sequence, it shouldn&#x27;t be rewritten as E_4(a1) ^ E_4(a2) ...; btw it&#x27;s just a matter of formalism</div>
+<div class='msg'><time>2025-06-17 17:02</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Not sure what you mean. </div>
+<div class='msg'><time>2025-06-17 17:03</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: E_4 indeed is not expressed in terms of E under any argument domain.</div>
+<div class='msg'><time>2025-06-17 17:04</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Regardless it is well defined for sequence domains, multiple arguments and tuples (all of them in terms of itself).  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-17 20:17</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: Does that mean the <code>#</code> <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/357001357701?v=0.6.7" target="_blank" rel="noopener">here for E_8</a> is redundant ?</div>
