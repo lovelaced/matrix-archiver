@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-06-18 03:34 UTC</small></p>
+<p><small>last updated 2025-06-19 03:35 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6248,3 +6248,22 @@ Is it reasonable to assume it&#x27;s going to be something like:
 <div class='msg'><time>2025-06-17 17:03</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: E_4 indeed is not expressed in terms of E under any argument domain.</div>
 <div class='msg'><time>2025-06-17 17:04</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Regardless it is well defined for sequence domains, multiple arguments and tuples (all of them in terms of itself).  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-06-17 20:17</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: Does that mean the <code>#</code> <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/357001357701?v=0.6.7" target="_blank" rel="noopener">here for E_8</a> is redundant ?</div>
+<div class='msg'><time>2025-06-18 05:12</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Yes, not just the hash but also the concatenation operator above. Feel free to make a PR or issue.</div>
+<div class='msg'><time>2025-06-18 10:38</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: Does the <a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/36ad0336b903?v=0.6.7" target="_blank" rel="noopener">new service host call</a> imply that no service id, even genesis services, should be less than 256?</div>
+<div class='msg'><time>2025-06-18 10:46</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It implies that no new services can be less than 256 (or greater than 2^32-256)</div>
+<div class='msg'><time>2025-06-18 10:47</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Genesis state is necessarily trusted and so doesn’t have these constraints.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-18 10:48</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: However the state merklisation is done to allow a genesis service at 0. </div>
+<div class='msg'><time>2025-06-18 11:02</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: State serialization question: How does one tell the difference between a preimage meta state key for a freshly solicited preimage, and a storage state key?
+
+I know the preimage meta value will be the encoded empty list, ie 0, but a storage key could have the same value. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-18 11:03</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Who says you can?</div>
+<div class='msg'><time>2025-06-18 11:03</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The only thing which we aim to achieve with Merklisation is security (non-collision) and speed.</div>
+<div class='msg'><time>2025-06-18 11:04</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The ability to introspect/interpret merklised keys is not a priority. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-18 11:05</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: I understand that, but I surely need to know which map to put a given key in when I import a trace, for example <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-18 11:05</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Nope.</div>
+<div class='msg'><time>2025-06-18 11:06</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: That&#x27;s simply not a given.</div>
+<div class='msg'><time>2025-06-18 11:06</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It would imply requiring that which I&#x27;ve already said isn&#x27;t a priority.</div>
+<div class='msg'><time>2025-06-18 11:06</time>&ensp;<span class='u' style='color:#bc5896'>greywolve</span>: Ah right</div>
+<div class='msg'><time>2025-06-18 11:07</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: I think many implementations use KV lookup, in which case you dont need to invert them. IMHO it is still possible to not use KV Db by inverting all keys that can be inverted and then doing some special handling for the service keys that cannot be inverted. Also since only three key kinds cannot be inverted and they are used from host-calls that tell you the kind of the key. You can check this unofficial key table here <a href="https://docs.jamcha.in/advanced/storage/keys" target="_blank" rel="noopener">https://docs.jamcha.in/advanced/storage/keys</a></div>
+<div class='msg'><time>2025-06-18 11:09</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If the lack of merklised-key-interpretability turns out to be an issue in usage, it&#x27;s something fairly easy to fix (by including metadata in the value).</div>
+<div class='msg'><time>2025-06-18 11:09</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: But right now the assumption is that it&#x27;s an unneeded pessimisation.</div>
