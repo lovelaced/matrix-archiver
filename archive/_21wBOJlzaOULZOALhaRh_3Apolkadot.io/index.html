@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-06-29 03:42 UTC</small></p>
+<p><small>last updated 2025-06-30 03:39 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9392,3 +9392,45 @@ Currently it can be:
 - <code>trace</code>: traces in the filesystem. Same format as the ones in jam-test-vectors.
 
 Only the <code>local</code> source is fuzzed using the logic I wrote. Nothing prevents someone to implement their source to be used as <code>remote</code> source by the tool. The source must follow the protocol I shared (the fuzzer side in this case) <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-06-29 07:44</time>&ensp;<span class='u' style='color:#788ad5'>yu2c</span>: Since we&#x27;ve updated our implementation to v0.7.0, we were wondering whether there will be an updated for test vectors( v0.6.7 or v0.7.0) — or will it go straight to fuzz testing for the M1 conformance test?</div>
+<div class='msg reply'><time>2025-06-29 12:04</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: I don&#x27;t get the remote option, if it is not specified yet? for what I under stand so for:
+
+1. <code>local</code> use the unix socket
+2. <code>trace</code> may accept a folder full of trace tests
+3. <code>remote</code>: no ideas
+
+perhaps still need one more flag to tell the program if it is testing others or it is being tested <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-06-29 16:11</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: we just released our 0.6.6 with a command <code>fuzz</code> can make <code>spacejam</code> a fuzz target, the unix sockets part is not tested yet since currently we don&#x27;t have the <code>fuzz</code> binary, however, the trace command still can be used for processing traces
+
+<a href="https://github.com/spacejamapp/specjam/releases/tag/0.6.6" target="_blank" rel="noopener">https://github.com/spacejamapp/specjam/releases/tag/0.6.6</a> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-29 12:17</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: These fuzzer options define where the fuzzer tool picks blocks to be sent to the target. &quot;remote&quot; indicates that blocks can be taken from a remote source.
+
+That said, these are fuzzer details and aren&#x27;t particularly relevant to the target itself, which simply communicates with the fuzzer via a Unix socket, as outlined in the draft I shared</div>
+<div class='msg'><time>2025-06-29 12:22</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: Of course, I imagine that the targets currently capable of importing pre-built traces (e.g., test vectors) are also implementing the &quot;trace&quot; source themselves, but that&#x27;s a separate matter. I was specifically referring to the source from which our fuzzer selects the blocks it sends to the target during a fuzzing session.
+</div>
+<div class='msg'><time>2025-06-29 12:30</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: Thanks! I&#x27;ll try implement the target features atm, and then update when needed</div>
+<div class='msg'><time>2025-06-29 12:52</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Thanks for the fuzzing protocol spec davxy - ooo What constants are we fuzzing with, production(341 validators etc) or tiny?</div>
+<div class='msg'><time>2025-06-29 13:33</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: &gt; &lt;@boymaas:matrix.org&gt; Thanks for the fuzzing protocol spec davxy - ooo What constants are we fuzzing with, production(341 validators etc) or tiny?
+
+Good question. Spec &quot;flavor&quot; can be deduced from the validators count in the state we&#x27;re sending you. Not sure if  worth adding it to the PeerInfo message</div>
+<div class='msg'><time>2025-06-29 17:14</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: That presents a challenge for JamZig&#x27;s implementation because the validator count is a compile-time setting in my implementation. I compile binaries based on specified constants using Zigs comptime features. Is a fluid/runtime adaptable validator count and other parameters a strict requirement to pass the conformance tests?</div>
+<div class='msg'><time>2025-06-29 17:19</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: same, we need big refactor to support customized parameters</div>
+<div class='msg'><time>2025-06-29 17:31</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: +1</div>
+<div class='msg'><time>2025-06-29 17:35</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: </div>
+<div class='msg'><time>2025-06-29 17:38</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Inverting serialization is not necessary for making a compliant impl </div>
+<div class='msg'><time>2025-06-29 17:41</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: You can do gets and sets and deletes on service account storage for example without having the original key that was used </div>
+<div class='msg'><time>2025-06-29 17:43</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: I am curious about how you would initiate the initial storage state. Imagine service X has some storage keys present. How would you deconstruct the actual storage keys used from the initial set state message?</div>
+<div class='msg'><time>2025-06-29 17:44</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: &gt; &lt;@boymaas:matrix.org&gt; That presents a challenge for JamZig&#x27;s implementation because the validator count is a compile-time setting in my implementation. I compile binaries based on specified constants using Zigs comptime features. Is a fluid/runtime adaptable validator count and other parameters a strict requirement to pass the conformance tests?
+
+no, I don&#x27;t think so.
+You can easily provide 2 binaries. Also I think that we&#x27;ll start with tiny</div>
+<div class='msg'><time>2025-06-29 17:45</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: You don’t have to. get/set/delete operations can do the key construction function themselves and now they’re operating in “state key space”</div>
+<div class='msg'><time>2025-06-29 17:45</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: That is a big relief 😅</div>
+<div class='msg'><time>2025-06-29 17:47</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Just to ensure we&#x27;re on the same page, I assume the SetState format for State and for example Storage Keys will be as specified here: <a href="https://graypaper.fluffylabs.dev/#/9a08063/3bab023bb802?v=0.6.6" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/9a08063/3bab023bb802?v=0.6.6</a> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-29 17:49</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &gt; &lt;@boymaas:matrix.org&gt; Just to ensure we&#x27;re on the same page, I assume the SetState format for Storage Keys will be as specified here: <a href="https://graypaper.fluffylabs.dev/#/9a08063/3bab023bb802?v=0.6.6" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/9a08063/3bab023bb802?v=0.6.6</a>
+
+Yes. So the service storage get function you have implemented already would have to be replaced with one that, given the key, calls C(s,E_4(…)k0…27) to get the state key, then looks in your storage for the value </div>
+<div class='msg'><time>2025-06-29 17:50</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: So you never have to invert C(*), which is not invertible anyway </div>
+<div class='msg'><time>2025-06-29 17:57</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: I understand your perspective. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-06-29 17:59</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: My implementation does this without custom host calls </div>
+<div class='msg'><time>2025-06-29 17:59</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: But I think if I explain further it might break clean room requirements  <span class="edited">(edited)</span></div>
