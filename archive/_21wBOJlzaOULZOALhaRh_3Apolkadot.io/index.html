@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-01 03:44 UTC</small></p>
+<p><small>last updated 2025-07-02 03:36 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -7933,6 +7933,7 @@ Think I missed this message before, sorry. This was probably because the --dev-v
 
 Currently, while connecting to Polkajam, I am encountering errors: InvalidForName, ServerNameMustContainOneHostName.</div>
 <div class='msg reply'><time>2025-06-24 01:48</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You just need the alternative name extension, with a single DNS name as defined in the SNP doc</div>
+<div class='msg reply'><time>2025-07-01 12:17</time>&ensp;<span class='u' style='color:#cb735c'>prasad-kumkar</span>: hi David Emett: could you please share how polkajam binary does syncing? We are trying to request all blocks from genesis till the latest time-slot via CE128, but not sure if this is correct as we are unable to get a response, and we get a timeout</div>
 <div class='msg'><time>2025-05-15 02:56</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Published jamduna binaries:
 
 <a href="https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1</a></div>
@@ -9440,3 +9441,86 @@ Yes. So the service storage get function you have implemented already would have
 <a href="https://crates.io/crates/jam-pvm-builder/versions" target="_blank" rel="noopener">https://crates.io/crates/jam-pvm-builder/versions</a>
 
 Context: <a href="https://github.com/paritytech/polkajam-releases/releases/tag/v0.1.23" target="_blank" rel="noopener">https://github.com/paritytech/polkajam-releases/releases/tag/v0.1.23</a> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 09:37</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: I&#x27;m stuck in implementing 0.6.7 / 0.7.0 on jampy, since when constructing the state from the merklerized, I&#x27;m unable to determine if a merklerized key is a storage key of a_s or a (key, len) of a_l, in the case that the preimage is not present in a_p.
+
+I&#x27;ve found that someone opened an issue regarding this <a href="https://github.com/gavofyork/graypaper/issues/436;" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/issues/436;</a>
+
+Idk if anyone else is facing the same issue, or if there is a solution that I can&#x27;t see.</div>
+<div class='msg'><time>2025-07-01 09:39</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@dakkk:matrix.org&gt; I&#x27;m stuck in implementing 0.6.7 / 0.7.0 on jampy, since when constructing the state from the merklerized, I&#x27;m unable to determine if a merklerized key is a storage key of a_s or a (key, len) of a_l, in the case that the preimage is not present in a_p.
+&gt; 
+&gt; I&#x27;ve found that someone opened an issue regarding this <a href="https://github.com/gavofyork/graypaper/issues/436;" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/issues/436;</a>
+&gt; 
+&gt; Idk if anyone else is facing the same issue, or if there is a solution that I can&#x27;t see.
+
+That is intentional. </div>
+<div class='msg'><time>2025-07-01 09:39</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: In general you cannot expect to be able to reconstruct state from the merkle nodes.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 09:40</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: There will be some elements which you can reconstruct, but being able to get everything back is clearly not supported, since there are parts which we hash. </div>
+<div class='msg'><time>2025-07-01 09:42</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: I know, I don&#x27;t want to reconstruct it entirely; I only want to distinguish two different things (keys of a\_l and keys of a\_s); should I put everything in a big container containing both? It&#x27;s the only way I see, but maybe not so good <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 09:51</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Generally, yes.</div>
+<div class='msg'><time>2025-07-01 09:51</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: That is the implication, anyway.</div>
+<div class='msg'><time>2025-07-01 10:01</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: ok, got it; I don&#x27;t like it, but now I can implement the ability of using traces in 0.7</div>
+<div class='msg'><time>2025-07-01 10:02</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Between convenience and security, we&#x27;re going to choose security:)</div>
+<div class='msg'><time>2025-07-01 10:02</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I am glad I was not the only one noticing it. The proposed solution in my issue above does allow to distinguish all the keys, preserves entropy and removes some compexity compared to current 0.7.0... 
+
+Or am i missing something? </div>
+<div class='msg'><time>2025-07-01 10:05</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Your suggestion misses the fact that adding a request is permissionless.</div>
+<div class='msg'><time>2025-07-01 10:05</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: image.png</div>
+<div class='msg'><time>2025-07-01 10:05</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It&#x27;s trivial to create a collision.</div>
+<div class='msg'><time>2025-07-01 10:05</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Just request the same hash with a different length.</div>
+<div class='msg'><time>2025-07-01 10:06</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: thanks i didnt think about that</div>
+<div class='msg'><time>2025-07-01 10:07</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I guess it can be fixed by having the key opaque in a_l. but using 254, 253 and 252</div>
+<div class='msg'><time>2025-07-01 10:07</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: like proposed,</div>
+<div class='msg'><time>2025-07-01 10:09</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: image.png</div>
+<div class='msg'><time>2025-07-01 10:09</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: basically this:
+</div>
+<div class='msg'><time>2025-07-01 10:13</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: C doesn&#x27;t take 3 arguments.</div>
+<div class='msg'><time>2025-07-01 10:15</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: yeah sorry it was part of my issue above. here would be the modified C</div>
+<div class='msg'><time>2025-07-01 10:15</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: image.png</div>
+<div class='msg'><time>2025-07-01 10:15</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: Again, i might be missing something very obvious :)</div>
+<div class='msg'><time>2025-07-01 10:16</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: C still only takes 2 args in your image there. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:16</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: image.png</div>
+<div class='msg'><time>2025-07-01 10:17</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: sorry</div>
+<div class='msg'><time>2025-07-01 10:19</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: But anyway, the root of the problem is simple: we are forced to fit more than 31 bytes of information into just 31 bytes of entropy. We need to split it opaquely by service since services are mutually trustless and we don&#x27;t want one service artificially lengthening another service&#x27;s keys&#x27; merkle paths. Services are 4 bytes, so that only leaves 27 bytes of entropy. This is now at the limit of security; any further opaque data in the key will reduce the effective entropy by which we shield permissionless data (such as lookups) potentially allowing a determined attacker to cause a collision. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:20</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Your suggestion removes an additonal byte, turning our 27 bytes of entropy into 26.</div>
+<div class='msg'><time>2025-07-01 10:20</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This reduces the security threshold from the &quot;probably secure for a few years&quot; to the &quot;possibly attackable within a few years&quot;</div>
+<div class='msg'><time>2025-07-01 10:22</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The only real way around this is to handle collisions gracefully. However this will either be a huge amount of work, highly inconvenient to service authors or introduce further insecurities, especially over consensus.</div>
+<div class='msg'><time>2025-07-01 10:23</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This issue with handling collisions is that you need to do something sensible in an exceptional circumstance and in the worst case there may not be a very sensible thing to do other than reversion. And reversion comes with its own issues especially over liveness. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The 26 vs 27 vs 31 vs 32 is admittedly a lot of guesswork and we can only speculate about the amount of resources an attacker may wish to throw at breaking it. However we knew, ~ten years ago, that 20 bytes was on the bounds of security. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:32</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: There&#x27;s nothing magical about 32 bytes and we can reasonably expect to lower it <em>somewhat</em> and retain practical security, but inevitably the bound of insecurity will have been creeping up from 20 bytes over the years.</div>
+<div class='msg'><time>2025-07-01 10:36</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The degree to which 27 bytes is truly secure against a determined and well-resourced adversary can be argued indefinitely. But what we can say is that reducing from 27 to 26 will make their job a <em>lot</em> easier, reducing it by, at face value, over 100x difficulty and turning something which would take a year of concerted effort into a 2 or 3 days.</div>
+<div class='msg'><time>2025-07-01 10:37</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I would not want to compromise to that level on the basis of implementation convenience.</div>
+<div class='msg'><time>2025-07-01 10:37</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: Won&#x27;t this be solved by restoring 32 bytes keys (instead of 31)? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:38</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: That would buy us an extra byte of entropy, but our expectation is that it would cost substantial levels of speed. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:39</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: 31 byte keys allow us to pack nodes very efficiently into disk blocks.</div>
+<div class='msg'><time>2025-07-01 10:39</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: That all gets screwed up with 32 byte keys. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:40</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The priorities are:
+
+- Security
+- Performance
+- Implementation convenience (or, indeed, supporting implementors&#x27; flawed protocol assumptions!) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:41</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: My apologies for not catching this earlier. The hashing should always have been there and then nobody would have written any flawed code. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:46</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: Thanks for the in-depth explanation on the reasoning behind all the values/lengths etc. 
+
+Do you think it&#x27;s best to close that issue up or keep it open in case someone have a better idea? Maybe i write a summary of what has been said here <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 10:46</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: NP, the main drawback are us arguing about it, and you having to reply 😄 </div>
+<div class='msg'><time>2025-07-01 11:02</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I think one additional quirk the hashes introduce is now it’s not as simple to get all storage for a given service index anymore (can’t use 8-byte prefix search). So e.g. when a service is ejected it’s not as simple now to go through and make sure all of that service’s storage is removed from state. Or am I wrong about needing to purge ejected service storage ? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 11:12</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It&#x27;s trivial because we track the number of items in the account. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 11:17</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: In the case where an ejected service has a bunch of items though, it’s not easy to actually find them and remove them from the state, I think </div>
+<div class='msg'><time>2025-07-01 11:21</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: We guarantee that the service cannot be deleted unless it has first deleted its items.</div>
+<div class='msg'><time>2025-07-01 11:21</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Service item enumeration is not a feature of the base JAM protocol. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 11:22</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: (I mention it because perhaps you&#x27;re mistakenly asserting that it is or should be.)</div>
+<div class='msg'><time>2025-07-01 11:27</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: No, I just missed where we guarantee all items are deleted before deleting the service. Where is that in the gp?</div>
+<div class='msg'><time>2025-07-01 11:31</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: See <code>eject</code>: </div>
+<div class='msg'><time>2025-07-01 11:31</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: image.png</div>
+<div class='msg'><time>2025-07-01 11:32</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This basically just guarantees that storage is empty and there is only one preimage left (the code, which must be there or there&#x27;d have been nothing to <code>upgrade</code> to the zombie code. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 11:33</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: ah i was wondering what that was all about</div>
+<div class='msg'><time>2025-07-01 11:36</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: &gt; &lt;@emielsebastiaan:matrix.org&gt; Any chance jam-pvm-builder v0.1.23 could be released on crates.io? 🙏🏻
+&gt; <a href="https://crates.io/crates/jam-pvm-builder/versions" target="_blank" rel="noopener">https://crates.io/crates/jam-pvm-builder/versions</a>
+&gt; 
+&gt; Context: <a href="https://github.com/paritytech/polkajam-releases/releases/tag/v0.1.23" target="_blank" rel="noopener">https://github.com/paritytech/polkajam-releases/releases/tag/v0.1.23</a>
+
+Bumping this 👆🏻
+Q: is a release jam-pvm-builder v0.1.23 an option? Or is it not a priority? </div>
+<div class='msg'><time>2025-07-01 11:48</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Noted that the latest version is desired. Unfortunately I&#x27;m the only one who can make a release and my schedule is not exactly replete with free time. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-01 11:51</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Np only asking so we can schedule tasks on our end. </div>
+<div class='msg'><time>2025-07-01 15:53</time>&ensp;<span class='u' style='color:#6f63cc'>decentration</span>: do we know yet how long is the deadline window for M1? when does it open/close. </div>
