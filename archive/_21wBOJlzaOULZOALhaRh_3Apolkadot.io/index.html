@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-03 03:36 UTC</small></p>
+<p><small>last updated 2025-07-04 03:35 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9528,3 +9528,7 @@ Q: is a release jam-pvm-builder v0.1.23 an option? Or is it not a priority? </di
 <div class='msg'><time>2025-07-02 20:29</time>&ensp;<span class='u' style='color:#cb735c'>prasad-kumkar</span>: Jan Bujak: From your recompiler talk- if we use <code>r14</code> as the base pointer for guest memory, should we exclude it from the guest register mapping set (leaving us with only 12 registers), or is there a way to safely use it for both? Thanks!</div>
 <div class='msg reply'><time>2025-07-03 03:34</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: If you&#x27;re going to use a register for the VM then obviously you can&#x27;t use it for guest registers.</div>
 <div class='msg reply'><time>2025-07-03 03:34</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: I can give you a hint though: you only need one register for the vmctx and the guest memory if you put the vmctx at a <em>negative</em> offset to the guest memory.</div>
+<div class='msg'><time>2025-07-03 11:51</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: @[davxy - ooo] to support the fuzzer, should our implementation be able to reconstruct the full posterior state for all header hashes in history, or just the most recent one?</div>
+<div class='msg'><time>2025-07-03 13:51</time>&ensp;<span class='u' style='color:#6f63cc'>decentration</span>: i see, so priority for higher milestone submission waiting to be evaluated. and i am assuming if a milestone is submitted and evaluated successfully it is safe for winning a prize.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-03 14:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The prize pool is limited overall, and individual language sets are also limited further. So hypothetically (at least) there could be a situation where two teams are competing over the same prize. </div>
+<div class='msg'><time>2025-07-03 14:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: For this reason it’s important to have a means of prioritizing. </div>
