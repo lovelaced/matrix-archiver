@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-04 03:35 UTC</small></p>
+<p><small>last updated 2025-07-05 03:32 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9404,6 +9404,8 @@ perhaps still need one more flag to tell the program if it is testing others or 
 <div class='msg reply'><time>2025-06-29 16:11</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: we just released our 0.6.6 with a command <code>fuzz</code> can make <code>spacejam</code> a fuzz target, the unix sockets part is not tested yet since currently we don&#x27;t have the <code>fuzz</code> binary, however, the trace command still can be used for processing traces
 
 <a href="https://github.com/spacejamapp/specjam/releases/tag/0.6.6" target="_blank" rel="noopener">https://github.com/spacejamapp/specjam/releases/tag/0.6.6</a> <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-04 16:55</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Hey davxy, what should our implementations do when an invalid block is received by ImportBlock? How should this be communicated back to the fuzzer?</div>
+<div class='msg reply'><time>2025-07-04 18:13</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Second question/comment relating to the fuzzer. I think I saw it mentioned that the chain spec can be derived from the number of validators present in the state. The problem I see is that is the header is sent first when using SetState, and it requires knowing the chain spec to know how many epoch mark validators are present. The order of arguments in SetState would need to be swapped to send the state first for this to work. <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-06-29 12:17</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: These fuzzer options define where the fuzzer tool picks blocks to be sent to the target. &quot;remote&quot; indicates that blocks can be taken from a remote source.
 
 That said, these are fuzzer details and aren&#x27;t particularly relevant to the target itself, which simply communicates with the fuzzer via a Unix socket, as outlined in the draft I shared</div>
@@ -9532,3 +9534,16 @@ Q: is a release jam-pvm-builder v0.1.23 an option? Or is it not a priority? </di
 <div class='msg'><time>2025-07-03 13:51</time>&ensp;<span class='u' style='color:#6f63cc'>decentration</span>: i see, so priority for higher milestone submission waiting to be evaluated. and i am assuming if a milestone is submitted and evaluated successfully it is safe for winning a prize.  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-07-03 14:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The prize pool is limited overall, and individual language sets are also limited further. So hypothetically (at least) there could be a situation where two teams are competing over the same prize. </div>
 <div class='msg'><time>2025-07-03 14:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: For this reason it’s important to have a means of prioritizing. </div>
+<div class='msg'><time>2025-07-04 18:32</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: &gt; &lt;@jaymansfield:matrix.org&gt; Hey davxy, what should our implementations do when an invalid block is received by ImportBlock? How should this be communicated back to the fuzzer?
+
+on import failure the prior state root should be returned.</div>
+<div class='msg'><time>2025-07-04 18:37</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: &gt; &lt;@jaymansfield:matrix.org&gt; Second question/comment relating to the fuzzer. I think I saw it mentioned that the chain spec can be derived from the number of validators present in the state. The problem I see is that is the header is sent first when using SetState, and it requires knowing the chain spec to parse the epoch mark validators. The order of arguments in SetState would need to be swapped to send the state first for this to work.
+
+The number of validators in the epoch marker matches the number of validators in the state, so either can be used to infer the spec flavor. That said, I&#x27;m open to adding this parameter to PeerInfo if it simplifies things</div>
+<div class='msg'><time>2025-07-04 18:38</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: &gt; &lt;@ascriv:matrix.org&gt; @[davxy - ooo] to support the fuzzer, should our implementation be able to reconstruct the full posterior state for all header hashes in history, or just the most recent one?
+
+The most recent. This is used only to give you back a report  with state diff. Expected vs actual</div>
+<div class='msg'><time>2025-07-04 18:42</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Yes it matches, but the header is sent first for SetState,  and without knowing the spec at that point how would you know when to stop reading in validators for the epoch mark? The number of bytes for the header isn&#x27;t known (just header+state together).  If the state was sent first, it would be easy to derive since the key value lengths can be determined. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-04 18:53</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: It seems that for a lot of impls, knowing the flavor is more convenient at compile time, so maybe we can decide on the flavor for the fuzzing and not have to worry about run-time flavor switching? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-04 18:54</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: or provide multiple binaries of different flavors which we describe a priori if the fuzzing requires. which I think davxy proposed <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-04 19:00</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: Of course. I don&#x27;t think that the spec flavor surprise factor is part of the fuzzing procedure. So you can submit two bins (tiny/full)</div>
