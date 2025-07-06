@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-05 03:32 UTC</small></p>
+<p><small>last updated 2025-07-06 03:40 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9547,3 +9547,23 @@ The most recent. This is used only to give you back a report  with state diff. E
 <div class='msg'><time>2025-07-04 18:53</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: It seems that for a lot of impls, knowing the flavor is more convenient at compile time, so maybe we can decide on the flavor for the fuzzing and not have to worry about run-time flavor switching? <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-07-04 18:54</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: or provide multiple binaries of different flavors which we describe a priori if the fuzzing requires. which I think davxy proposed <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-07-04 19:00</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: Of course. I don&#x27;t think that the spec flavor surprise factor is part of the fuzzing procedure. So you can submit two bins (tiny/full)</div>
+<div class='msg'><time>2025-07-05 06:07</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: will we have test vectors for work package computation this or next month?</div>
+<div class='msg'><time>2025-07-05 13:19</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Some Qs about this:
+
+- Can Docker images be submitted or does it have to be an executable?
+- Just Linux amd64, I assume?
+- In the case of requiring a binary, what system libraries can we expect to exist (and what glibc version)? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-05 14:24</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: &gt; &lt;@oliver.tale-yazdi:parity.io&gt; Some Qs about this:
+&gt; 
+&gt; - Can Docker images be submitted or does it have to be an executable?
+&gt; - Just Linux amd64, I assume?
+&gt; - In the case of requiring a binary, what system libraries can we expect to exist (and what glibc version)?
+
+Generalized question for delivery of interpreted languages I suppose. Docker would be ideal. Please advise. 🙏🏻 </div>
+<div class='msg'><time>2025-07-05 15:01</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: for interpreted languages running in docker, ain&#x27;t people can still fetch the source via entering the container? I know typescript can compile javascript into non-human-readable exprs, but what about python, just curious</div>
+<div class='msg'><time>2025-07-05 19:27</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Opened one question issue around the unix socket operation mode <a href="https://github.com/davxy/jam-stuff/issues/3" target="_blank" rel="noopener">https://github.com/davxy/jam-stuff/issues/3</a></div>
+<div class='msg'><time>2025-07-05 19:55</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: I&#x27;m not sure where the official conformance testing process will eventually run (as it will run no-stop for... days? weeks?), but as far as I&#x27;m concerned:
+- **Docker**: I&#x27;m totally fine with you providing a Docker image instead of a plain binary. The key requirement is that the container exposes a Unix domain socket and forwards traffic to your binary inside the container. I haven’t done this myself, but it should definitely be doable. If you go this route, please make sure everything is set up so that we only need to start the container and point the fuzzer to the socket - I think no additional setup on our side is preferable.
+- **Target architecture**: Right now, I believe we’re targeting <code>amd64</code>. Not sure yet if we&#x27;ll fuzz M1 over other platforms (and if it makes sense). 
+- **Binary**: A statically built binary would be very much appreciated. If that’s not feasible, then the Docker approach becomes even more preferable (compared to getting crazy with dynamic lib deps). <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-05 19:58</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: If Docker is chosen solely to prevent access to the source code of interpreted langs, we&#x27;ll need to get our hands on the sources anyway :-)</div>
