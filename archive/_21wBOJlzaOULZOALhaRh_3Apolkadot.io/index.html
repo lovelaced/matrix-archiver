@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-07 03:40 UTC</small></p>
+<p><small>last updated 2025-07-08 03:36 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -7934,6 +7934,15 @@ Think I missed this message before, sorry. This was probably because the --dev-v
 Currently, while connecting to Polkajam, I am encountering errors: InvalidForName, ServerNameMustContainOneHostName.</div>
 <div class='msg reply'><time>2025-06-24 01:48</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You just need the alternative name extension, with a single DNS name as defined in the SNP doc</div>
 <div class='msg reply'><time>2025-07-01 12:17</time>&ensp;<span class='u' style='color:#cb735c'>prasad-kumkar</span>: hi David Emett: could you please share how polkajam binary does syncing? We are trying to request all blocks from genesis till the latest time-slot via CE128, but not sure if this is correct as we are unable to get a response, and we get a timeout</div>
+<div class='msg reply'><time>2025-07-07 12:13</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Sorry have been on holiday. If you aren&#x27;t getting a response you may not be sending a properly formatted request.</div>
+<div class='msg reply'><time>2025-07-07 12:18</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: There is no prescribed strategy for syncing the chain. As long as you follow the protocol described in the SNP doc any reasonable strategy should work.</div>
+<div class='msg reply'><time>2025-07-07 13:34</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: &gt;to request all blocks from genesis till the latest time-slot via CE128, but not sure if this is correct as we are unable to get a response, and we get a timeout
+
+I thought about the same thing to do, but SNP only mentions that the responding nodes needs to respond with *a child*, not the canonical one. So you could get stuck in old forks.  
+Not sure if this is the intended meaning, but it leads to the consequence of having to do reverse order</div>
+<div class='msg reply'><time>2025-07-07 13:35</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Just doing descend downloading would be like trying to random-walk a tree downwards.</div>
+<div class='msg reply'><time>2025-07-07 13:35</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Maybe the spec could be amended to prioritize blocks of the final (or best fork)? <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-07 14:27</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: CE128 shouldn&#x27;t return blocks that can&#x27;t be finalised, I&#x27;ll clarify this in the doc. But if there are multiple forks yes you need to request them explicitly in reverse order, there isn&#x27;t really a way to ask for a particular fork otherwise as you say.</div>
 <div class='msg'><time>2025-05-15 02:56</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Published jamduna binaries:
 
 <a href="https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/releases/tag/0.6.6.1</a></div>
@@ -9581,3 +9590,24 @@ Which GP version is the fuzzer right now?</div>
 <div class='msg reply'><time>2025-07-07 00:06</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: we have a 0.6.6 release with fuzzer target here, not sure if we can  get matched 👀
 
 <a href="https://github.com/spacejamapp/specjam/releases/tag/0.6.6" target="_blank" rel="noopener">https://github.com/spacejamapp/specjam/releases/tag/0.6.6</a></div>
+<div class='msg reply'><time>2025-07-07 06:21</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: You can&#x27;t read the message I sent, strange? The Fuzzer target generates some simple blocks: fallback and safrole. The target &quot;targets&quot; version v0.6.6. </div>
+<div class='msg reply'><time>2025-07-07 11:08</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Aah, okay, that explains it. I created the fuzzer solely to test the target, so it generates only simple blocks. And is not hardened.</div>
+<div class='msg'><time>2025-07-07 06:58</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: Does the fuzzer protocol uses asn.1? I see asn.1 syntax, but asn.1 is not mentioned in the README</div>
+<div class='msg'><time>2025-07-07 07:02</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: The serialization/deserialization is as in the GP </div>
+<div class='msg'><time>2025-07-07 07:08</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: The &quot;Message&quot; choice, how should be serialized? Like the optional value in the gp with more than two values?</div>
+<div class='msg'><time>2025-07-07 07:14</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Like the 0-6 or whatever it was? It’s a byte </div>
+<div class='msg'><time>2025-07-07 07:14</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: After the length, iirc. I’m not at my laptop though </div>
+<div class='msg'><time>2025-07-07 07:15</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: ok</div>
+<div class='msg'><time>2025-07-07 07:41</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: yeah looking at <a href="https://github.com/davxy/jam-stuff/blob/main/fuzz-proto/README.md" target="_blank" rel="noopener">https://github.com/davxy/jam-stuff/blob/main/fuzz-proto/README.md</a> again actually it doesn&#x27;t explicitly say the enum value is the byte after the 4 bytes for the message length, but that seems to be the case. the 2 encoding examples are evidence of this (they use enum values 0 and 5 correctly). @[davxy - ooo] to confirm for sure though</div>
+<div class='msg'><time>2025-07-07 09:04</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: image.png</div>
+<div class='msg'><time>2025-07-07 09:04</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: any suggestions on what dates I should push CoreChains and CorePlay back to?</div>
+<div class='msg'><time>2025-07-07 09:04</time>&ensp;<span class='u' style='color:#ae40b7'>alice_und_bob</span>: and what is the latest in regards to XCMP? Is it still roadmap relevant or did plans here change?</div>
+<div class='msg'><time>2025-07-07 11:11</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@alice_und_bob:matrix.org&gt; any suggestions on what dates I should push CoreChains and CorePlay back to?
+
+From my perspective, CorePlay is still in ideation &amp; research and has an open timeline. </div>
+<div class='msg'><time>2025-07-07 11:12</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: For CoreChains, prototyping can performance testing can begin, though it is not a priority for me or the PolkaJam team. </div>
+<div class='msg'><time>2025-07-07 11:14</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I understand Basti had started some initial work here. </div>
+<div class='msg'><time>2025-07-07 11:15</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: XCMP is a Polkadot-1, parachains specific protocol. It is unclear to what extent it will be implemented with CoreChains. </div>
+<div class='msg'><time>2025-07-07 11:16</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Hyperbridge may be enough. Or perhaps there will be a more general JAM-wide inter-service message passing protocol.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-07 11:17</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This is all dependent on CoreChains successfully being able to replace the Relay-chain. </div>
+<div class='msg'><time>2025-07-07 11:17</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: That is presently speculative. </div>
