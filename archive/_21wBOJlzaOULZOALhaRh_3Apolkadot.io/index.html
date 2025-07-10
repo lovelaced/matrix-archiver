@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-09 03:38 UTC</small></p>
+<p><small>last updated 2025-07-10 03:37 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9646,3 +9646,37 @@ Edit: I&#x27;m particularly interested in the techniques you used to generate bl
 - Why not sending just the work package? 
 - what if the core sent is not the core that the receiver guarantor belongs to? Should the guarantor reject the package? 
 - If builder needs to know the core each validator belongs to, it should inspect the chain state, right? </div>
+<div class='msg'><time>2025-07-09 06:44</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Great questions! Targeting GP v0.6.6:
+
+**Fuzzer Protocol**: Yes, the binary conforms to the fuzzer protocol you proposed - it was developed to support jamzig&#x27;s fuzz target, though not as the main development effort. I could put a bit more energy in it.
+
+**Report Format**: Formalizing the mismatch report format would be valuable for integration into the fuzzer spec.
+
+**Functionality**:
+• Only generates &quot;valid&quot; blocks that can be imported (no fault triggering)
+• Includes both safrole and fallback blocks
+• No host function exercising
+• Targeting GP v0.6.6
+
+**Block Generation**: Straightforward generation of importable blocks only - no sophisticated techniques for faulty blocks since the fuzzer was only implemented to help test the fuzzing protocol on the target. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-09 06:55</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: </div>
+<div class='msg'><time>2025-07-09 06:57</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: One thing I added to the target and fuzzer parameters is the ability to dump the actual constants used to build the binary. This could be handy for debugging and might be worth formalizing in the spec.</div>
+<div class='msg'><time>2025-07-09 10:08</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: I also wrote a fuzzer-target on jampy following davxy spec, and compiled it for gp 0.6.6, 0.6.7 and 0.7.0</div>
+<div class='msg'><time>2025-07-09 14:50</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: Boy Maas | JamZig: I&#x27;m trying your fuzzer against my target, but I&#x27;m receiving blocks where an empty extrinsic has an hash full of zeros; I think this is wrong <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-09 15:33</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: I get the same error, my target raise a &quot;bad extrinsic hash&quot; error. Also, if I ignore this error and continue with the block check I also get a &quot;seal verify failure&quot;.</div>
+<div class='msg reply'><time>2025-07-09 15:33</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: same on both</div>
+<div class='msg reply'><time>2025-07-09 16:25</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: That seems to be a successful fuzzing session as I indeed generate blocks with a &quot;bad extrinsic hash&quot;. The fuzzing appears to be effective.</div>
+<div class='msg reply'><time>2025-07-09 16:26</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: so we have to send back the same state, right?</div>
+<div class='msg reply'><time>2025-07-09 16:28</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Good question. We should follow the protocol. What does it instruct us to do in this scenario? I believe this is not described yet. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-09 16:30</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: I believe this indicates that the target refused to process the block. So that could work.</div>
+<div class='msg reply'><time>2025-07-09 17:10</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: After a bad extrinsic hash error I send back the same state root that I had before, but the fuzzer appears to have an updated state root.  <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-09 17:13</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: I also think that the fuzzer may not be reading the full state properly when it is requested to me through the GetState request. When it shows to me the differences, I see that the first one has a byte which is the number (15) of key-values of the full state.  <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-09 17:14</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: image.png</div>
+<div class='msg reply'><time>2025-07-09 18:03</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: I have not yet implemented the case with the same root. This was not included in the protocol description.I never intended for anyone other than me to use the fuzzer. 😅 
+
+Let me add that when a target sends the same root, the fuzzer interprets the target encountered some kind of import error.
+
+Could you send me the state you are sending, or your target binary, so I can develop further based on that? I am on linux-aarch64. Prefer the binary.
+ <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-09 19:30</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: Sure, here is my target binary for linux-aarch64 <a href="https://github.com/bloppan/conformance_testing" target="_blank" rel="noopener">https://github.com/bloppan/conformance_testing</a></div>
+<div class='msg'><time>2025-07-09 17:09</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: </div>
