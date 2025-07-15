@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-14 03:44 UTC</small></p>
+<p><small>last updated 2025-07-15 03:43 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9724,6 +9724,14 @@ HandShake is OK, SetState is OK, and the initial roots match after SetState. How
 <div class='msg reply'><time>2025-07-12 16:50</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: dakkk | JamPy: The protocol is functioning, but the JamPy target is failing on the seal signature. However, after this failure I do receive the correct state. So with the JamPy implementation, the JamZig fuzzer gets a working GetState, and I obtain the correct key values and can produce a good state diff. <span class="edited">(edited)</span></div>
 <div class='msg reply'><time>2025-07-13 10:53</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Just pushed a cleaned up version: <a href="https://github.com/jamzig/conformance-releases" target="_blank" rel="noopener">https://github.com/jamzig/conformance-releases</a> <span class="edited">(edited)</span></div>
 <div class='msg reply'><time>2025-07-13 11:20</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Bernar | Vinwolf:  <a href="https://asciinema.org/a/rZfU3E9kqfC3hCeU0vaPioVjD" target="_blank" rel="noopener">https://asciinema.org/a/rZfU3E9kqfC3hCeU0vaPioVjD</a> almost there.</div>
+<div class='msg reply'><time>2025-07-14 11:33</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Hi Bernar | Vinwolf , could you check why our protocols are mismatched? At random points, when I run the official traces, against the Vinwolf target it stops unexpectedly. Is this an issue on my side or yours? When I run it against my target, it always works.
+
+</div>
+<div class='msg reply'><time>2025-07-14 12:15</time>&ensp;<span class='u' style='color:#6ecf94'>qiwei</span>: hi Boy Maas | JamZig , Boka target matches with jamzig fuzzer when using --trace-dir, can pass all traces</div>
+<div class='msg reply'><time>2025-07-14 12:18</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: image.png</div>
+<div class='msg reply'><time>2025-07-14 12:18</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: yes, there was an issue on my side, now I can pass all traces as well, I&#x27;ve updated my vinwolf_target binary Boy Maas | JamZig. My GetState response is not fixed yet <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-14 12:40</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Nice! That makes sense. Let me try this as well.</div>
+<div class='msg reply'><time>2025-07-14 12:41</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Cool, the fuzz protocol seems to be working! Now we need to initiate some real fuzzing. </div>
 <div class='msg'><time>2025-07-09 17:09</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: </div>
 <div class='msg'><time>2025-07-10 07:44</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: If there is any guide on error handling of the network protocol?
 
