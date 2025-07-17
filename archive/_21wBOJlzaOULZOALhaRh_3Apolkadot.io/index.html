@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-16 03:42 UTC</small></p>
+<p><small>last updated 2025-07-17 03:42 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9732,9 +9732,6 @@ HandShake is OK, SetState is OK, and the initial roots match after SetState. How
 <div class='msg reply'><time>2025-07-14 12:18</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: yes, there was an issue on my side, now I can pass all traces as well, I&#x27;ve updated my vinwolf_target binary Boy Maas | JamZig. My GetState response is not fixed yet <span class="edited">(edited)</span></div>
 <div class='msg reply'><time>2025-07-14 12:40</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Nice! That makes sense. Let me try this as well.</div>
 <div class='msg reply'><time>2025-07-14 12:41</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Cool, the fuzz protocol seems to be working! Now we need to initiate some real fuzzing. </div>
-<div class='msg reply'><time>2025-07-15 17:26</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: Hi Boy Maas | JamZig I found a protocol mismatch between jamzig and vinwolf: During the encoding of the validator key-values, jamzig is prepending the total length of the ed25519, bandersnatch, bls and metadata keys of each set of validators. I believe that this length should not be encoded, as these keys have a fixed size.
-
-I am also working on a more robust vinwolf version of the fuzz protocol, as I have found more cases where it can stop unexpectedly, I will let you know when I have it ready.</div>
 <div class='msg'><time>2025-07-09 17:09</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: </div>
 <div class='msg'><time>2025-07-10 07:44</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: If there is any guide on error handling of the network protocol?
 
@@ -9797,3 +9794,31 @@ App: <a href="https://search.fluffylabs.dev" target="_blank" rel="noopener">http
 <div class='msg'><time>2025-07-13 12:10</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: IMO we should try to keep this channel free from treasury funding discussions and free from JAM Implementers DAO discussions. </div>
 <div class='msg'><time>2025-07-13 12:17</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Sounds sensible. </div>
 <div class='msg'><time>2025-07-15 17:19</time>&ensp;<span class='u' style='color:#d53774'>carpathiancoder</span>: 👋 any problem in changing the email commited in git? I used a wrong one for like 5 commits and I would like it corrected...which means I need to do a rebase or something... I can leave it as is tho.. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-15 17:26</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: </div>
+<div class='msg'><time>2025-07-16 05:37</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: We have a working recompiler getting &gt; 10 FPS on Doom now  (&gt; 20 FPS if we don&#x27;t do any gas checks/charging) -- yay!
+
+The results between different x86 machines vary widely though (one machine gets 5FPS, the other 10 FPS, etc.) so we&#x27;re wondering how we can do meaningful apples-to-apples comparisons and know where we stand relative to whatever you&#x27;ve achieved on Doom with respect to 50%/100% performance.
+
+Using an extra ecalli call per basic block _temporarily_ added for analytics, we collected data to answer &quot;how many x86 instructions were used in executing XYZ PVM instruction&quot; in a run of doom -- measuring over many exported frames (&gt;2T gas).  Thankfully, the top 15 PVM instructions (ADD_64, SHLO_L_IMM_64, LOAD_IMM_JUMP_IND,  LOAD_IND_U64... ) ended up with &gt;85-90% of x86 instructions executed.   While like half of these 15 are optimizable (in that we will proceed to eliminate push/pop/movs/...), the other half are not (being 1 already.. or 2-3 irreducible).  The raw data cannot support a 6x improvement -- if we magically mapped every PVM instruction to just 1 X86 instruction, we&#x27;d only get a 4.75x gain.  So we&#x27;re puzzled how you can suggest 60 fps.
+
+While we can of course optimize relative to X machine, we appear to need to talk hardware specs to make fair apples-to-apples comparisons.  While the Toaster would solve this, it seems reasonable to do this outside by counting (or estimating) how many x86 instructions were executed per frame on average or in aggregate (or something similar, like, average # of x86 instructions per basic block, # of basic blocks)... or just move onto more &quot;real&quot; benchmarks.  Do you have DOOM statistics like this or some &quot;real&quot; benchmarks to share? 
+ </div>
+<div class='msg reply'><time>2025-07-16 05:54</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: The harware specs should be irrelevant here; you should be able to run DOOM at 60+ FPS on virtually any machine.
+
+Most PVM instructions should result in only a couple of native instructions. If you need to use <code>push</code>/<code>pop</code> then you&#x27;re most likely doing something wrong - essentially only at most three types of instructions should even necessitate the need to push anything to the stack - division and remainder, upper multiplication instructions, and _maybe_ indirect jump instruction. All of the rest of the instructions should have no pushes/pops.
+
+To give you an example: the <code>add_64</code> instruction should be recompiled either to a) a <code>mov</code> followed by <code>add</code> (when the destination register is different than both source registers), or b) a single <code>add</code> instruction (when the destination register is equal to either of the source registers).
+
+Also, note that the instruction counts don&#x27;t necessarily correlate linearly with performance; certain instructions are more expensive than others. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-16 10:09</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Thank you so much for the guidance -- we will proceed to eliminate all the  push/pop/movs/... we can and report back summary stats!</div>
+<div class='msg'><time>2025-07-16 08:26</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: We are going to have a JAM nodespace today at Web3Summit Berlin. Join the JAM builders from 12pm til 2pm at the nodespace 3. </div>
+<div class='msg'><time>2025-07-16 09:13</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: We&#x27;ll have one introducing the status of spacejam and related rust tools tmr 2pm at nodespace 1, the topic is open, feel free to DM me that I can prepare more context</div>
+<div class='msg'><time>2025-07-16 20:18</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: Is the source code for the service being accumulated in test vectors (<code>stf/accumulate</code>; latest master of <code>w3f/jamtestvectors</code> aka 0.6.6) available somewhere? It seems the <code>test-service</code> link from README doesn&#x27;t work any more and there is no JAM-SDK service in the repo any more. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-16 20:29</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: &gt; &lt;@tomusdrw:matrix.org&gt; Is the code for the service being accumulated in test vectors (<code>stf/accumulate</code>; latest master of <code>w3f/jamtestvectors</code> aka 0.6.6) available somewhere? It seems the <code>test-service</code> link from README doesn&#x27;t work any more and there is no JAM-SDK service in the repo any more.
+
+It was removed because it&#x27;s using jam-pvm-common 0.1.23, which is the version compatible with GP 0.6.6 and not yet published on crates.io.
+If you think it&#x27;s useful, I can reintroduce it, but it won&#x27;t build until the new crates are published.</div>
+<div class='msg'><time>2025-07-16 20:46</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: I see. I was trying to look for some more debug info in the service itself to figure out what it&#x27;s doing since it seems unhappy with my constants and/or operands encoding, that I feel is matching the GP, hence asking. But I feel what you are saying is that there are no significant changes to the service code and it&#x27;s just the <code>jam-pvm-common</code> version that&#x27;s different, right? </div>
+<div class='msg'><time>2025-07-16 22:11</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: We have <a href="https://github.com/spacejamapp/jade/blob/main/polkajam/jam-types/src/types.rs#L307" target="_blank" rel="noopener">a fork of jam-pvm-common</a> aligns to pvm at <code>0.6.6</code>, the data structure of <code>AccumulateItem</code> and the <code>fetch</code> call in the accumulate could be root case ...
+
+btw we now support <a href="https://github.com/spacejamapp/jade/blob/main/services/simple-token-service/src/tests.rs" target="_blank" rel="noopener">local testing</a> for the accumulate interface, it&#x27;s a fast impl atm, things could be better in next month )) <span class="edited">(edited)</span></div>
