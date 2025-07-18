@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-07-17 03:43 UTC</small></p>
+<p><small>last updated 2025-07-18 03:44 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -4456,6 +4456,7 @@ Should the preimage be retrieved from a node&#x27;s internal data store (local d
 
 <a href="https://github.com/gavofyork/graypaper/pull/241" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/241</a> <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-02-14 11:49</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: How is the strangely odd number <a href="https://graypaper.fluffylabs.dev/#/5f542d7/114c01114c01" target="_blank" rel="noopener">81</a> from the <code>a_o</code> service storage size formula derived?   The 32 within the same formula is the storage for key, but 81 is 17 more bytes than 64... <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-17 10:13</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I believe it&#x27;s key+value size for the l and p dictionaries. p key size is 32, value size is z. l key size is 36, value size is max 13 (1 for len + 3*4 bytes). Total is 81+z.</div>
 <div class='msg'><time>2025-02-14 19:27</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: For initializing the ring context for bandersnatch ring vrf stuff, there must be a common seed we’ll all be using? So that it remains deterministic </div>
 <div class='msg'><time>2025-02-14 19:33</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I assume we use the parameters in 4.1 configuration in <a href="https://github.com/davxy/bandersnatch-vrfs-spec/blob/main/specification.pdf" target="_blank" rel="noopener">https://github.com/davxy/bandersnatch-vrfs-spec/blob/main/specification.pdf</a> but wanted to confirm </div>
 <div class='msg'><time>2025-02-14 21:58</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: &gt; &lt;@ascriv:matrix.org&gt; I assume we use the parameters in 4.1 configuration in <a href="https://github.com/davxy/bandersnatch-vrfs-spec/blob/main/specification.pdf" target="_blank" rel="noopener">https://github.com/davxy/bandersnatch-vrfs-spec/blob/main/specification.pdf</a> but wanted to confirm 
@@ -6367,3 +6368,5 @@ our testnet (<code>0.6.5</code>) configuration is 5 <code>polkajam</code> node +
 <div class='msg reply'><time>2025-07-16 21:05</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Not sure the network protocol can sensibly work any other way, could be wrong about this though</div>
 <div class='msg'><time>2025-07-16 21:12</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I guess this would be in the availability spec. How long should a guarantor keep work report availability specs? <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-07-16 21:14</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Should keep mappings for as long as the data is available, 28 days is what&#x27;s currently specified I believe</div>
+<div class='msg'><time>2025-07-17 09:21</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Can guarantors assume that each imported data segment for the work items is exported by one of the prerequisite work packages? (Unless perhaps the imported segment is identified by work package hash)</div>
+<div class='msg reply'><time>2025-07-17 09:24</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: No</div>
