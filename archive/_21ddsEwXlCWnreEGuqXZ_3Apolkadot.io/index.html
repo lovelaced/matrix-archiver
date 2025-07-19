@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-07-18 03:44 UTC</small></p>
+<p><small>last updated 2025-07-19 03:38 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6370,3 +6370,8 @@ our testnet (<code>0.6.5</code>) configuration is 5 <code>polkajam</code> node +
 <div class='msg'><time>2025-07-16 21:14</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Should keep mappings for as long as the data is available, 28 days is what&#x27;s currently specified I believe</div>
 <div class='msg'><time>2025-07-17 09:21</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Can guarantors assume that each imported data segment for the work items is exported by one of the prerequisite work packages? (Unless perhaps the imported segment is identified by work package hash)</div>
 <div class='msg reply'><time>2025-07-17 09:24</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: No</div>
+<div class='msg'><time>2025-07-18 14:54</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: The JNP seems pretty clear about how guarantors should get segment shards for reconstruction, but aren’t segment justifications also in D3L? There doesn’t seem to be a way to get those that I can tell. The justifications sent in 140 are justifications for shards, not segments, no?</div>
+<div class='msg reply'><time>2025-07-18 14:55</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You should also use 139/140 to request proof page shards</div>
+<div class='msg reply'><time>2025-07-18 14:56</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You need to reconstruct proof pages in the same way that you reconstruct import segments</div>
+<div class='msg reply'><time>2025-07-18 14:58</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The justifications returned by CE 140 are for shards yes. As the SNP doc says you generally should only use CE 140 if your first attempt to fetch shards and reconstruct segments using CE 139 fails</div>
+<div class='msg'><time>2025-07-18 15:22</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Ok think I get it, looking at 14.16, we can reuse the same erasure roots but use different indices to get paged proof shards using 139/140 <span class="edited">(edited)</span></div>
