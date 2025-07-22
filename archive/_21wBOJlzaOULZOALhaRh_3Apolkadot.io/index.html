@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-21 03:46 UTC</small></p>
+<p><small>last updated 2025-07-22 03:43 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9836,3 +9836,46 @@ If you think it&#x27;s useful, I can reintroduce it, but it won&#x27;t build unt
 <div class='msg'><time>2025-07-16 22:11</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: We have <a href="https://github.com/spacejamapp/jade/blob/main/polkajam/jam-types/src/types.rs#L307" target="_blank" rel="noopener">a fork of jam-pvm-common</a> aligns to pvm at <code>0.6.6</code>, the data structure of <code>AccumulateItem</code> and the <code>fetch</code> call in the accumulate could be root case ...
 
 btw we now support <a href="https://github.com/spacejamapp/jade/blob/main/services/simple-token-service/src/tests.rs" target="_blank" rel="noopener">local testing</a> for the accumulate interface, it&#x27;s a fast impl atm, things could be better in next month )) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-21 13:23</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: image.png</div>
+<div class='msg'><time>2025-07-21 13:23</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: @boymaas:matrix.org: Hi, we ran JamZig’s fuzzer with Tiny Config (<a href="https://github.com/jamzig/conformance-releases/)" target="_blank" rel="noopener">https://github.com/jamzig/conformance-releases/)</a> against the GP 0.6.6 fuzzer-target implementation of our JAM client. It fails after processing the first block and the only difference is the authorizer-pool state component (i.e the state key 01000000000000000000000000000000000000000000000000000000000000). As you can see in the screenshot, the fuzzer’s authorizer-pool was still empty for the 2 cores (i.e 0000). While in our implementation, it had added an item to each of the 2 cores (therefore becoming 010000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000). 
+
+Surprisingly, if we disable updating the authorizer-pool state component when processing a block, we are able successfully process all the blocks of the fuzzer.
+
+Therefore, could this be an oversight in the processing of the authorizer-pool state component in the fuzzer? Thanks <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-21 14:54</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: I actually hit the same thing yesterday but did not check yet which is correct </div>
+<div class='msg reply'><time>2025-07-21 14:54</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Screenshot 2025-07-21 at 16.54.25.png</div>
+<div class='msg'><time>2025-07-21 18:54</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: What’s the plan for JAM and Kusama?
+
+With Referendum 682, Polkadot governance signaled support for a future where the Polkadot relay chain is replaced by JAM. (<a href="https://polkadot.polkassembly.io/referenda/682)" target="_blank" rel="noopener">https://polkadot.polkassembly.io/referenda/682)</a>
+
+In the JAM Implementers’ Prize, milestone 3 refers to achieving “Kusama performance”—which, if memory serves, has informally been described as around 50% of Polkadot’s performance (though I’m not sure who first coined that or where it was stated).
+
+However, as far as I can tell, there’s been no explicit discussion—let alone a referendum—about what happens to the Kusama relay chain with regard to JAM. Unlike Polkadot, Kusama has not had a 682-style governance decision to define its path in a JAM future.
+
+Personally, I’ve always assumed we’d see a first JAM instance for Kusama, followed by a second for Polkadot—each fully sovereign, each with its own independent validator set.
+
+Of course, this ultimately falls to Kusama OpenGov to decide, nevertheless what are the possible paths forward for Kusama?
+
+1. A fully sovereign Kusama/JAM chain with its own validator set. 
+2. Kusama has a separate ParachainsService (or similar) on Polkadot/JAM (inspired by Oliver’s post: <a href="https://x.com/olivertaleyazdi/status/1947043501268455559?s=46&amp;t=ThX7Y87rr1MIKyk6af4OXg)" target="_blank" rel="noopener">https://x.com/olivertaleyazdi/status/1947043501268455559?s=46&amp;t=ThX7Y87rr1MIKyk6af4OXg)</a>
+3. Some eventual hybrid arrangement as part of the JAM Grid
+4. Or something wild—beyond what I can currently imagine
+
+I’d love to hear ideas. 💡 </div>
+<div class='msg'><time>2025-07-21 20:43</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Yes, the performance nomenclature was a little premature. In my more recent writings I’ve avoided using the name Kusama for this meaning. </div>
+<div class='msg'><time>2025-07-21 20:46</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Kusama could reasonably switch to JAM first; this would likely be quite helpful to reduce risk for Polkadot and could presumably happen prior to the completion of the formal audit. </div>
+<div class='msg'><time>2025-07-21 20:48</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Of course it’s OpenGov which should decide in the end. And it doesn’t much help with the greater problem that JAM will likely be ready before the parachains service logic is completed and all tooling ready for the transition. </div>
+<div class='msg'><time>2025-07-21 20:50</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: A combined JAM with both Polkadot and Kusama sharing a validator set is an interesting proposition but inevitably raises questions about the staking tokenomics for such a network. JAM Grid doesn’t help here (even if it were ready) since that’s only about scaling up beyond a single JAM instance - it doesn’t help with consolidating two token economies. </div>
+<div class='msg'><time>2025-07-21 21:03</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: A dot/ksm merger/acquisition would be a great proof of concept and could optimistically be replicated between dot and other economies in the future </div>
+<div class='msg'><time>2025-07-21 21:14</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: JAM should theoretically be general enough to support hosting a service created just for onboarding all projects on any potential acquired L1, no? </div>
+<div class='msg'><time>2025-07-21 21:16</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: And then do a “stock-for-stock” transaction for all stakeholders funded by treasury. Or something </div>
+<div class='msg'><time>2025-07-21 21:16</time>&ensp;<span class='u' style='color:#bf4233'>emilkietzman</span>: Was it ever under consideration, that Kusama becomes not only a canary network around Polkadot but for the whole JAM protocol - since it’s going heavy on ZK technology and could test/be early on JAM ZK-rollups and Services?</div>
+<div class='msg'><time>2025-07-21 21:17</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If you’re considering it, then it’s under consideration:P</div>
+<div class='msg'><time>2025-07-21 21:18</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@ascriv:matrix.org&gt; And then do a “stock-for-stock” transaction for all stakeholders funded by treasury. Or something 
+
+This probably doesn’t work since it disregards dramatic differences in liquidity. </div>
+<div class='msg'><time>2025-07-21 21:19</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &lt;@ascriv:matrix.org&gt; JAM should theoretically be general enough to support hosting a service created just for onboarding all projects on any potential acquired L1, no? 
+
+An interesting query. It depends on the L1 - JAM could not onboard itself. </div>
+<div class='msg'><time>2025-07-21 21:22</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Overall, there’s a lot to be considered with crypto M&amp;A. Ultimately this stuff is political. Unfortunately it appears to be a widespread belief that being the sole currency used to account value in staking for the provision of security is a privilege not to be shared. </div>
+<div class='msg'><time>2025-07-21 21:25</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Personally I think such a view is narrow-minded and short-term and that this technology will only reach its full potential when the forces of token maximalism relent to mutually-beneficial cooperation over such things as provision of security. </div>
