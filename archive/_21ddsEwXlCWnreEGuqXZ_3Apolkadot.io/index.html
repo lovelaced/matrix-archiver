@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-07-23 03:45 UTC</small></p>
+<p><small>last updated 2025-07-24 03:44 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6376,3 +6376,11 @@ our testnet (<code>0.6.5</code>) configuration is 5 <code>polkajam</code> node +
 <div class='msg reply'><time>2025-07-18 14:58</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The justifications returned by CE 140 are for shards yes. As the SNP doc says you generally should only use CE 140 if your first attempt to fetch shards and reconstruct segments using CE 139 fails</div>
 <div class='msg'><time>2025-07-18 15:22</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Ok think I get it, looking at 14.16, we can reuse the same erasure roots but use different indices to get paged proof shards using 139/140 <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-07-22 13:28</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: </div>
+<div class='msg'><time>2025-07-23 10:15</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Is there a proposal for the format of the metadata in the last 128 octets of the validator keys somewhere? I can infer from the various examples floating around but would be nice if it was written down somewhere (to infer the IP address/port, e.g.) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-23 12:24</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: IDK if this is specified anywhere, but PolkaJam currently assumes first 16 bytes are an IPv6 address and next 2 bytes are a port</div>
+<div class='msg'><time>2025-07-23 12:25</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Remaining metadata bytes are currently ignored</div>
+<div class='msg'><time>2025-07-23 12:27</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This ought to fit nicely in the networking spec <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-23 12:28</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Ah, it is there already actually: <a href="https://github.com/zdave-parity/jam-np/blob/main/simple.md#required-connectivity" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/blob/main/simple.md#required-connectivity</a></div>
+<div class='msg'><time>2025-07-23 12:28</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &quot;The validators&#x27; IP-layer endpoints are given as IPv6/port combinations, to be found in the first 18 bytes of validator metadata, with the first 16 bytes being the IPv6 address and the latter 2 being a little endian representation of the port&quot;</div>
+<div class='msg'><time>2025-07-23 15:03</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: should a valid ipv6/port be enforced before incorporation on chain?</div>
+<div class='msg'><time>2025-07-23 15:21</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Could plausibly be sanity checked by the delegator service, GP does not have any such logic though</div>
