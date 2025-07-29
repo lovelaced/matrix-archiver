@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-28 03:46 UTC</small></p>
+<p><small>last updated 2025-07-29 03:47 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -9862,7 +9862,9 @@ Fuzzer genesis state now begins with authentication queues filled with 0x0 which
 <div class='msg reply'><time>2025-07-26 17:05</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: GrayMatter passes it now, thanks</div>
 <div class='msg reply'><time>2025-07-27 15:31</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Boy Maas: do you have an idea why this would happen? It is on the first block, and the block references the genesis header.</div>
 <div class='msg reply'><time>2025-07-27 15:31</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Screenshot 2025-07-27 at 17.31.21.png</div>
-<div class='msg reply'><time>2025-07-27 17:14</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Boy Maas: GrayMatter rejects block with slot 248 when importing blocks from <code>./jam_conformance_fuzzer -b 1000 --seed 1753635650</code> with this <code>ticket useless</code> error which corresponds to this condition, can you please check whether your authoring logic might include useless tickets in the extrinsic? <a href="https://graypaper.fluffylabs.dev/#/9a08063/0f8f010f9a01?v=0.6.6" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/9a08063/0f8f010f9a01?v=0.6.6</a></div>
+<div class='msg reply'><time>2025-07-27 17:14</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Boy Maas: GrayMatter rejects block with slot 248 when importing tiny blocks from <code>./jam_conformance_fuzzer -b 1000 --seed 1753635650</code> with this <code>ticket useless</code> error which corresponds to this condition, can you please check whether your authoring logic might include useless tickets in the extrinsic? <a href="https://graypaper.fluffylabs.dev/#/9a08063/0f8f010f9a01?v=0.6.6" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/9a08063/0f8f010f9a01?v=0.6.6</a> <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-28 16:31</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: Hi Boy Maas: Could you please check if the fuzzer is applying the condition <code>i = Ha</code> <a href="https://graypaper.fluffylabs.dev/#/1c979cb/0e77010e7801?v=0.7.1" target="_blank" rel="noopener">from Eq. 6.16</a>?
+If I ignore this condition, I match the state root result from all the fuzzed blocks (around 7,000 so far). I updated the vinwolf-target binaries in <a href="https://github.com/bloppan/conformance_testing" target="_blank" rel="noopener">my repo</a> <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-07-21 18:54</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: What’s the plan for JAM and Kusama?
 
 With Referendum 682, Polkadot governance signaled support for a future where the Polkadot relay chain is replaced by JAM. (<a href="https://polkadot.polkassembly.io/referenda/682)" target="_blank" rel="noopener">https://polkadot.polkassembly.io/referenda/682)</a>
