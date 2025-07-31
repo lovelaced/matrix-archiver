@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-30 03:45 UTC</small></p>
+<p><small>last updated 2025-07-31 03:45 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -10198,3 +10198,29 @@ We can have one issue per implementation to keep things organized. I&#x27;ll try
 <div class='msg'><time>2025-07-29 21:09</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Yes, pls share your 0.6.7 build with fuzzer support [we are in the same state] and if you can, your 0.6.7 traces -- we&#x27;ll do the same and if we can, do a &quot;fuzz-reports&quot; output in the same style as davxy &#x27;s report!</div>
 <div class='msg reply'><time>2025-07-30 01:52</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: I pushed a new set of traces for 0.6.7 here <a href="https://github.com/javajamio/javajam-trace" target="_blank" rel="noopener">https://github.com/javajamio/javajam-trace</a></div>
 <div class='msg reply'><time>2025-07-30 01:53</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: and a new JavaJAM build for 0.6.7 <a href="https://github.com/javajamio/javajam-releases" target="_blank" rel="noopener">https://github.com/javajamio/javajam-releases</a></div>
+<div class='msg reply'><time>2025-07-30 13:44</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: here is ours: <a href="https://github.com/jamixir/jamixir-releases" target="_blank" rel="noopener">https://github.com/jamixir/jamixir-releases</a></div>
+<div class='msg reply'><time>2025-07-30 18:13</time>&ensp;<span class='u' style='color:#c377dd'>mkchung</span>: <pre><code class=''>11:08:25.356 [error] [ALICE] ❌ Failed to generate TLS identity bundle: {:certificate_creation_failed, &quot;&quot;}
+
+11:08:25.356 [info] [ALICE] 🎭 Starting as validator
+
+11:08:25.508 [info] [ALICE] 🔧 Running in fuzzer environment
+
+11:09:29.028 [info] [ALICE] New fuzzer  connected
+
+11:09:29.031 [info] [ALICE] Peer info: name=jam-duna-fuzzer-v0.1, version=0.6.7, protocol=0.6.7
+
+11:09:29.032 [error] Task #PID&lt;0.203.0&gt; started from #PID&lt;0.202.0&gt; terminating
+** (UndefinedFunctionError) function Mix.Project.config/0 is undefined (module Mix.Project is not available)
+    Mix.Project.config()
+    (jamixir 0.6.7) lib/meta.ex:2: Jamixir.Meta.app_version/0
+    (jamixir 0.6.7) lib/fuzzer/service.ex:95: Jamixir.Fuzzer.Service.send_peer_info/1
+    (jamixir 0.6.7) lib/fuzzer/service.ex:37: Jamixir.Fuzzer.Service.handle_client/2
+    (elixir 1.17.2) lib/task/supervised.ex:101: Task.Supervised.invoke_mfa/2
+Function: #Function&lt;0.18238596/0 in Jamixir.Fuzzer.Service.loop_acceptor/2&gt;
+    Args: []
+
+</code></pre>
+danicuki | Jamixir : I think we got errors right after connecting to jamixir</div>
+<div class='msg'><time>2025-07-30 18:16</time>&ensp;<span class='u' style='color:#52b0cd'>advatar</span>: Does anyone have a full implementation of 0.7.1 up and running?</div>
+<div class='msg'><time>2025-07-30 19:08</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Jason | JavaJAM: We successfully passed your 0.6.7 traces <a href="https://github.com/javajamio/javajam-trace/tree/5297d62c8634017151acbf36d1ad65d81d5b0465/stf/state_transitions" target="_blank" rel="noopener">here</a> happily, thank you for posting.  Everyone else, if you&#x27;re hungry for 0.6.7 traces vectors, recommend you check them out!</div>
+<div class='msg'><time>2025-07-30 20:49</time>&ensp;<span class='u' style='color:#52b0cd'>advatar</span>: No?</div>
