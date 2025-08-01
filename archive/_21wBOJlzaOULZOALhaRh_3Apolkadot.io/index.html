@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-07-31 03:45 UTC</small></p>
+<p><small>last updated 2025-08-01 03:49 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -10221,6 +10221,79 @@ Function: #Function&lt;0.18238596/0 in Jamixir.Fuzzer.Service.loop_acceptor/2&gt
 
 </code></pre>
 danicuki | Jamixir : I think we got errors right after connecting to jamixir</div>
+<div class='msg reply'><time>2025-07-31 10:06</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: Thanks for reporting. Just fixed the issue. Could you please retry with the latest updated 0.6.7.tar.gz file? <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-07-31 18:15</time>&ensp;<span class='u' style='color:#c377dd'>mkchung</span>: 
+Pulled the latest build. but still have issues with handshake
+<pre><code class=''>2025/07/31 11:00:09 Handshake failed before test run: failed to jam-decode data for tag 0: [Error From Codec Decode]data length insufficient for string character , type: string, name: Name, tag: name
+</code></pre>
+you can find more detail here: <a href="https://gist.github.com/mkchungs/c623db06b9dd520c3cd37a670258469f." target="_blank" rel="noopener">https://gist.github.com/mkchungs/c623db06b9dd520c3cd37a670258469f.</a> </div>
 <div class='msg'><time>2025-07-30 18:16</time>&ensp;<span class='u' style='color:#52b0cd'>advatar</span>: Does anyone have a full implementation of 0.7.1 up and running?</div>
 <div class='msg'><time>2025-07-30 19:08</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Jason | JavaJAM: We successfully passed your 0.6.7 traces <a href="https://github.com/javajamio/javajam-trace/tree/5297d62c8634017151acbf36d1ad65d81d5b0465/stf/state_transitions" target="_blank" rel="noopener">here</a> happily, thank you for posting.  Everyone else, if you&#x27;re hungry for 0.6.7 traces vectors, recommend you check them out!</div>
 <div class='msg'><time>2025-07-30 20:49</time>&ensp;<span class='u' style='color:#52b0cd'>advatar</span>: No?</div>
+<div class='msg'><time>2025-07-31 09:18</time>&ensp;<span class='u' style='color:#34c64d'>anish1222</span>: Screenshot 2025-07-31 at 2.48.28 PM.png</div>
+<div class='msg'><time>2025-07-31 09:19</time>&ensp;<span class='u' style='color:#34c64d'>anish1222</span>: mail: harpreet@techsteck.com</div>
+<div class='msg'><time>2025-07-31 09:21</time>&ensp;<span class='u' style='color:#34c64d'>anish1222</span>: when i am doing KYC i am getting this error why?
+and how can i complete KYC now? kindly help</div>
+<div class='msg reply'><time>2025-07-31 09:25</time>&ensp;<span class='u' style='color:#45b871'>david</span>: Thanks for bringing this up. Let me share your contact information with the team at the foundation that is handling KYC.   </div>
+<div class='msg reply'><time>2025-07-31 15:22</time>&ensp;<span class='u' style='color:#da79a8'>keegan</span>: Hey guys, I can help with this. Did you submit a JAM delivery recently or what&#x27;s the reason for KYC?</div>
+<div class='msg'><time>2025-07-31 09:43</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: Screenshot 2025-07-31 at 3.11.49 PM.png</div>
+<div class='msg'><time>2025-07-31 09:43</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: mail:9664sukhdevsingh@gmail.com</div>
+<div class='msg'><time>2025-07-31 09:44</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: During KYC I&#x27;m getting this error?</div>
+<div class='msg reply'><time>2025-07-31 10:46</time>&ensp;<span class='u' style='color:#45b871'>david</span>: I will also share it internally with the team. </div>
+<div class='msg reply'><time>2025-07-31 15:22</time>&ensp;<span class='u' style='color:#da79a8'>keegan</span>: Hey guys, I can help with this. Did you submit a JAM delivery recently or what&#x27;s the reason for KYC?</div>
+<div class='msg'><time>2025-07-31 11:02</time>&ensp;<span class='u' style='color:#6194cb'>roysingh8368</span>: Hi everyone,
+
+I&#x27;m currently working on the Bandersnatch VRF and encountering an issue during the ticket verification process. The extrinsic is failing, and I&#x27;m having trouble pinpoint where exactly the problem lies.
+
+Specifically, I&#x27;m following Equation 6.29 from the GreyPaper and attempting to verify against the gamma_z ring root of Bandersnatch. However, the verification fails, and I&#x27;m not sure where the discrepancy is.
+
+Could someone with experience in Bandersnatch VRF help me debug this? Here’s what I’ve tried so far:
+
+Confirmed the input parameters (e.g., public key, challenge, response) are correctly formatted.
+
+Ensured the gamma_z derivation aligns with the spec.
+
+Any insights or pointers would be greatly appreciated!
+</div>
+<div class='msg'><time>2025-07-31 11:03</time>&ensp;<span class='u' style='color:#52b0cd'>advatar</span>: Is there some place where I can see which implementations are being worked on and their current protocol version?</div>
+<div class='msg'><time>2025-07-31 11:30</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: &gt; &lt;@advatar:matrix.org&gt; Is there some place where I can see which implementations are being worked on and their current protocol version?
+
+Whould be nice to have this info here <a href="https://jamcha.in/clients" target="_blank" rel="noopener">https://jamcha.in/clients</a></div>
+<div class='msg reply'><time>2025-07-31 11:51</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: The original idea was to have Milestones in there, but so far everybody was on zero so it is not show.  
+The information is pulled from here <a href="https://graypaper.com/clients/json" target="_blank" rel="noopener">https://graypaper.com/clients/json</a> , (which does contain the milestones) so you can probably propose in that repo to add the GP version here <a href="https://github.com/w3f-webops/graypaper-website/blob/b870e97491b92302383e1a3085e23d3ebed5a991/src/data/types.ts#L61" target="_blank" rel="noopener">https://github.com/w3f-webops/graypaper-website/blob/b870e97491b92302383e1a3085e23d3ebed5a991/src/data/types.ts#L61</a></div>
+<div class='msg reply'><time>2025-07-31 11:52</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Then I can change the rendering to include the GP version as well</div>
+<div class='msg reply'><time>2025-07-31 11:53</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Or we go by a different convention where it just scans a public GitHub repo per project where each project can set its version (like the conformance-release repos that some teams already maintain)</div>
+<div class='msg reply'><time>2025-07-31 11:53</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: That would probably be less friction and more up-to-date</div>
+<div class='msg'><time>2025-07-31 11:32</time>&ensp;<span class='u' style='color:#6194cb'>roysingh8368</span>: &gt; &lt;@roysingh8368:matrix.org&gt; Hi everyone,
+&gt; 
+&gt; I&#x27;m currently working on the Bandersnatch VRF and encountering an issue during the ticket verification process. The extrinsic is failing, and I&#x27;m having trouble pinpoint where exactly the problem lies.
+&gt; 
+&gt; Specifically, I&#x27;m following Equation 6.29 from the GreyPaper and attempting to verify against the gamma_z ring root of Bandersnatch. However, the verification fails, and I&#x27;m not sure where the discrepancy is.
+&gt; 
+&gt; Could someone with experience in Bandersnatch VRF help me debug this? Here’s what I’ve tried so far:
+&gt; 
+&gt; Confirmed the input parameters (e.g., public key, challenge, response) are correctly formatted.
+&gt; 
+&gt; Ensured the gamma_z derivation aligns with the spec.
+&gt; 
+&gt; Any insights or pointers would be greatly appreciated!
+
+can anybody help me with this as i&#x27;m stuck now.</div>
+<div class='msg'><time>2025-07-31 12:18</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: &gt; &lt;@roysingh8368:matrix.org&gt; can anybody help me with this as i&#x27;m stuck now.
+
+Have you tried to follow the example here: <a href="https://github.com/davxy/bandersnatch-vrf-spec/tree/main/assets/example" target="_blank" rel="noopener">https://github.com/davxy/bandersnatch-vrf-spec/tree/main/assets/example</a> ?</div>
+<div class='msg'><time>2025-07-31 12:49</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: You have to run something like:
+RingVrf.ring\_vrf\_verify(epoch\_root, context, &quot;&quot;, ticket\_signature)
+
+context is \&lt;\&lt;$jam\_ticket\_seal + eta2&#x27; + attempt&gt;&gt; <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-31 12:52</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: I just created a PR to add some  JAM related data to the  ElectricCapital Developer Report (<a href="https://www.developerreport.com/)." target="_blank" rel="noopener">https://www.developerreport.com/).</a> This report methodology required that every team self claim their participation into specific Ecosystems. It is a very weak methodology, but still this is a reference report for the industry. I noticed many missing Polkadot repos in the list - including the Graypaper repo. I strongly suggest that all JAM teams make PRs like this one to make sure we appear strong in the next report that comes out by the end of the year. <a href="https://github.com/electric-capital/crypto-ecosystems/pull/2088" target="_blank" rel="noopener">https://github.com/electric-capital/crypto-ecosystems/pull/2088</a></div>
+<div class='msg'><time>2025-07-31 15:02</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: That would have helped me a lot a few months ago….. 🤦‍♂️ <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-31 22:23</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: hey David Emett
+I saw your binary version is updated to 0.6.7
+and we found that our protocol\_parameters length mismatch (we are 136 and you are 134) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-07-31 22:28</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: and found this when we were running <code>polkajam-testnet</code>
+<pre><code class=''>node1: 2025-07-31 20:56:54 main ERROR jam_cli  Error: Chain error: VmEngine(EngineInitializationFailed(Error(Owned(&quot;failed to create a worker process (0 already exist): failed to fetch the userfaultfd from the child process: recvfd failed: received zero bytes (root cause: failed to create an userfaultfd: userfaultfd (errno = 1 (EPERM)))&quot;))))
+node0: 2025-07-31 20:56:54 main ERROR jam_cli  Error: Chain error: VmEngine(EngineInitializationFailed(Error(Owned(&quot;failed to create a worker process (0 already exist): failed to fetch the userfaultfd from the child process: recvfd failed: received zero bytes (root cause: failed to create an userfaultfd: userfaultfd (errno = 1 (EPERM)))&quot;))))
+node4: 2025-07-31 20:56:54 main ERROR jam_cli  Error: Chain error: VmEngine(EngineInitializationFailed(Error(Owned(&quot;failed to create a worker process (0 already exist): failed to fetch the userfaultfd from the child process: recvfd failed: received zero bytes (root cause: failed to create an userfaultfd: userfaultfd (errno = 1 (EPERM)))&quot;))))
+</code></pre></div>
+<div class='msg'><time>2025-07-31 23:43</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: Hi there! hoping to gather some feedback/thoughts on this early stage idea of <a href="https://forum.polkadot.network/t/kunekt-jam-native-real-time-collaboration-protocol/14153" target="_blank" rel="noopener">**Kunekt** a JAM-native real-time collaboration protocol</a>. Our team that focuses on building tech to on-boarding real-world organizations as DAOs, in the pre-JAM era we (ab)use the Matrix protocol as part of our stack to give orgs the ability to store encrypted private data, collaborate and do off-chain computation. I believe JAM can evolve our stack and remove the need for our Matrix dependency with a protocol like Kunekt to serve most needs for collaboration and privacy of organizations, it would be a protocol that I hope compliments well other JAM services like parachains instead of competing with them :)</div>
