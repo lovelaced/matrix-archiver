@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-08-02 03:40 UTC</small></p>
+<p><small>last updated 2025-08-03 03:47 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -10244,6 +10244,8 @@ and how can i complete KYC now? kindly help</div>
 <div class='msg'><time>2025-07-31 09:44</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: During KYC I&#x27;m getting this error?</div>
 <div class='msg reply'><time>2025-07-31 10:46</time>&ensp;<span class='u' style='color:#45b871'>david</span>: I will also share it internally with the team. </div>
 <div class='msg reply'><time>2025-07-31 15:22</time>&ensp;<span class='u' style='color:#da79a8'>keegan</span>: Hey guys, I can help with this. Did you submit a JAM delivery recently or what&#x27;s the reason for KYC?</div>
+<div class='msg reply'><time>2025-08-02 06:53</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: Yes,I need KYC for Submit a Jam delivery.</div>
+<div class='msg reply'><time>2025-08-02 06:55</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: Thank you so much</div>
 <div class='msg'><time>2025-07-31 11:02</time>&ensp;<span class='u' style='color:#6194cb'>roysingh8368</span>: Hi everyone,
 
 I&#x27;m currently working on the Bandersnatch VRF and encountering an issue during the ticket verification process. The extrinsic is failing, and I&#x27;m having trouble pinpoint where exactly the problem lies.
@@ -10381,6 +10383,38 @@ Sounds like you&#x27;re talking about proof-of-device. Anything involving proof-
 The device(paired to the phone?) can participate on a second kind of non-interactive automated ceremony that is celebrated more often(daily/hourly/all the time?) as an extra measure and mostly to not require my participation in the main ceremonies as often.</div>
 <div class='msg reply'><time>2025-08-01 10:57</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: I was skimming over Idena&#x27;s approach and ceremony, it looks interesting, I think what I mention is a mix of that and the geo component of Encointer. Ceremonies with good UX, the right incentive and without having to be very regular shouldn&#x27;t be a downside it can actually become something people look forward to.</div>
 <div class='msg reply'><time>2025-08-02 01:26</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I don’t know of any trustless device. I certainly don’t know of one which can deliver its GPS coordinates to a public network in a trustless manner such that any observer can believe them. I see little point for any continuous device proof and cannot see how it is any way effective at reducing the rate of actual proof of personhood.  <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-02 17:36</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: Thinking better yeah I don&#x27;t see much benefit for the continuous device proof, but there&#x27;s a reason I started to consider the device thing, I still think it has its place in the picture ;)
+
+Idena and Encointer&#x27;s premise of _one human cannot be in two places at the same time_ is a good starting point, regular temporally-synchronised gatherings are not ideal but might not be the worst thing. I see some pros and cons with their approaches,
+-Idena challenges(FLIP) can be solved anywhere in the world, there&#x27;s no need to move but the ceremony taking place at the same time everywhere means some parts of the world won&#x27;t be lucky with the time, also I&#x27;d argue that AI might be advanced enough nowadays to solve their FLIPs and can it handle millions of people at the same time?
+
+- Encointer is more flexible with the time to accommodate people in different timezones, showing up in a physical place also proves your location, but it&#x27;s hard to scale that kind of ceremonies(and I still think it can be dangerous for participants).
+
+Now the device thing to try to make things a bit better. Borrowing from Helium <a href="https://docs.helium.com/iot/proof-of-coverage/#why-proof-of-coverage" target="_blank" rel="noopener">proof of coverage</a>, we can use the Long Range radio to proof location(no GPS, no need to trust the device, just solve an automated challenge)
+
+&gt; - RF has limited physical propagation and, therefore, distance.
+&gt; - The strength of a received RF signal is inversely proportional to the square of the distance from the transmitter.
+&gt; - RF travels at the speed of Light with (effectively) no latency.
+
+We can use physical hubs with well known locations elected via governance to be the &quot;challengers&quot; that expect swift responses and coordinate the ceremonies(e.g. the Web3 Outposts). The device solving a challenge via radio marks the start of the time sensitive ceremony that could use JAM Kunekt&#x27;s realtime collaboration properties to have more robust(and more fun) forms of verification. Idena also has the concept of different levels of &quot;humanness&quot;, older participants who have gone through several ceremonies can afford to miss some, so given that we are proving the location and a device solving an automated challenge is better that not attending a ceremony, I&#x27;d say there&#x27;s room for relaxing the frequency or ratio of attendance. Some participants with track record humanness can also help expand the coverage of the hub. Devices should also be relatively cheap(e.g. 10 - 50 USD dev boards<a href="https://lilygo.cc/products/t-watch-s3" target="_blank" rel="noopener">¹</a><a href="https://www.seeedstudio.com/Wio-SX1262-with-XIAO-ESP32S3-p-5982.html" target="_blank" rel="noopener">²</a><a href="https://lilygo.cc/products/t-beam-supreme-meshtastic" target="_blank" rel="noopener">³</a>), more affordable that a tattoo? <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-02 17:37</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: pop+lora.png</div>
+<div class='msg reply'><time>2025-08-03 03:27</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; AI might be advanced enough nowadays to solve their FLIPs and can it handle millions of people at the same time?
+
+Always a concern with remote PoP. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-03 03:27</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; showing up in a physical place also proves your location, but it&#x27;s hard to scale that kind of ceremonies
+
+Agreed, but ultimately I fear that it will come to either to this or something more invasive (e.g. proof-of-ink). <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-03 03:28</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; We can use physical hubs with well known locations elected via governance to be the &quot;challengers&quot; that expect swift responses and coordinate the ceremonies
+
+All this does is introduce a new governmental authority.</div>
+<div class='msg reply'><time>2025-08-03 03:29</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This is not what I believe is helpful to the world, and certainly not what I would wish to spend my time, stress-levels and resources on. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-03 03:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: All participants in any Web3 system must be unprivileged; barriers to entry must be zero.</div>
+<div class='msg reply'><time>2025-08-03 03:32</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If it then becomes hub-controllers who create the challenge and attest to location (and through that, personhood) and that the barriers to entry for a hub-controller are basically $$$ to purchase land/property, then you&#x27;ve just created the basis for a feudal society, with princelings basically awarding digital passports to their local peasantry. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-03 03:33</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Now there are plenty of tech bros out there who see a feudal society (with tech bro kings sitting at the top) as some sort of thing to aim for, but as I said it&#x27;s really not what I&#x27;m wanting to spend time on.</div>
+<div class='msg reply'><time>2025-08-03 03:35</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: This is part of a wider issue with the challenge-based approach: who sets the challenge and who verifies it?</div>
+<div class='msg reply'><time>2025-08-03 03:36</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: You cannot generally assume a perfect &quot;challenge oracle&quot;. If it comes down to &quot;trusted parties&quot; setting a challenge and/or determining the correct answer, then you&#x27;re back to feudalism.</div>
+<div class='msg reply'><time>2025-08-03 03:38</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Idena was interesting due to the challenges being both settable and veriifiable in a transparent and decentralised manner. Bitcoin&#x27;s PoW has the same properties but is obviously a device challenge rather than ostensibly human. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-03 03:43</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Specialist devices/tech are generally not a silver bullet since they are neither transparent nor robust. (The latter becomes an issue when it becomes critical equipment for a semi-centralised &quot;hub&quot; to help attest to its peasantry.) <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-08-01 08:46</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Economically strong PoP is hard.</div>
 <div class='msg'><time>2025-08-01 08:46</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Users will realise.</div>
 <div class='msg'><time>2025-08-01 08:47</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: My estimation is actually $5k/month, given that running a node must be assumed to be a pretty hard-core thing to be doing and keeping an eye on. I figured that Kusama can probably skimp a bit. <span class="edited">(edited)</span></div>
@@ -10423,3 +10457,15 @@ your picture is not compliant witg 0.7. E.g. I see you don&#x27;t have N and you
 <div class='msg'><time>2025-08-02 01:21</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Before you casually suggest the possibility (“in theory”) of JAM being insecure, I would suggest you read the Elves paper. It is referenced in the GP.  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-08-02 01:22</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If you want the latest information on using ZK as an alternative to Elves in JAM, see my latest talk at the Web3 Summit.  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-08-02 01:23</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Bottom line: it’s not going to be commercially comparable for some years yet. </div>
+<div class='msg'><time>2025-08-02 10:35</time>&ensp;<span class='u' style='color:#58d23c'>philip.poloczek</span>: </div>
+<div class='msg'><time>2025-08-02 19:43</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Here are all the factors of 4104 below Polkadot&#x27;s C=341:
+<pre><code class=''>2, 3, 4, 6, 8, 9, 12, 18, 19, 24, 27, 36, 38, 54, 57, 72, 76, 108, 114, 152, 171, 216, 228
+</code></pre>
+
+What are technical reasons why 2-3 hard forks can&#x27;t be planned within the above set of core numbers?
+
+36 =x2=&gt; 72 =x3=&gt; 228 
+36 =x3=&gt; 108 =x2=&gt; 228
+
+</div>
+<div class='msg'><time>2025-08-03 03:25</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The GP generally assumes a fixed V/C from block to block. There are no fundamental technical reasons why the protocol could not be changed to allow these to mutate over time (indeed there&#x27;s <a href="https://github.com/gavofyork/graypaper/issues/324" target="_blank" rel="noopener">an issue</a> in the GP repo already) but those changes would be needed to manage the transition. I haven&#x27;t taken a deep look yet, but the places where V and C are assumed constant are going to be mostly in validator set rotation, validator statistics and the core pipeline.</div>
