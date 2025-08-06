@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-08-05 03:46 UTC</small></p>
+<p><small>last updated 2025-08-06 03:45 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -10505,3 +10505,33 @@ What are technical reasons why 2-3 hard forks can&#x27;t be planned within the a
 <div class='msg'><time>2025-08-03 09:09</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: As i said, any trust in hardware would be unacceptable to me as someone who wants to build a system resilient to state-level attack.  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-08-03 09:09</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: And personally unless you’re actually building something transparently trustless I really don’t see the point. </div>
 <div class='msg'><time>2025-08-03 09:23</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: </div>
+<div class='msg'><time>2025-08-05 09:29</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Can I request that polkajam releases 7.0.0 and onwards align 1-1 with GP versions (not mixed)? It makes alignment with all other implementations much easier  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-05 09:34</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &gt; &lt;@davxy:matrix.org&gt; Since no one wants to lose their mind over this, I think it’s a sensible idea. I’ll bring it up with the team this week
+
+Also, any word on fuzzer binaries?</div>
+<div class='msg'><time>2025-08-05 11:42</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: &gt; &lt;@ascriv:matrix.org&gt; Can I request that polkajam releases 7.0.0 and onwards align 1-1 with GP versions? It makes alignment with all other implementations much easier 
+
+Version 0.7.0 will be released soon.
+Polkajam is typically released alongside the corresponding test vectors. Right now, we&#x27;re gathering feedback on the 0.6.7 vectors, which teams have only recently started processing successfully.
+We&#x27;ll let those vectors mature for a bit longer before moving on to 0.7.0, which is already prepared (given that the changes from 0.6.7 are minimal)</div>
+<div class='msg'><time>2025-08-05 11:46</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: We&#x27;re currently collecting reports here: <a href="https://github.com/davxy/jam-stuff/tree/main/fuzz-reports" target="_blank" rel="noopener">https://github.com/davxy/jam-stuff/tree/main/fuzz-reports</a>
+
+If you have a binary you&#x27;d like us to fuzz, please open an issue there and include a link to it.
+At the moment, we&#x27;re prepared to fuzz 0.6.7 implementations <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-08-05 11:51</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: JavaJAM is ready for 0.6.7 fuzzing: <a href="https://github.com/javajamio/javajam-releases" target="_blank" rel="noopener">https://github.com/javajamio/javajam-releases</a></div>
+<div class='msg'><time>2025-08-05 11:47</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Thank you. Are there plans to release the fuzzer as a binary for us to test ourselves?</div>
+<div class='msg'><time>2025-08-05 11:48</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: And regarding this I meant it would be ideal for the polkajam version Y to have same behavior as GP version Y. For the past couple releases this hasn’t been the case <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-05 12:22</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: I see what you mean, and indeed that is the ideal.
+
+The fuzzer and tooling shipped by the PolkaJam team are, as you&#x27;d expect, based directly on the PolkaJam sources. If a future GP version change (intentional or not) slips in, we usually keep it.
+We  **generally** don&#x27;t:
+
+- maintain a separate fork for the tooling
+- revert the main branch just because of future feature inclusions
+
+We do try to stay disciplined, BTW :-) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-05 12:23</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: The fuzzer is stabilizing. I imagine we could share the binary once we hit 0.7.  
+WDYT gav ?
+
+</div>
+<div class='msg'><time>2025-08-05 12:25</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: This naturally lets the teams iterate faster and ensures we&#x27;re not the bottleneck</div>
