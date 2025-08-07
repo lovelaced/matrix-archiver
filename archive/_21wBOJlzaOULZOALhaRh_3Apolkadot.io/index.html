@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-08-06 03:45 UTC</small></p>
+<p><small>last updated 2025-08-07 03:45 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -10246,6 +10246,14 @@ and how can i complete KYC now? kindly help</div>
 <div class='msg reply'><time>2025-07-31 15:22</time>&ensp;<span class='u' style='color:#da79a8'>keegan</span>: Hey guys, I can help with this. Did you submit a JAM delivery recently or what&#x27;s the reason for KYC?</div>
 <div class='msg reply'><time>2025-08-02 06:53</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: Yes,I need KYC for Submit a Jam delivery.</div>
 <div class='msg reply'><time>2025-08-02 06:55</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: Thank you so much</div>
+<div class='msg reply'><time>2025-08-06 05:54</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: Screenshot 2025-08-06 at 11.23.26 AM.png</div>
+<div class='msg reply'><time>2025-08-06 05:57</time>&ensp;<span class='u' style='color:#c4328e'>sukhdev123</span>: KYB link is not working i need to do KYB .How can i do?My entire team doing KYB .Link is not working anymore help me with this.
+
+1. one team member is sufficient for KYB or entire team has to do KYB? 
+</div>
+<div class='msg reply'><time>2025-08-06 14:25</time>&ensp;<span class='u' style='color:#da79a8'>keegan</span>: Sukhdev Singh: that appears to be the wrong link, can you try with <a href="https://in.sumsub.com/websdk/p/uni_6eVGNmoJ83HVovnN" target="_blank" rel="noopener">https://in.sumsub.com/websdk/p/uni_6eVGNmoJ83HVovnN</a></div>
+<div class='msg reply'><time>2025-08-06 14:25</time>&ensp;<span class='u' style='color:#da79a8'>keegan</span>: KYB is for the legal entity, but yes all members need to do KYC as part of it.</div>
+<div class='msg reply'><time>2025-08-06 14:26</time>&ensp;<span class='u' style='color:#da79a8'>keegan</span>: If that doesn&#x27;t work feel free to email compliance@web3.foundation</div>
 <div class='msg'><time>2025-07-31 11:02</time>&ensp;<span class='u' style='color:#6194cb'>roysingh8368</span>: Hi everyone,
 
 I&#x27;m currently working on the Bandersnatch VRF and encountering an issue during the ticket verification process. The extrinsic is failing, and I&#x27;m having trouble pinpoint where exactly the problem lies.
@@ -10535,3 +10543,41 @@ WDYT gav ?
 
 </div>
 <div class='msg'><time>2025-08-05 12:25</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: This naturally lets the teams iterate faster and ensures we&#x27;re not the bottleneck</div>
+<div class='msg'><time>2025-08-06 16:16</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: Sharing here the two Wish For Change proposals in Kusama about how to proceed with JAM.
+
+- <a href="https://kusama.subsquare.io/referenda/573" target="_blank" rel="noopener">Option A</a> - **Lightweight and independent**
+- <a href="https://kusama.subsquare.io/referenda/574" target="_blank" rel="noopener">Option B</a> - **Full power and Polkadot friendly**
+
+My <em>wishing budget</em> went on OptA, anyone feel free to place decision deposit for OptB. 
+The context is mostly quotes from this chat, gav and Emiel let me know if I(the AI) have misquoted you or if extra context should be provided.</div>
+<div class='msg'><time>2025-08-06 17:53</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: We have a doubt about the state serialization:
+do we need to prefix each KeyValue item with its size? </div>
+<div class='msg'><time>2025-08-06 19:05</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: No. Perhaps the confusion lies in the interpretation of the ASN.1 <code>SEQUENCE</code> keyword.
+
+In ASN.1:
+
+- <code>SEQUENCE</code> is conceptually equivalent to a <code>struct</code>; it represents an ordered collection of typed fields.
+
+- A <em>variable-length vector</em> of elements of type <code>T</code> is written as:
+
+  <code>SEQUENCE OF T</code>  
+  This form includes a length prefix.
+
+- A <em>fixed-length vector</em> of <code>T</code> with size <code>N</code> is written as:
+
+  <code>SEQUENCE (SIZE(N)) OF T</code>  
+  This form does **not** include a length prefix.
+
+- A <em>variable-length byte array</em> is written as:
+
+  <code>OCTET STRING</code>  
+  This is effectively a shorthand for <code>SEQUENCE OF U8</code> and includes a length prefix.
+
+- A <em>fixed-length byte array</em> is written as:
+
+  <code>OCTET STRING (SIZE(N))</code>  
+  This is equivalent to <code>SEQUENCE (SIZE(N)) OF OCTET</code>, and does **not** include a length prefix.
+
+For context for the other readers, see the protocol message syntax:  
+<a href="https://github.com/davxy/jam-stuff/tree/main/fuzz-proto#protocol-messages" target="_blank" rel="noopener">https://github.com/davxy/jam-stuff/tree/main/fuzz-proto#protocol-messages</a> and the syntax for all the jam protocol types: <a href="https://github.com/davxy/jam-test-vectors/blob/master/lib/jam-types.asn" target="_blank" rel="noopener">https://github.com/davxy/jam-test-vectors/blob/master/lib/jam-types.asn</a> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-06 19:32</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Daniel: It’s always a little weird seeing one’s words twisted by missing context. I would not have proposed option B. <span class="edited">(edited)</span></div>
