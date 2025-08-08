@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-08-07 03:45 UTC</small></p>
+<p><small>last updated 2025-08-08 03:45 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -10581,3 +10581,53 @@ In ASN.1:
 For context for the other readers, see the protocol message syntax:  
 <a href="https://github.com/davxy/jam-stuff/tree/main/fuzz-proto#protocol-messages" target="_blank" rel="noopener">https://github.com/davxy/jam-stuff/tree/main/fuzz-proto#protocol-messages</a> and the syntax for all the jam protocol types: <a href="https://github.com/davxy/jam-test-vectors/blob/master/lib/jam-types.asn" target="_blank" rel="noopener">https://github.com/davxy/jam-test-vectors/blob/master/lib/jam-types.asn</a> <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-08-06 19:32</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Daniel: It’s always a little weird seeing one’s words twisted by missing context. I would not have proposed option B. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-07 03:54</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Daniel, please do not publish an AI-twisted version of my words that you yourself would not assert full accountability for. This is extremely bad form. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-07 03:58</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: &gt; &quot;Assuming validator nodes cost a bare minimum of ~$3k/month to run, it would cost $3m/month, $36m/year&quot; for full configuration, but &quot;Kusama could reasonably... have Kusama run a smaller JAM (perhaps just 32-core)&quot; - Gavin Wood
+
+Please give a reference to this quote.</div>
+<div class='msg'><time>2025-08-07 04:47</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: Alright, my bad, I checked some of the quotes and looks god on the surface but perhaps it&#x27;s better without the quoting. The main idea that I wrote on the remarks remains, Opt.A: light, fast, cheaper, independent configuration. OptB: Standard params, non-biased towards KSM, and crossing fingers that Polkadot joins later to share security costs. We can always have an option C if there&#x27;s something fundamentally wrong with the other two.</div>
+<div class='msg'><time>2025-08-07 04:54</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Daniel, I choose my words here carefully. What you did is despicable and dishonourable. </div>
+<div class='msg'><time>2025-08-07 04:55</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: You made a false quote of me and published it in a highly central community space as the truth.  </div>
+<div class='msg'><time>2025-08-07 04:56</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If you foolishly entrust my reputation to AI, you can count my support for you at an end. </div>
+<div class='msg'><time>2025-08-07 04:57</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: Knowing AI is as quirky as it is my first reaction was to share it here. Sorry to hear you feel that way, I&#x27;ll be a better human next time 🙏</div>
+<div class='msg'><time>2025-08-07 04:58</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: YOU posted that, not the AI. Man the fuck up. </div>
+<div class='msg'><time>2025-08-07 04:58</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I trust this is mere foolishness and not malice, so I will give you a second chance. If you value your honour and my company, never ever use AI to speak for anyone other than yourself. </div>
+<div class='msg'><time>2025-08-07 05:06</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Publishing lies and asking the victim to fact-check is <em>at best</em> ignorant and lazy. </div>
+<div class='msg'><time>2025-08-07 05:07</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>:  No lazy AI quoting, lesson learned for life 🫡 <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-07 05:08</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Good 🫡</div>
+<div class='msg'><time>2025-08-07 21:16</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Hey everyone. I am trying to reproduce the Altnames. Reading the Graypaper they seem to start with &quot;$&quot; and the alphabet seems to include $ in the start. I cannot see that behavior in the dev-config or in polkajam. Also are they based on the ed25519 public key or the bandersnatch one.  Thoughts are appreciated <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-07 21:19</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: $xyz just means the ASCII string &quot;xyz&quot;, the $ is part of the notation. This ought to be covered in the notation section at the start of the paper, but I can&#x27;t find it so possibly it is missing.</div>
+<div class='msg'><time>2025-08-07 23:46</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: <pre><code class=''># bin/polkajam --version
+polkajam 0.1.24
+GP 0.6.7
+# bin/polkajam-testnet
+testnet: Working directory: /tmp/testnet-PGBe0P
+node0: 2025-08-07 23:46:25 main INFO jam_node  Chain ID: dev
+node0: 2025-08-07 23:46:25 main INFO jam_node  Config dir: /tmp/testnet-PGBe0P/node0/conf/dev
+node0: 2025-08-07 23:46:25 main INFO jam_node  Data dir: /tmp/testnet-PGBe0P/node0/data/dev
+node1: 2025-08-07 23:46:25 main INFO jam_node  Chain ID: dev
+node1: 2025-08-07 23:46:25 main INFO jam_node  Config dir: /tmp/testnet-PGBe0P/node1/conf/dev
+node1: 2025-08-07 23:46:25 main INFO jam_node  Data dir: /tmp/testnet-PGBe0P/node1/data/dev
+node2: 2025-08-07 23:46:25 main INFO jam_node  Chain ID: dev
+node2: 2025-08-07 23:46:25 main INFO jam_node  Config dir: /tmp/testnet-PGBe0P/node2/conf/dev
+node2: 2025-08-07 23:46:25 main INFO jam_node  Data dir: /tmp/testnet-PGBe0P/node2/data/dev
+node3: 2025-08-07 23:46:25 main INFO jam_node  Chain ID: dev
+node3: 2025-08-07 23:46:25 main INFO jam_node  Config dir: /tmp/testnet-PGBe0P/node3/conf/dev
+node3: 2025-08-07 23:46:25 main INFO jam_node  Data dir: /tmp/testnet-PGBe0P/node3/data/dev
+node4: 2025-08-07 23:46:25 main INFO jam_node  Chain ID: dev
+node4: 2025-08-07 23:46:25 main INFO jam_node  Config dir: /tmp/testnet-PGBe0P/node4/conf/dev
+node4: 2025-08-07 23:46:25 main INFO jam_node  Data dir: /tmp/testnet-PGBe0P/node4/data/dev
+node5: 2025-08-07 23:46:25 main INFO jam_node  Chain ID: dev
+node5: 2025-08-07 23:46:25 main INFO jam_node  Config dir: /tmp/testnet-PGBe0P/node5/conf/dev
+node5: 2025-08-07 23:46:25 main INFO jam_node  Data dir: /tmp/testnet-PGBe0P/node5/data/dev
+node0: 2025-08-07 23:46:25 main INFO jam_node::chain  Reading state...
+node2: 2025-08-07 23:46:25 main INFO jam_node::chain  Reading state...
+node3: 2025-08-07 23:46:25 main INFO jam_node::chain  Reading state...
+node1: 2025-08-07 23:46:25 main INFO jam_node::chain  Reading state...
+node5: 2025-08-07 23:46:25 main INFO jam_node::chain  Reading state...
+node4: 2025-08-07 23:46:25 main INFO jam_node::chain  Reading state...
+node0: 2025-08-07 23:46:26 main ERROR jam_cli  Error: Chain error: VmEngine(EngineInitializationFailed(Error(Owned(&quot;failed to create a worker process (0 already exist): failed to fetch the userfaultfd from the child process: recvfd failed: received zero bytes (root cause: failed to create an userfaultfd: userfaultfd (errno = 1 (EPERM)))&quot;))))
+Error: node0 exited abnormally: exit code 1
+</code></pre> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-07 23:47</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: <code>sudo sysctl -w vm.unprivileged_userfaultfd=1</code></div>
+<div class='msg'><time>2025-08-07 23:47</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Thank you that worked! <span class="edited">(edited)</span></div>
