@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-08-18 03:44 UTC</small></p>
+<p><small>last updated 2025-08-19 03:31 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -10846,3 +10846,44 @@ If you write up your precise design, we (all teams) can publish our fuzzer+targe
 
 Cost: we have to update the <a href="https://github.com/colorfulnotion/polkavm/blob/dev/services/utils/src/functions.rs" target="_blank" rel="noopener">parse_{refine/accumulate}_args</a> as the codec details changes ourselves, which pretty much happens like every version ;)
 Benefits: by eliminating using the &quot;official&quot; abstraction we are more in control and don&#x27;t have to wonder if its the abstractions fault or ours when Bad Things Happen -- its always our fault =)!</div>
+<div class='msg'><time>2025-08-18 09:02</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: Hi @davxy and everybody else, I noticed that in GP 0.6.7 that the **service&#x27;s storage dictionary&#x27;s keys** are **blobs** now instead of **hashes** (<a href="https://github.com/gavofyork/graypaper/pull/406)." target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/406).</a> Therefore, may I please enquire, when we deserialize the entire state - how are we expected to calculate the service&#x27;s minimum/threshold balance (<a href="https://graypaper.fluffylabs.dev/#/7e6ff6a/117b01117b01?v=0.6.7)?" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/7e6ff6a/117b01117b01?v=0.6.7)?</a> Since now we need the **blob&#x27;s length**, but there doesn&#x27;t seem to be any way of deserializing the blob&#x27;s length from the 31-byte state key. Thanks <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-18 09:04</time>&ensp;<span class='u' style='color:#2962d0'>luke_jamixir</span>: I&#x27;m wondering the same thing. Especially in the context of fuzzing </div>
+<div class='msg'><time>2025-08-18 09:43</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You are not expected to deserialize the entire state. In the case of the threshold balance this is explicitly stored alongside other account info and is expected to be updated incrementally as relevant state changes are made.</div>
+<div class='msg'><time>2025-08-18 10:39</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: FWIW, threshold balance doesn’t have to be stored, my impl derives it from total items used , total octets used, etc on the fly </div>
+<div class='msg'><time>2025-08-18 10:39</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: But total octets used and total items used , yes I believe they must be kept track of and maintained </div>
+<div class='msg'><time>2025-08-18 12:26</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &gt; &lt;@ascriv:matrix.org&gt; But total octets used and total items used , yes I believe they must be kept track of and maintained 
+
+Yes, sorry. This is accurate.</div>
+<div class='msg'><time>2025-08-18 16:21</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: The latest batch contains **highly controversial reports** ,  either we’re making a serious mistake,  
+or perhaps many people have overlooked something. Most of the failures involve host calls with malicious arguments.  
+
+I’ll be digging into these as well.  
+
+Have fun :-)  
+
+<a href="https://github.com/davxy/jam-conformance/tree/main/fuzz-reports" target="_blank" rel="noopener">https://github.com/davxy/jam-conformance/tree/main/fuzz-reports</a>
+</div>
+<div class='msg'><time>2025-08-18 16:22</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: &gt; &lt;@davxy:matrix.org&gt; The latest batch contains **highly controversial reports** ,  either we’re making a serious mistake,  
+&gt; or perhaps many people have overlooked something. Most of the failures involve host calls with malicious arguments.  
+&gt; 
+&gt; I’ll be digging into these as well.  
+&gt; 
+&gt; Have fun :-)  
+&gt; 
+&gt; <a href="https://github.com/davxy/jam-conformance/tree/main/fuzz-reports" target="_blank" rel="noopener">https://github.com/davxy/jam-conformance/tree/main/fuzz-reports</a>
+&gt; 
+
+Any time estimation for 0.7.0 traces?</div>
+<div class='msg'><time>2025-08-18 16:26</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: TBH, we already have it. It&#x27;s just going through the review process. Hopefully by next week.</div>
+<div class='msg'><time>2025-08-18 16:31</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: &gt; &lt;@davxy:matrix.org&gt; TBH, we already have it. It&#x27;s just going through the review process. Hopefully by next week.
+
+Awesome 👍</div>
+<div class='msg'><time>2025-08-18 16:32</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: 💀</div>
+<div class='msg'><time>2025-08-18 16:34</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: my guess is page fault stuff</div>
+<div class='msg'><time>2025-08-18 16:34</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: but idk hm</div>
+<div class='msg'><time>2025-08-18 16:37</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: actually my diffs are minor. basically just gas used in service stats. will look now</div>
+<div class='msg'><time>2025-08-18 16:47</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: @davxy can you double check if the gas used for service index 3202820706 in test 1755531322 is expected to be 0? I have a similar concern for most other tests in that set too <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-08-18 17:29</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: I expect (hope) that most of these issues share the same root cause.  
+If anyone finds any interesting updates, please note them in the GitHub issue.  
+I won&#x27;t be able to look into this until Wednesday</div>
+<div class='msg'><time>2025-08-18 19:18</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: It almost looks like polkajam may skip accumulation if the refine result is BAD. I can&#x27;t seem to find anything in the GP suggesting to do this though so my conclusion may be wrong but that&#x27;s my first guess. There are 6 traces that follow this pattern. <span class="edited">(edited)</span></div>
