@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-09-13 03:18 UTC</small></p>
+<p><small>last updated 2025-09-14 03:26 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6616,3 +6616,14 @@ My broader question is whether such hidden or implicit dependencies should be ex
 
 Its been 2 years since some of started reading about JAM here: <a href="https://github.com/polkadot-fellows/RFCs/blob/gav-corejam/text/0031-corejam.md" target="_blank" rel="noopener">https://github.com/polkadot-fellows/RFCs/blob/gav-corejam/text/0031-corejam.md</a>  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-09-12 00:09</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Very cool to see how much has changed, and how little has changed from the original RFC.</div>
+<div class='msg'><time>2025-09-13 06:57</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I was looking into the pvm memory management in my implementation. I&#x27;ve seen others addressing the pvmmemory in regions (ro, rw, stack...).  Eg: <a href="https://github.com/davxy/jam-conformance/issues/76" target="_blank" rel="noopener">https://github.com/davxy/jam-conformance/issues/76</a>
+
+I&#x27;ve had that hint as well but I always hesitated because of the page host call which seems to allow setting a W access modifier on a RO region (and vice-versa).
+
+To explain this differently i don&#x27;t see any contraint in pages hostcall to prevent setting 1-or-more pages of the RO region as writeable. Or setting part of the RW region Readonly (maybe in the middle of it). 
+
+I&#x27;d like to migrate my currently overcomplicated pvm memory implementation to something with regions. Should also give me some boosts but I&#x27;d like to know what I am missing .... <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-09-13 07:53</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: imo you need to think about how to make your memory access closed to O(1) performance, region based or page map based, it doesn&#x27;t matter, btw I&#x27;m curious have you tried AssemblyScript for specified logic, or using bun or deno as runtime instead of node, not sure if these would help</div>
+<div class='msg'><time>2025-09-13 08:29</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: &gt; &lt;@clearloop:matrix.org&gt; imo you need to think about how to make your memory access closed to O(1) performance, region based or page map based, it doesn&#x27;t matter, btw I&#x27;m curious have you tried AssemblyScript for specified logic, or using bun or deno as runtime instead of node, not sure if these would help
+
+I am exploring all of this but some of the big winners are no go for now (ex bun)</div>
