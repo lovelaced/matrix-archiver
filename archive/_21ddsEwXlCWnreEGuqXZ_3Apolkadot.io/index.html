@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-09-15 03:31 UTC</small></p>
+<p><small>last updated 2025-09-16 03:22 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6627,3 +6627,10 @@ I&#x27;d like to migrate my currently overcomplicated pvm memory implementation 
 <div class='msg'><time>2025-09-13 08:29</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: &gt; &lt;@clearloop:matrix.org&gt; imo you need to think about how to make your memory access closed to O(1) performance, region based or page map based, it doesn&#x27;t matter, btw I&#x27;m curious have you tried AssemblyScript for specified logic, or using bun or deno as runtime instead of node, not sure if these would help
 
 I am exploring all of this but some of the big winners are no go for now (ex bun)</div>
+<div class='msg'><time>2025-09-15 05:11</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: @room GP v0.7.2 is <a href="https://github.com/gavofyork/graypaper/releases/tag/v0.7.2" target="_blank" rel="noopener">released</a>. There&#x27;s no big changes, just a bunch of corrections and clarifications.</div>
+<div class='msg'><time>2025-09-15 05:16</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: For future note, 0.7 series will probably not see any substantial development other than Jan Bujak &#x27;s gas charging refactor and (possibly) <a href="https://github.com/gavofyork/graypaper/issues/398" target="_blank" rel="noopener">one new host call</a>. I&#x27;ll keep rolling in corrections/clarifications until then and we&#x27;ll move on to 0.8 series once that&#x27;s all done.</div>
+<div class='msg'><time>2025-09-15 05:16</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I also don&#x27;t see much happening in 0.8/0.9 series beyond what I&#x27;ve already talked about - optimisations and security fixes.</div>
+<div class='msg'><time>2025-09-15 15:01</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: <a href="https://graypaper.fluffylabs.dev/#/1c979cb/373d01373d01?v=0.7.1" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/1c979cb/373d01373d01?v=0.7.1</a> This should probably be &quot;b.&quot; The balance should not fall below the threshold balance.</div>
+<div class='msg'><time>2025-09-15 15:01</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: See 0.7.2.</div>
+<div class='msg'><time>2025-09-15 17:39</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: curious about why we use <code>blake2b</code> instead of <code>blake3</code> for storage hash, how storage can be attacked, since the program storage key is &quot;prefixed&quot; by service id without hash, that inside of services, it will never be possible to mockup the same keys of others <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-09-15 18:00</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Might be interesting to switch to Blake3 as its hierarchical structure allows you to make Merkle proofs for ranges of the hashed data</div>
