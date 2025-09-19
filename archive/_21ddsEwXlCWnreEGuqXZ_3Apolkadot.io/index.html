@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-09-18 03:23 UTC</small></p>
+<p><small>last updated 2025-09-19 03:25 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6614,7 +6614,7 @@ My broader question is whether such hidden or implicit dependencies should be ex
 <div class='msg'><time>2025-09-10 19:46</time>&ensp;<span class='u' style='color:#5bdb7f'>r2rtnl</span>: <a href="https://github.com/gavofyork/graypaper/pull/491" target="_blank" rel="noopener">https://github.com/gavofyork/graypaper/pull/491</a></div>
 <div class='msg'><time>2025-09-12 00:08</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Its 9/11, so like Happy  2nd birthday JAM! 
 
-Its been 2 years since some of started reading about JAM here: <a href="https://github.com/polkadot-fellows/RFCs/blob/gav-corejam/text/0031-corejam.md" target="_blank" rel="noopener">https://github.com/polkadot-fellows/RFCs/blob/gav-corejam/text/0031-corejam.md</a>  <span class="edited">(edited)</span></div>
+Its been 2 years since some of us started reading about JAM here: <a href="https://github.com/polkadot-fellows/RFCs/blob/gav-corejam/text/0031-corejam.md" target="_blank" rel="noopener">https://github.com/polkadot-fellows/RFCs/blob/gav-corejam/text/0031-corejam.md</a>  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-09-12 00:09</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Very cool to see how much has changed, and how little has changed from the original RFC.</div>
 <div class='msg'><time>2025-09-13 06:57</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I was looking into the pvm memory management in my implementation. I&#x27;ve seen others addressing the pvmmemory in regions (ro, rw, stack...).  Eg: <a href="https://github.com/davxy/jam-conformance/issues/76" target="_blank" rel="noopener">https://github.com/davxy/jam-conformance/issues/76</a>
 
@@ -6649,3 +6649,8 @@ From Wikipedia:
 <div class='msg'><time>2025-09-16 10:06</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: It&#x27;s unclear as to whether that assumption is correct.</div>
 <div class='msg'><time>2025-09-16 10:10</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Furthermore Blake3, inherits its main datum from Blake2s as 32-bit, making it fastest on silicon of that architecture. I expect JAM nodes to be overwhelmingly 64-bit architecture, giving Blake2b an edge. They added a binary tree structure to it to help parallelise the processing, however this isn&#x27;t too helpful unless the data is large enough to use a deep enough binary tree. Much of our hash input is itself quite close to 32 bytes and probably wouldn&#x27;t. In reality hashing small data on 64-bit hardware the two are pretty similar in speed yet Blake2b is objectively and substantially more secure - even if, arguably, that security is redundant. <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-09-16 10:12</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: On the latter point, just because there are no published attacks from academia doesn&#x27;t mean that at the state level there are no weakening vectors known. Furthermore, in JAM we routinely <em>don&#x27;t</em> use all 32 bytes of security from the hash, so it makes sense to be more conservative in the hash function itself.</div>
+<div class='msg'><time>2025-09-18 10:23</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: Question about Ancestors in <a href="https://graypaper.fluffylabs.dev/#/ab2cdbd/15e80215f602?v=0.7.2" target="_blank" rel="noopener">Eq 11.35</a>: In a real scenario where a validator node goes offline for a while (i.e. a power outage), how can we recover the missed headers? The GP says that the header chain is deterministic and calculable, but I don&#x27;t find how we can recover it <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-09-18 10:25</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: In the validator case you need to request the missing blocks using CE 128 and import them all in turn</div>
+<div class='msg'><time>2025-09-18 10:28</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Currently there isn&#x27;t a way of fetching headers only</div>
+<div class='msg'><time>2025-09-18 10:29</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: This might be sensible to add when we add the bits needed for warp sync</div>
+<div class='msg'><time>2025-09-18 10:41</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: Got it, thank you!</div>
