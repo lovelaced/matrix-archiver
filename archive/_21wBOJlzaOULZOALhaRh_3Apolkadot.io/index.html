@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-09-20 03:21 UTC</small></p>
+<p><small>last updated 2025-09-21 03:30 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11344,3 +11344,13 @@ Why wouldn’t earlier submissions get earlier prizes?</div>
 I assumed this also meant prizes would go out when the submissions are verified, not by GP 1.0. Can we get some clarification on this?</div>
 <div class='msg'><time>2025-09-18 11:58</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The reading of the rules by <a href="https://matrix.to/#/@sourabhniyogi:matrix.org" target="_blank" rel="noopener">sourabhniyogi</a>is accurate. The intention is to avoid depletion of the prize pot before everyone has had a reasonable chance to compete for it. </div>
 <div class='msg'><time>2025-09-18 11:58</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: However given the extended length of the project I am considering the possibility of loosening the rules. Possibly for the M1 and M2 milestones. </div>
+<div class='msg'><time>2025-09-20 14:13</time>&ensp;<span class='u' style='color:#2979b3'>hitchhooker</span>: </div>
+<div class='msg'><time>2025-09-20 14:34</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: We have an awesomely clear idea about M1 conformance (and increasingly good resolution about what M3/M4 is about, at least for PVM) ... but not M2 -- can you provide guidance on M2 conformance requirements so those of us who are ready \[pretty much all enrolled teams\] can spend our extra hours on that most effectively for the rest of the year?
+
+If this can&#x27;t be defined precisely because it sounds like a promise, perhaps a &quot;soft target&quot; proxy to focus teams works very well: &quot;M2 conformance would be to author blocks and refine DOOM work packages with jamt alongside polkajam + another team in a tiny testnet for N hours&quot;. 
+
+Then the rules could be loosened (without premature ratification of 1.0) in a predictable way while ensuring everyone is focused on the next 2 milestones by having soft targets for both, something like &quot;If you can include in your M(n) report how you met the soft targets of M(n+1) and M(n+2), then ___&quot;.  This keeps implementers focussed meeting the engineering goals of the M(n) hard target while also attempting the M(n+1) and M(n+2) soft targets and sacrifices nothing on desired conformance goals of the hard target.    Does that make sense? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-09-20 14:57</time>&ensp;<span class='u' style='color:#2979b3'>hitchhooker</span>: <a href="https://w3c.github.io/webtransport/#certificate-hashes" target="_blank" rel="noopener">https://w3c.github.io/webtransport/#certificate-hashes</a>
+
+for some reason(bigtech?) webtransport decided against bidirectional authentication - &quot;does not provide any means of authenticating the client&quot; per spec.
+does WebTransport&#x27;s serverCertificateHashes work with self-signed certs on ipv6 addresses? like can chrome/firefox connect to <a href="https://[2001:db8::1]:4433" target="_blank" rel="noopener">https://[2001:db8::1]:4433</a> using cert hash verification? </div>
