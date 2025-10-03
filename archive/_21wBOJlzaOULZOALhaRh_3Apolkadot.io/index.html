@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-10-02 03:22 UTC</small></p>
+<p><small>last updated 2025-10-03 03:22 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11372,3 +11372,25 @@ it was demoed at PBA</div>
 <div class='msg'><time>2025-09-25 10:11</time>&ensp;<span class='u' style='color:#6194cb'>roysingh8368</span>: Hii Team can anybody tell me how can HS and HV generated , proper flow i wanted to understand in the Safrole component.  <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-09-25 12:19</time>&ensp;<span class='u' style='color:#2962d0'>luke_jamixir</span>: I doubt anyone is going to answer such a general question.
 Your going to have to be more specific then that </div>
+<div class='msg'><time>2025-10-02 17:14</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: Hi there, our service sdk <a href="https://github.com/spacejamapp/jade/tree/main" target="_blank" rel="noopener">jade</a> is now ready to be hacked!  for the quickstart of jade
+
+<pre><code class='bash'>cargo install jade
+jade new my-service
+cd my-service
+cargo test
+</code></pre>
+
+for the recent releases:
+
+- now <code>jade</code> is using dependencies from <code>spacejam</code> directly
+- introduced the <a href="https://docs.rs/spacevm-sys/0.0.12-patch-1/spacevm_sys/" target="_blank" rel="noopener">system interface of SpaceVM</a> (both compiler and interpreter)
+- I just found that I have written <a href="https://pvm.spacejam.app/" target="_blank" rel="noopener">a instruction table for PVM</a> months ago...feel free to check it out for fun
+- <a href="https://spacejam.app/" target="_blank" rel="noopener">our website</a> is open sourced and updated with more links
+
+I have prepared <a href="https://github.com/spacejamapp/jade/issues" target="_blank" rel="noopener">2 simple issues in jade</a> for new devs in JAM that don&#x27;t know where to start, which are about
+
+- the skill of reading graypaper
+- understanding how host call works in the services
+- writing service tests using <code>jade</code>
+
+happy hacking! <span class="edited">(edited)</span></div>
