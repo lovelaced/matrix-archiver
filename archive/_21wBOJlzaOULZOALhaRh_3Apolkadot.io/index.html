@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-10-07 03:23 UTC</small></p>
+<p><small>last updated 2025-10-08 03:23 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11403,3 +11403,14 @@ i have done with M1 and for M2 i am stuck with networking part please anyone tel
 
 What is your impl?</div>
 <div class='msg'><time>2025-10-06 20:22</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: is this still relevant as of GP 7.1 ? <a href="https://github.com/w3f/jamtestvectors/blob/master/trie/merkle.py" target="_blank" rel="noopener">https://github.com/w3f/jamtestvectors/blob/master/trie/merkle.py</a></div>
+<div class='msg'><time>2025-10-07 07:30</time>&ensp;<span class='u' style='color:#8dbe5c'>arkadiy</span>: This is an up to date version. Not sure why it is not merged yet:
+<a href="https://github.com/w3f/jamtestvectors/pull/14" target="_blank" rel="noopener">https://github.com/w3f/jamtestvectors/pull/14</a></div>
+<div class='msg'><time>2025-10-07 08:23</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: thank you</div>
+<div class='msg'><time>2025-10-07 14:21</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Should an M1 implementation comply with the SCALE codec test vectors if we have the GP compliant variable length encoding done? <a href="https://github.com/w3f/jamtestvectors/blob/master/codec/README.md" target="_blank" rel="noopener">https://github.com/w3f/jamtestvectors/blob/master/codec/README.md</a></div>
+<div class='msg'><time>2025-10-07 14:44</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You should use davxy&#x27;s fork here, sorry about the confusion: <a href="https://github.com/davxy/jam-test-vectors" target="_blank" rel="noopener">https://github.com/davxy/jam-test-vectors</a> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-07 14:44</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The codec vectors there should match the GP codec</div>
+<div class='msg'><time>2025-10-07 19:18</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: am i missing something, or are both master and v0.7.1 of the fork also using SCALE instead of GP variable length encoding?</div>
+<div class='msg'><time>2025-10-07 21:19</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: That fork should be using the GP codec. If you think there&#x27;s an error in the test vectors please open an issue</div>
+<div class='msg'><time>2025-10-07 21:29</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: Both the master branch in the w3f repo and my fork should be using JAM variable-length encoding.  
+Where exactly have you found the &quot;classic&quot; SCALE varlen encoding being used? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-08 02:25</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Any news on the dates/location for this, which is now less than 8-10 weeks from now I gather?</div>
