@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-10-14 03:25 UTC</small></p>
+<p><small>last updated 2025-10-15 03:29 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11433,3 +11433,20 @@ Message me if you&#x27;re interested, and once I have a draft of the GP changes 
 <div class='msg'><time>2025-10-10 13:57</time>&ensp;<span class='u' style='color:#2979b3'>hitchhooker</span>: <a href="https://gfw.report/publications/usenixsecurity25/en/#sec:7-circumvention" target="_blank" rel="noopener">https://gfw.report/publications/usenixsecurity25/en/#sec:7-circumvention</a>
 seems like custom(or rfc9369) quic versioning, 65535 default port for validators would help a lot to overcome it <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-10-11 23:32</time>&ensp;<span class='u' style='color:#b1336d'>nomadbitcoin</span>: </div>
+<div class='msg'><time>2025-10-14 08:12</time>&ensp;<span class='u' style='color:#47c036'>dhruv245</span>: Yes, the fuzzer protocol is implemented and everything upto M2 is complete</div>
+<div class='msg'><time>2025-10-14 08:13</time>&ensp;<span class='u' style='color:#47c036'>dhruv245</span>: davxy: </div>
+<div class='msg'><time>2025-10-14 08:14</time>&ensp;<span class='u' style='color:#47c036'>dhruv245</span>: Can you give me a ping on telegram: @Dhruv245 (<a href="https://t.me/Dhruv245)." target="_blank" rel="noopener">https://t.me/Dhruv245).</a> As I check this chat very minimum</div>
+<div class='msg'><time>2025-10-14 12:37</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: how does one prove their M1 test vectors are passing? Is supplying a binary that runs along with open sourced unit tests work, or perhaps the implementation should generate same files as the test vectors for given case?</div>
+<div class='msg'><time>2025-10-14 13:18</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: How do we represent <code>None</code> or <code>Some(None)</code> in RPC returns? <a href="https://github.com/jamixir/JIPs/blob/main/JIP-2.md" target="_blank" rel="noopener">https://github.com/jamixir/JIPs/blob/main/JIP-2.md</a> - is there a standard? JIP-2 doesn&#x27;t explicitly define.</div>
+<div class='msg'><time>2025-10-14 13:19</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: you provide the binaries to be fuzzed. Take a look here: <a href="https://github.com/davxy/jam-conformance/" target="_blank" rel="noopener">https://github.com/davxy/jam-conformance/</a></div>
+<div class='msg'><time>2025-10-14 15:03</time>&ensp;<span class='u' style='color:#35a646'>igankevich</span>: We recently changed RPC API to use BASE64 encoding for all binary data, including hashes, preimages, segments and other similar types. According to our benchmarks it is much faster to encode a byte array to a BASE64 string and send than to encode it as JSON and send, even for small arrays. This statement is true for both Rust and Javascript-based clients.
+
+You can find the relevant JIP PR here: <a href="https://github.com/polkadot-fellows/JIPs/pull/9" target="_blank" rel="noopener">https://github.com/polkadot-fellows/JIPs/pull/9</a></div>
+<div class='msg'><time>2025-10-14 17:50</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: image.jpg</div>
+<div class='msg'><time>2025-10-14 17:50</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: Hi, does anyone know if the state component θ is supposed to be ordered by the service index? Because one of our failing fuzzer tests seems to be because θ is not ordered by service index. Thanks <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-14 18:00</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: C(16) shows that order matters for θ and dictionaries default to order by key (C.10). I sort them in JavaJAM. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-14 18:28</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: I see. I&#x27;ll do the same then. Thanks man
+
+But now I&#x27;m wondering how would we sort it we had 2 elements in θ with the same service index then 🤔?</div>
+<div class='msg'><time>2025-10-14 18:28</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: e.g: if we had the elements (2, 0x00) and (2, 0x01)</div>
+<div class='msg'><time>2025-10-15 00:57</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Then you order based on the second elements’ lexicographic order I believe  <span class="edited">(edited)</span></div>
