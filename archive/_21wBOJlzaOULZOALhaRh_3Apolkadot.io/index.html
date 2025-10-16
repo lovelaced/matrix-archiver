@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-10-15 03:29 UTC</small></p>
+<p><small>last updated 2025-10-16 03:28 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11450,3 +11450,12 @@ You can find the relevant JIP PR here: <a href="https://github.com/polkadot-fell
 But now I&#x27;m wondering how would we sort it we had 2 elements in θ with the same service index then 🤔?</div>
 <div class='msg'><time>2025-10-14 18:28</time>&ensp;<span class='u' style='color:#2a9dc1'>aang114</span>: e.g: if we had the elements (2, 0x00) and (2, 0x01)</div>
 <div class='msg'><time>2025-10-15 00:57</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Then you order based on the second elements’ lexicographic order I believe  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-15 06:57</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: Is there a possibility of accumulate twice the same service in the same block?</div>
+<div class='msg'><time>2025-10-15 07:21</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Yes</div>
+<div class='msg'><time>2025-10-15 07:22</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: That is indeed the meaning of lexicographic ordering. </div>
+<div class='msg'><time>2025-10-15 07:22</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Think dictionary. </div>
+<div class='msg'><time>2025-10-15 07:24</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: As long as we’re only dealing with tuples of scalar values then there’s a well-defined lexicographic order.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-15 07:25</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: And it extends to other things like sequences and sets as long as you’re only comparing like with like (we don’t define how to compare a sequence with a scalar in the GP because it is never needed) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-15 12:16</time>&ensp;<span class='u' style='color:#47c036'>dhruv245</span>: Hi, I wanted to check if there are any confirmed dates for the submission of M1 and M2. 
+
+My team has already completed both modules, so I’d like to know the next steps.</div>
