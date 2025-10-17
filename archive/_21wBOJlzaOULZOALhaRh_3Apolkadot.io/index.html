@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-10-16 03:28 UTC</small></p>
+<p><small>last updated 2025-10-17 03:26 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11459,3 +11459,25 @@ But now I&#x27;m wondering how would we sort it we had 2 elements in θ with the
 <div class='msg'><time>2025-10-15 12:16</time>&ensp;<span class='u' style='color:#47c036'>dhruv245</span>: Hi, I wanted to check if there are any confirmed dates for the submission of M1 and M2. 
 
 My team has already completed both modules, so I’d like to know the next steps.</div>
+<div class='msg'><time>2025-10-16 04:34</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: The fuzzer for M1 is maturing, and I know W3F is planning to start using it to test targets officially. That said, based on my experiments **there is still NO target I can fuzz continuously for minutes in a row**. Things have improved **a lot** over the past couple of months, but that&#x27;s not enough yet as targets need to be fuzzed for days. My impression is that longer-running fuzzing will arrive soon, at least for some implementations.
+
+My suggestions:
+- Join the teams listed <a href="https://github.com/davxy/jam-conformance/issues" target="_blank" rel="noopener">here</a> so we can quickly review your M1 work.
+- Keep the discussion public, I will not take private conversations on Telegram or other closed channels.
+</div>
+<div class='msg'><time>2025-10-16 10:17</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: about jam-np <code>the &amp;quot;path to the start key&amp;quot; should terminate either at a fork node with an all-zeroes hash in the branch that would be taken for the start key, or at a leaf node with a different key</code>
+
+This means that in case the key is not found, if the given start key should be in the empty branch, would i just need to return the &quot;parent branch node&quot; or ???
+
+</div>
+<div class='msg'><time>2025-10-16 10:58</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Yeah you should include the node with the empty branch in the boundary node list in that case</div>
+<div class='msg'><time>2025-10-16 12:51</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: tkz</div>
+<div class='msg'><time>2025-10-16 17:15</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: &gt; &lt;@davxy:matrix.org&gt; The fuzzer for M1 is maturing, and I know W3F is planning to start using it to test targets officially. That said, based on my experiments **there is still NO target I can fuzz continuously for minutes in a row**. Things have improved **a lot** over the past couple of months, but that&#x27;s not enough yet as targets need to be fuzzed for days. My impression is that longer-running fuzzing will arrive soon, at least for some implementations.
+&gt; 
+&gt; My suggestions:
+&gt; - Join the teams listed <a href="https://github.com/davxy/jam-conformance/issues" target="_blank" rel="noopener">here</a> so we can quickly review your M1 work.
+&gt; - Keep the discussion public, I will not take private conversations on Telegram or other closed channels.
+&gt; 
+
+What are the issues you encountered when fuzzing continuously? Nodes crash? Memory overload? </div>
+<div class='msg'><time>2025-10-16 19:19</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: See jam-conformance chan</div>
