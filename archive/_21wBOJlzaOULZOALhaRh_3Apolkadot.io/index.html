@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-10-20 03:35 UTC</small></p>
+<p><small>last updated 2025-10-21 03:30 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11487,3 +11487,13 @@ Looking at the immediate value instructions, they did not seem to have length pr
 <div class='msg reply'><time>2025-10-19 18:16</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Not sure what you mean by &quot;they did not seem to have length prefixes&quot;, but these should still be correct (sans perhaps a few minor gas discrepancies, which will become irrelevant very soon due to the new gas cost model)</div>
 <div class='msg'><time>2025-10-20 00:58</time>&ensp;<span class='u' style='color:#47c036'>dhruv245</span>: </div>
 <div class='msg'><time>2025-10-20 00:58</time>&ensp;<span class='u' style='color:#47c036'>dhruv245</span>: Yes, it crashes in few minutes</div>
+<div class='msg'><time>2025-10-20 07:52</time>&ensp;<span class='u' style='color:#34c64d'>anish1222</span>: </div>
+<div class='msg'><time>2025-10-20 09:44</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: For those interested, draft of the new gas cost model and the new test vectors are now publicly available here: <a href="https://github.com/koute/new-gas-cost-model/tree/master" target="_blank" rel="noopener">https://github.com/koute/new-gas-cost-model/tree/master</a>
+Of course, for now this is <em>unofficial</em> and is not part of the GP proper (and can have errors/issues). A couple of teams volunteered to implement this before it lands (and their feedback will heavily influence when/how it will land). If anyone else still wants to join in and try implementing it in your client then you&#x27;re welcome too.</div>
+<div class='msg reply'><time>2025-10-20 13:39</time>&ensp;<span class='u' style='color:#5cdeb7'>cisco</span>: Is it possible to implement in an interpreter? We still don&#x27;t have our recompiler 😅</div>
+<div class='msg reply'><time>2025-10-20 14:30</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: why not?</div>
+<div class='msg reply'><time>2025-10-20 14:40</time>&ensp;<span class='u' style='color:#5cdeb7'>cisco</span>: Just wanted to check 🤷 I volunteer as well <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2025-10-21 01:13</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Yes. Once it lands in the GP even the interpreters will have to implement it.</div>
+<div class='msg reply'><time>2025-10-21 01:14</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Great! Feel free to message me if you have any questions/feedback.</div>
+<div class='msg'><time>2025-10-20 17:13</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Can someone point me to how the instruction operand distance (in bytes) would get calculated for the PVM test vectors (where there is no bitmask)? </div>
+<div class='msg'><time>2025-10-20 19:00</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: There is bitmask.</div>
