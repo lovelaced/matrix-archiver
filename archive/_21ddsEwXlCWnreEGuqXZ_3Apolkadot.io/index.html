@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-10-24 03:26 UTC</small></p>
+<p><small>last updated 2025-10-25 03:27 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6699,3 +6699,13 @@ The first in the sequence can know, but the last cannot, as far as I can tell.  
 <div class='msg'><time>2025-10-23 19:59</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: No. Service accumulation continues as long as any of them make a transfer. No service’s accumulation can know what happens in another which is happening contemporaneously. Therefore it’s not possible. </div>
 <div class='msg'><time>2025-10-23 20:00</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Best you could do is have services make a transfer to some integrator service. </div>
 <div class='msg'><time>2025-10-23 20:02</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: But then the integrator would need to know what services are going to send to it before it does the integration rather than blindly accrue and do everything at the end of the block when “everything is finished”. </div>
+<div class='msg'><time>2025-10-24 18:26</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: image.png</div>
+<div class='msg'><time>2025-10-24 18:29</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Is there a recorded lecture where you explain all the numbers in this diagram in detail?   Now that the gas model is becoming clearer and we&#x27;re imminently ready to test it on the Toaster or something tiny for our services, I think an update of the above would be useful!  </div>
+<div class='msg'><time>2025-10-24 18:33</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: That’s a rather old image and according estimation. Estimations of eventual emergent system performance will change as we understand the protocol better, with the eventual numbers being the product of empirical analysis. Anyway for this specific diagram, a later version (still 12+ months out of date) was 2 MB/s on the right when the WP size was revised from 15 to 12 MB.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-24 18:37</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: The gray paper and its analysis is where you should look for the most current estimations. And otherwise understand that perfect information doesn’t come from guesswork 2+ years out from a production implementation but rather from experiments and experience. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-24 18:38</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: To the extent you can contribute experience, please do. </div>
+<div class='msg'><time>2025-10-24 18:39</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Overall, the gas model has been eye-opening to all involved. It involved a lot of consideration and innovation and we are quite confident that what we have now is a quite optimal solution  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-24 18:42</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Can we do a JAM implementers meetup to get your Toaster experience in Dec (PBA) similar to the May event, or should service implementers report on their experience in Feb/Mar after testing out their services in the Toaster.</div>
+<div class='msg'><time>2025-10-24 18:43</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: We are hopeful that we will have toaster results in the coming weeks, but it has been a long journey of optimisation. </div>
+<div class='msg'><time>2025-10-24 18:43</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Other teams will probably need to take the same journey. </div>
+<div class='msg'><time>2025-10-24 18:45</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Otherwise, I’d expect teams taking part in the PBA JAM hackathon Dec-Mar to do their own experiments and draw their own experience. </div>
