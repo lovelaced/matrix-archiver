@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-10-27 03:38 UTC</small></p>
+<p><small>last updated 2025-10-28 03:31 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11636,3 +11636,7 @@ and
 </code></pre>
 
 according to <a href="https://graypaper.fluffylabs.dev/#/1c979cb/15f00215f902?v=0.7.1" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/1c979cb/15f00215f902?v=0.7.1</a> that would require us to have stored two headers with the same hash but different time slot =&gt; not possible <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-10-27 17:08</time>&ensp;<span class='u' style='color:#35a646'>igankevich</span>: This would require implementing all system calls that LXC uses, in particular process creation and networking. This would take some time, but otherwise I don&#x27;t see much of a problem to do that. The only remaining question is &quot;Why?&quot; 😃 LXC is basically a <code>chroot</code> with namespace-based isolation for processes, network, root file system etc. PolkaVM gives much higher degree of isolation and also full reproducibility. If your goal is to protect the program and the outside world from each other, you can just run it on CoreVM without LXC.</div>
+<div class='msg'><time>2025-10-27 19:41</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Tonight&#x27;s PolkaJam release (<a href="https://github.com/paritytech/polkajam-releases)" target="_blank" rel="noopener">https://github.com/paritytech/polkajam-releases)</a> should include a <code>jam-telemetry-dumper</code> binary which you can use for debugging. It simply accepts connections from nodes and dumps any received events straight to stdout without any processing. The <code>polkajam</code> and <code>polkajam-testnet</code> binaries in the release should support the <code>--telemetry</code> flag which you can point at this. I believe erin intends to release a more interesting CLI frontend later this week. The web frontend should be usable by the end of the year, although it likely won&#x27;t be feature-complete.</div>
+<div class='msg'><time>2025-10-27 19:56</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: could the telemetry frontend to be public so people can contribute?</div>
+<div class='msg'><time>2025-10-27 19:57</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: It&#x27;s in a separate repo to PolkaJam so we should be able to make it public yeah</div>
