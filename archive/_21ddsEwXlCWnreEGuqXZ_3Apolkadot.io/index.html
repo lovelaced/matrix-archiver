@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-11-13 03:35 UTC</small></p>
+<p><small>last updated 2025-11-14 03:34 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6720,3 +6720,13 @@ I recognize that a rollup host service can have its <code>accumulate</code> invo
 <div class='msg'><time>2025-11-08 21:58</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: What should we return if the lookup key doesn&#x27;t exist in the <a href="https://graypaper.fluffylabs.dev/#/1c979cb/380904381204?v=0.7.1" target="_blank" rel="noopener">provide</a> hostcall?
 
 HUH? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-13 14:06</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Hello I have a question about JIP-2/JIP-3.
+
+Should JIP-2&#x27;s submitWorkPackage and submitWorkPackageBundle RPC methods emit a JIP-3 work package submission event for telemetry so that it can be tracked? If so what should be used for the Peer ID attribute in the event since we don&#x27;t have a builder address?</div>
+<div class='msg'><time>2025-11-13 14:57</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: This plausibly could be tracked but the work-package events in JIP-3 at the moment are only intended to be emitted by guarantors <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-13 14:58</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: So the <code>submitWorkPackage</code> RPC should send the work-package to the guarantors assigned to the given core, and it will first appear in telemetry when those guarantors emit events for it</div>
+<div class='msg'><time>2025-11-13 15:02</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Oh I misunderstood the intent of the rpc method. I thought they were for builders to submit straight to a guarantor, not for the rpc server to redistribute to the correct guarantor after receiving it. Okay in this case an event wouldn&#x27;t make sense. Thanks. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-13 15:08</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: In general validator nodes should not expose RPC. I think polkajam currently always runs an RPC server, we should maybe change this. RPC is really only intended as a stop-gap until we have light client stuff, to avoid needing to have tools/builders embed a full node. It&#x27;s only expected to be used to communicate between eg a builder and a node running on the same machine. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-13 15:11</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Actually one other question. When a guarantor receives a work package for a core they are not assigned too, should it be rejected immediately or queued until they are correctly assigned? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-13 15:14</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: To some extent this is up to you, though it&#x27;s probably sensible to have some standard behaviour that builders can rely on. PolkaJam currently accepts from 1 slot before the assignment up until the end of the assignment</div>
+<div class='msg'><time>2025-11-13 15:14</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Outside of this it immediately rejects</div>
