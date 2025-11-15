@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2025-11-14 03:34 UTC</small></p>
+<p><small>last updated 2025-11-15 03:31 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -6730,3 +6730,26 @@ Should JIP-2&#x27;s submitWorkPackage and submitWorkPackageBundle RPC methods em
 <div class='msg'><time>2025-11-13 15:11</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Actually one other question. When a guarantor receives a work package for a core they are not assigned too, should it be rejected immediately or queued until they are correctly assigned? <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-11-13 15:14</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: To some extent this is up to you, though it&#x27;s probably sensible to have some standard behaviour that builders can rely on. PolkaJam currently accepts from 1 slot before the assignment up until the end of the assignment</div>
 <div class='msg'><time>2025-11-13 15:14</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Outside of this it immediately rejects</div>
+<div class='msg'><time>2025-11-14 08:51</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Will JAM provide any kind of easy way to construct ancestry proof of blocks contained in the chain? This would enable light clients to not only load data from recent blocks, but also to read data from blocks in the past. (Requires that these nodes keep the data around, but this is another issue) Or can the beefy mmr be used to construct this? Or should we build some zk ancestry proof?  </div>
+<div class='msg'><time>2025-11-14 21:43</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: You mean historical state proofs?</div>
+<div class='msg'><time>2025-11-14 21:43</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Under what conditions would that data be stored? It seems pretty unlikely that there would be many nodes which would provide this service since it’s totally unscalable.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-14 21:46</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: &gt; &lt;@gav:polkadot.io&gt; You mean historical state proofs?
+
+Yeah </div>
+<div class='msg'><time>2025-11-14 21:46</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: In any case, no, it hasn’t been an explicit consideration, but I suppose could probably be built on top if deemed important. I’d say that archive nodes are probably too high a cost and that apps should just keep any data which are deemed important to be able to have users query be available either under DA, locally or under some paid persistent store. </div>
+<div class='msg'><time>2025-11-14 21:47</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Just assuming archive nodes exist and will serve out proofs understates the importance of having an economic rationale for retaining this data and presenting it in a convenient format on demand. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-14 21:47</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I see no such rationale, generally. </div>
+<div class='msg'><time>2025-11-14 21:48</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: What about thinks like proper block explorers that enable you to verify the data they serve to you </div>
+<div class='msg'><time>2025-11-14 21:49</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: If block explorers are an economically viable service then I guess they’ll have to suck up the cost of procuring and archiving all their data. </div>
+<div class='msg'><time>2025-11-14 21:49</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I see them as Web2 remnants, like centralised exchanges and JSONRPC servers.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-14 21:50</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: We’ll need to start better architecting solutions than to rely on such workarounds.  <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-14 21:50</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: So you would argue that apps should store relevant data in storage? </div>
+<div class='msg'><time>2025-11-14 21:50</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Thankfully with JAM we probably have enough raw resources available that we don’t need to have apps rely on historical state. </div>
+<div class='msg'><time>2025-11-14 21:51</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Simple things like a transaction history </div>
+<div class='msg'><time>2025-11-14 21:51</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: They can just keep enough relevant history alive in present state. </div>
+<div class='msg'><time>2025-11-14 21:51</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: And aggregate or store locally as needed. </div>
+<div class='msg'><time>2025-11-14 22:01</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah okay makes sense </div>
+<div class='msg'><time>2025-11-14 22:18</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: One slightly related question, warp proofs are probably part of the networking spec and not part of the gray paper? </div>
+<div class='msg'><time>2025-11-14 22:33</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: David Emett: did you looked into zk warp proofs? </div>
+<div class='msg'><time>2025-11-14 22:35</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: No, Matthew Halpin has been implementing grandpa and speccing the network stuff for it, think he has integrated the polkadot grandpa stuff with minimal changes <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-14 22:35</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: If you have suggestions he is the one to talk to :)</div>

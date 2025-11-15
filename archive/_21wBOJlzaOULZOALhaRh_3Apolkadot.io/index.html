@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-11-14 03:33 UTC</small></p>
+<p><small>last updated 2025-11-15 03:30 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11791,3 +11791,13 @@ The Playground server code is private since it is in a monorepo with our JAM cli
 happy to help!</div>
 <div class='msg reply'><time>2025-11-12 00:46</time>&ensp;<span class='u' style='color:#787fdf'>erin</span>: also good to know the default terminal doesn&#x27;t provide a good experience - thanks for the feedback, I can look into that</div>
 <div class='msg reply'><time>2025-11-12 17:33</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: I tested it into VSCode embedded terminal and it works fine as well. </div>
+<div class='msg'><time>2025-11-14 18:56</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: I have a doubt about <a href="https://github.com/polkadot-fellows/JIPs/blob/main/JIP-4.md:" target="_blank" rel="noopener">https://github.com/polkadot-fellows/JIPs/blob/main/JIP-4.md:</a>
+
+What is the purpose of bootnodes? Genesis state already contains a list of current (and next) validators. Shouldn&#x27;t this be enough to know where to connect?</div>
+<div class='msg'><time>2025-11-14 19:06</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: After the chain has been running for a while genesis validators are unlikely to still be running</div>
+<div class='msg'><time>2025-11-14 19:07</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: IDK if this bootnodes list in the chainspec will be the long-term solution to this, possibly bootnodes will be published somewhere else (eg IPFS)</div>
+<div class='msg'><time>2025-11-14 22:08</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: &gt; &lt;@dave:parity.io&gt; After the chain has been running for a while genesis validators are unlikely to still be running
+
+Sure, but the validator list is updated on every epoch and nodes should renew their connections to eventual new validators on the list. I still don’t understand the need for an “external” source of information about nodes. </div>
+<div class='msg'><time>2025-11-14 22:09</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: You need some entry point to the network?</div>
+<div class='msg'><time>2025-11-15 02:39</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: It&#x27;s more about new nodes joining the network. A new node would only have the genesis information to start. If the genesis validators were no longer online, they could not start requesting blocks to sync as they wouldn&#x27;t know the current validators (yet).</div>
