@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-11-17 03:36 UTC</small></p>
+<p><small>last updated 2025-11-18 03:33 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11808,3 +11808,7 @@ Which exact vector are you referring to? By the way, the &quot;fuzzy&quot; servi
 <div class='msg reply'><time>2025-11-15 21:14</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: I am investigating accumulation using preimage from <a href="https://github.com/davxy/jam-test-vectors/blob/84213c3fa619f26d77f61601a7dd77048f6bbf7a/traces/preimages_light/00000002.json" target="_blank" rel="noopener">https://github.com/davxy/jam-test-vectors/blob/84213c3fa619f26d77f61601a7dd77048f6bbf7a/traces/preimages_light/00000002.json</a> . </div>
 <div class='msg reply'><time>2025-11-15 21:15</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Are the preimages used in the traces supposed to be successfully accumulatable?</div>
 <div class='msg reply'><time>2025-11-15 22:04</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: This preimage seems to not have any writes to the stack in the first instructions, causing the first fetch host call to fail, causing the panic loop that exhausts gas <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-11-17 14:03</time>&ensp;<span class='u' style='color:#6f63cc'>decentration</span>: davxy: can i get a sanity check that the accumulate conformance test vectors have real blobs that can be executed through the pvm? i&#x27;m assuming yes</div>
+<div class='msg'><time>2025-11-17 14:21</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: yes</div>
+<div class='msg'><time>2025-11-17 14:46</time>&ensp;<span class='u' style='color:#6f63cc'>decentration</span>: oh and crucially i am running it on your 0.7.1 branch, just checking it works for that version</div>
+<div class='msg reply'><time>2025-11-17 17:59</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: doubling on that question</div>
