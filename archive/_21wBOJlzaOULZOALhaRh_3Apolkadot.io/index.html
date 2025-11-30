@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-11-29 03:33 UTC</small></p>
+<p><small>last updated 2025-11-30 03:43 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -11868,6 +11868,13 @@ Actually, I was hoping for a super tight connection between Sec 18 (with a very 
 <div class='msg reply'><time>2025-11-25 10:00</time>&ensp;<span class='u' style='color:#bd3fa7'>matt_halpin</span>: Responders need to store justifications for all set change blocks since genesis.
 There is a warp sync fragment (header and justification) for every set change block. Being set change blocks the headers include epoch markers, which include Ed25519 public keys for all the new validators, as described in GP section 6.6. These are the validator keys needed for verifying the justification of the next set change block. Does that make sense or have I missed something?</div>
 <div class='msg reply'><time>2025-11-25 20:09</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Makes enough sense to execute on </div>
+<div class='msg reply'><time>2025-11-29 03:59</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Matthew Halpin:   Where are you getting the &quot;stakes&quot; of the validators from?  
+
+I believe the end game is to get it from AssetHub staking module  but in the meantime we need some kind of JAM State or JAM DA plan instead of &quot;oh, they are all the same value&quot; (which works as a stub but not much more).  
+
+Is getting from JAM DA even a possibility or should we use a place in JAM State to hold stakes</div>
+<div class='msg reply'><time>2025-11-29 11:33</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Staking is not part of JAM really, it will be handled by a service. JAM nodes don&#x27;t need to know about stakes, they just get told the validator sets by this service using the designate-validators host call. Some channel is needed back to this service to get misbehaving validators slashed of course, I don&#x27;t know exactly how that will work. Guarantor/auditor misbehaviour is recorded on chain already by the disputes stuff. I don&#x27;t think there is anything to record eg GRANDPA or Safrole equivocations, not sure what exactly is needed there but I would guess something...</div>
+<div class='msg reply'><time>2025-11-29 11:44</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: For safrole it is basically the equivocating headers and a proof that the validator was part of the active set in the slashable period </div>
 <div class='msg'><time>2025-11-21 07:49</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I’m trying to understand the long-term economics of JAM.
 
 From what I’ve gathered, there’s an intention over the medium-long term to move toward a Polkadot-native stablecoin that would be used both for validator compensation and for paying for JAM execution.
@@ -11957,3 +11964,5 @@ C. Yes, mid-2026, but can accelerate to March! <span class="edited">(edited)</sp
 <div class='msg reply'><time>2025-11-25 15:43</time>&ensp;<span class='u' style='color:#99cb63'>wirednkod</span>: Thank you sourabhniyogi . Can you please give me a link to the Polkatool?</div>
 <div class='msg reply'><time>2025-11-26 22:48</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: <a href="https://github.com/paritytech/polkavm/tree/master/tools/polkatool" target="_blank" rel="noopener">https://github.com/paritytech/polkavm/tree/master/tools/polkatool</a></div>
 <div class='msg'><time>2025-11-25 08:58</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: </div>
+<div class='msg'><time>2025-11-29 10:30</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Validators won’t have stakes; there are no plans to use PoS for validator selection. </div>
+<div class='msg'><time>2025-11-29 11:59</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: Grandpa misbehaviour will be handled in the same way - some logic on the parachains which handles validator selection. </div>
