@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-12-04 03:38 UTC</small></p>
+<p><small>last updated 2025-12-05 03:37 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12009,3 +12009,42 @@ I’m currently integrating our PVM implementation with the accumulation layer. 
 and we can compare notes and go pro-grade.  I would prefer going full bazaar here with no hand-holding, its really time to grow up. <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-12-03 19:37</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: If you were in kindergarten 6 months ago, I wasn&#x27;t even born... 😂
 Maybe I am in kindergarten now, eager to catch up and be able to contribute more</div>
+<div class='msg'><time>2025-12-04 13:05</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: I have some doubts about <a href="https://docs.jamcha.in/knowledge/advanced/simple-networking/spec#ce-137-shard-distribution" target="_blank" rel="noopener">CE-137</a>
+ - The T function in the Graypaper (H.2) returns just a list of (B U H), while the Justification in the protocol is defined as [0 ++ Hash OR 1 ++ Hash ++ Hash]
+- Is there anywhere the formal specification for the shard validation, something like 
+
+<code>fn validate_shard(shard_bin, erasure_root, justification): boolean</code>
+</div>
+<div class='msg'><time>2025-12-04 14:01</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: B = Hash ++ Hash in this case, the leaves are pairs of hashes</div>
+<div class='msg'><time>2025-12-04 14:02</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The GP formally specifies this stuff</div>
+<div class='msg'><time>2025-12-04 16:45</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: </div>
+<div class='msg'><time>2025-12-04 17:21</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: sure, I am struggling to match the definitions on JAMNSP with the formulas in the GP. We have many things called &quot;Justification&quot; with different meanings:
+
+ - Formula E.5 J_x is called justification
+ - Formula 14.15 J is called justification
+ - JAMSNP calls T (Formula E.2) justification
+
+None of the GP formula mention &quot;pairs of hashes&quot;
+
+Sorry if this is a dumb question, all this things are new to me.</div>
+<div class='msg'><time>2025-12-04 17:30</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: See the definition of u here <a href="https://graypaper.fluffylabs.dev/#/ab2cdbd/1c75011c9301?v=0.7.2" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/ab2cdbd/1c75011c9301?v=0.7.2</a></div>
+<div class='msg'><time>2025-12-04 17:31</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The elements of the list passed into M_B are essentially pairs of hashes</div>
+<div class='msg'><time>2025-12-04 17:32</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: One of the hashes is the hash of the bundle shard, the other is the root of the tree of segment shards <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-04 17:33</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: See b^clubs and s^clubs just below</div>
+<div class='msg'><time>2025-12-04 17:34</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: u is the erasure root and a CE 137 justification is basically a (co)path from one of these hash pairs to the erasure root, it&#x27;s a fairly regular Merkle proof <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-04 23:31</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: <a href="https://github.com/jam-duna/jamtestnet/issues/139" target="_blank" rel="noopener">https://github.com/jam-duna/jamtestnet/issues/139</a> attempts a tutorial (with diagrams!) -- since nothing has changed on this (?), I believe you could use <a href="https://github.com/jam-duna/jamtestnet/tree/0.6.4.0/guarantees" target="_blank" rel="noopener">these</a> as a &quot;can you get the same spec&quot; test case.   We can dust up the fuzzer refine features if others were also so inclined.  A work report derivation for the jamt circa 0.7.2 would seem to be useful as a small holy grail =)
+
+What new CEs (129, 146?, 147?, 148?) have been added in <a href="https://github.com/paritytech/polkajam-releases/releases/tag/v0.1.27" target="_blank" rel="noopener">polkajam 0.7.2</a> that we can check out and confirm alignment on?  Are  <a href="https://github.com/zdave-parity/jam-np/pull/6" target="_blank" rel="noopener">Grandpa CEs 149-153</a> activatable somehow?  </div>
+<div class='msg'><time>2025-12-04 23:57</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Ah sorry, not sure we announced the new ones. 147&amp;148 have been added for directly requesting bundles/segments. You don&#x27;t _need_ to implement these; if a direct request for a bundle/segment fails the requesting node should fall back to recovery via shards. 146 was added to allow builders to provide the content of imported segments, saving the primary guarantor from having to fetch them. Commit that added these protocols here: <a href="https://github.com/zdave-parity/jam-np/commit/7c502af98db291bf85d4eb25dc9a8124fd5cc7c8" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/commit/7c502af98db291bf85d4eb25dc9a8124fd5cc7c8</a></div>
+<div class='msg'><time>2025-12-04 23:58</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Re the Grandpa protocols, these are not yet available in polkajam, but we&#x27;re starting to merge the grandpa branch into master so hopefully they will be available soonish :)</div>
+<div class='msg'><time>2025-12-05 01:38</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: <a href="https://x.com/sassal0x/status/1996442356464361817" target="_blank" rel="noopener">This ETH data point</a>   reminds me of the following anxiety re &quot;implementation identifier&quot;: what if the majority of validators, seeing something like <a href="https://paritytech.github.io/jam-conformance-dashboard/" target="_blank" rel="noopener">jam-conformance-dashboard</a> in say, 2-3  years from now, overwhelmingly pick the #1 and #2 clients due to performance (lets say spacejam) and reputation (parity, being the eco leader)?
+
+I would bet that the end game in JAM client diversity with N clients is extremely unlikely to be anything like 1/N and instead have &gt; 2/3 be on the top #1 / #2 clients in this way.  The ETH situation, if you believe this tweets data, is 70% on the top 2, 90% on the top 4.
+
+If nothing incentivizes client diversity and continuous competition (e.g. rewards to be in the top 4 clients), wouldn&#x27;t client diversity tend to gravitate to &quot;winner-take-all&quot; endpoints?  
+
+At least part why I wanted a byte or two for validator metadata is to not only reward validators ala RFC 119 (who will pick the least buggy clients to give them the most rewards), but also client implementers, who need a sustainable path.
+
+Transparency into which validator uses what client, publicly visible performance (even if subjective ala RFC 119), and a sustainable path for client implementers to compete to be in the top 3 to earn some of the validator rewards seems important.  Validators _should_ make decisions about which clients to pick based on this transparent information.  What am I missing? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-05 01:42</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Why would JAM, following &quot;Strong Web3&quot; principles, want to hide its equivalent of <a href="https://clientdiversity.org/#distribution" target="_blank" rel="noopener">this</a>?</div>
+<div class='msg'><time>2025-12-05 02:46</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I have similar concerns regarding validator client diversity in the long term, seems like operators will choose from top 1 or 2 most popular/performant, except for perhaps operators who themselves were jam implementors <span class="edited">(edited)</span></div>
