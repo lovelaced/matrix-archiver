@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-12-08 03:40 UTC</small></p>
+<p><small>last updated 2025-12-09 03:37 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12053,3 +12053,6 @@ Transparency into which validator uses what client, publicly visible performance
 2. For client implementations, even with 100% conformance, any actual spoofing attached to xyz public key will be detectable.  If reputation relates to honesty down to client bits, spoofing could be frowned upon.
 3. Otherwise, I think its naive to expect 100% honesty and would cheer Robin Hood on in taking away from the #1/#2 and giving it to the meritorious #7/#9 esp with client diversity actively valued.   A progressive Strong Web3 agenda could justify &quot;dishonestly&quot; spoofing to the point where it becomes &#x27;optimistic funding&#x27; for everyones beloved JAM implementers. <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-12-05 23:17</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: I agree, it’s naive. </div>
+<div class='msg'><time>2025-12-08 03:40</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: In accumulation context, do we need the raw/unprocessed work item data? how would we resolve it from the work reports? If i am understanding correctly selector 14 of the host function FETCH needs access to the work item, even in accumulation invocation, right?</div>
+<div class='msg'><time>2025-12-08 12:48</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: No. Selector 14 is only enabled if bold-i is non-null. Under Accumulation it is null. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-08 12:55</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: bold-i doesn&#x27;t represent the unprocessed data. It represents the _accumulation inputs_. These are either deferred-transfers or operand-tuples (see eq 12.15). <span class="edited">(edited)</span></div>
