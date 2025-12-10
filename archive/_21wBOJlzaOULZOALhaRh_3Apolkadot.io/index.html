@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-12-09 03:37 UTC</small></p>
+<p><small>last updated 2025-12-10 03:41 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12056,3 +12056,7 @@ Transparency into which validator uses what client, publicly visible performance
 <div class='msg'><time>2025-12-08 03:40</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: In accumulation context, do we need the raw/unprocessed work item data? how would we resolve it from the work reports? If i am understanding correctly selector 14 of the host function FETCH needs access to the work item, even in accumulation invocation, right?</div>
 <div class='msg'><time>2025-12-08 12:48</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: No. Selector 14 is only enabled if bold-i is non-null. Under Accumulation it is null. <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-12-08 12:55</time>&ensp;<span class='u' style='color:#cd8957'>gav</span>: bold-i doesn&#x27;t represent the unprocessed data. It represents the _accumulation inputs_. These are either deferred-transfers or operand-tuples (see eq 12.15). <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-09 10:25</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: This PR has been mentioned a couple of times in the jam-conformance channel. It covers an important point of ed25519 signatures that could go easily overlooked: <a href="https://github.com/davxy/jam-conformance/pull/112" target="_blank" rel="noopener">https://github.com/davxy/jam-conformance/pull/112</a> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-09 11:24</time>&ensp;<span class='u' style='color:#b9329c'>jeff</span>: hehe yay cofactor etc chaos :) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-09 11:33</time>&ensp;<span class='u' style='color:#b9329c'>jeff</span>: <a href="https://hdevalence.ca/blog/2020-10-04-its-25519am/" target="_blank" rel="noopener">https://hdevalence.ca/blog/2020-10-04-its-25519am/</a>
+</div>
