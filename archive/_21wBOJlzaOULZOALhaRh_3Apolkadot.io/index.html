@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-12-10 03:41 UTC</small></p>
+<p><small>last updated 2025-12-11 03:42 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12060,3 +12060,24 @@ Transparency into which validator uses what client, publicly visible performance
 <div class='msg'><time>2025-12-09 11:24</time>&ensp;<span class='u' style='color:#b9329c'>jeff</span>: hehe yay cofactor etc chaos :) <span class="edited">(edited)</span></div>
 <div class='msg'><time>2025-12-09 11:33</time>&ensp;<span class='u' style='color:#b9329c'>jeff</span>: <a href="https://hdevalence.ca/blog/2020-10-04-its-25519am/" target="_blank" rel="noopener">https://hdevalence.ca/blog/2020-10-04-its-25519am/</a>
 </div>
+<div class='msg'><time>2025-12-10 21:53</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: Hey everyone! 👋
+
+I finally managed to run DOOM on JAM (super fun! <a href="https://youtu.be/riyYJo-CKWE?si=cCw5-HIgHnwmvWeH)," target="_blank" rel="noopener">https://youtu.be/riyYJo-CKWE?si=cCw5-HIgHnwmvWeH),</a> but I still feel there are some cloudy parts of the workflow. In particular, I’d love help understanding:
+	•	How exactly a CoreVM service is created — what’s happening under the hood?
+	•	What the builder is really doing — what are the contents/structure of the work packages it keeps submitting?
+	•	How to take another arbitrary program/game and make it run on JAM — is there a clear process for compiling something new to PVM and packaging it as a service? How difficult is it supposed to be?
+
+Would anyone be open to running a small online workshop or walkthrough for the community?
+I think a step-by-step session would help a lot of us start experimenting with new ideas and services on JAM.
+
+Thanks! 🙏✨
+</div>
+<div class='msg'><time>2025-12-10 21:57</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Not really an answer to your questions _but_ it is possible to look at the source for <code>jamt</code> and CoreVM now, I believe all the crates are on crates.io</div>
+<div class='msg'><time>2025-12-10 22:10</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Re compiling something new, it depends if you mean as a JAM service or for CoreVM.
+
+For CoreVM you can use <a href="https://github.com/paritytech/polkaports," target="_blank" rel="noopener">https://github.com/paritytech/polkaports,</a> I believe this is how Quake is built although for historical reasons DOOM works a bit differently.
+
+If you want to make your own JAM service, the <code>jam-pvm-common</code> crate (<a href="https://docs.rs/jam-pvm-common/0.1.26/jam_pvm_common/)" target="_blank" rel="noopener">https://docs.rs/jam-pvm-common/0.1.26/jam_pvm_common/)</a> is the main crate to look at for Parity&#x27;s SDK. You can build a PVM blob using <code>jam-pvm-build</code> (<a href="https://crates.io/crates/jam-pvm-build)." target="_blank" rel="noopener">https://crates.io/crates/jam-pvm-build).</a>
+
+You don&#x27;t need to use Parity&#x27;s SDK though, other teams have their own SDKs and you can of course make your own :D</div>
+<div class='msg'><time>2025-12-11 02:26</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: The 0.7.2 version of polkajam seems to be using the 0.7.1 value of the WB constant still, at least in in the rpc parameters() call. (Ex: &quot;max_input&quot;:13794305)</div>
