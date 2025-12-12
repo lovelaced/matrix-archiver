@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2025-12-11 03:42 UTC</small></p>
+<p><small>last updated 2025-12-12 03:41 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12081,3 +12081,7 @@ If you want to make your own JAM service, the <code>jam-pvm-common</code> crate 
 
 You don&#x27;t need to use Parity&#x27;s SDK though, other teams have their own SDKs and you can of course make your own :D</div>
 <div class='msg'><time>2025-12-11 02:26</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: The 0.7.2 version of polkajam seems to be using the 0.7.1 value of the WB constant still, at least in in the rpc parameters() call. (Ex: &quot;max_input&quot;:13794305)</div>
+<div class='msg'><time>2025-12-11 13:10</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: What do you mean by the &quot;0.7.2 version&quot;? The nightly release has the correct value AFAIK. Until we start doing real releases I would recommend using the latest nightly build as that should contain all of the latest fixes.</div>
+<div class='msg reply'><time>2025-12-11 13:35</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Looks like I was using an outdated spec file. Dumping the latest has the right value. Thank you.</div>
+<div class='msg reply'><time>2025-12-11 13:55</time>&ensp;<span class='u' style='color:#b332c3'>rustybot</span>: Tagged 0.7.2 should have the right WB value as well <span class="edited">(edited)</span></div>
+<div class='msg'><time>2025-12-11 13:11</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: I am referring to the latest release supporting GP 0.7.2. Just verified again using nightly-2025-12-11 <span class="edited">(edited)</span></div>
