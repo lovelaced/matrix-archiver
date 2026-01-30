@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-01-29 03:56 UTC</small></p>
+<p><small>last updated 2026-01-30 03:56 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12300,3 +12300,9 @@ You don’t need to implement all methods, only those you think are useful for y
 PyJAMaz has achieved DOOM! 
 
 <a href="https://x.com/jamdottech/status/2016506194710401468?s=46&amp;t=ThX7Y87rr1MIKyk6af4OXg" target="_blank" rel="noopener">https://x.com/jamdottech/status/2016506194710401468?s=46&amp;t=ThX7Y87rr1MIKyk6af4OXg</a></div>
+<div class='msg'><time>2026-01-29 10:21</time>&ensp;<span class='u' style='color:#6247cb'>bamzedev</span>: For M1 submission do we need to have Ancestry enabled or it&#x27;s not mandatory atm?</div>
+<div class='msg'><time>2026-01-29 11:26</time>&ensp;<span class='u' style='color:#9b6fdc'>olanod</span>: Any team working on a pvm recompiler for aarch64 and/or riscv64 hosts or thinking of adding support for it?</div>
+<div class='msg'><time>2026-01-29 11:37</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I believe there is a plan to support aarch64 in the polkavm recompiler eventually, but AFAIK this is not currently being worked on. Jan Bujak may have more to add. FWIW the gas costs are being set based on the x86 machines in the toaster, unsure if these will be appropriate for any current aarch64 machines.</div>
+<div class='msg'><time>2026-01-29 11:55</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: JavaJAMs recompiler supports both aarch64/x86. I actually started with aarch64 as it was a bit easier with the additional registers. I added in x86 instructions afterwards. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-01-29 12:47</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: I will be adding an aarch64 backend to PolkaVM once I&#x27;m done with all of the higher priority work (which will take quite some time). That said, the current official reference hardware for JAM is the Toaster, so the expectation is that you will need to have an amd64 recompiler, and any aarch64 recompiler you might have will not be evaluated in any way. Depending on how it&#x27;s written and on what hardware you&#x27;re running it may or may not be conformant with JAM&#x27;s gas cost model.</div>
+<div class='msg'><time>2026-01-29 12:52</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Also, FYI while I&#x27;m here - if you&#x27;re using any of my tooling (e.g. <code>polkatool link</code> etc.) then you should temporarily pin it to version 0.29.0. Newer versions include some changes which are incompatible with GP 0.7.x. (Once GP 0.8.0 is out you can switch back to the newest version since I&#x27;ve recently introduced explicit versioning of the ISA so any potential incompatible changes will be isolated from the JAM-specific ISA.) <span class="edited">(edited)</span></div>
