@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2026-03-19 04:03 UTC</small></p>
+<p><small>last updated 2026-03-20 04:00 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -7046,3 +7046,56 @@ And how do you handle the case of e.g. an inner PVM having its initial instructi
 It seems clear some basic probabilistic modeling for C \&lt; 341 in practice (to graduate from tiny C=2 to something notably higher in the Toaster, in Kusama) is in order, and for us make some decisions on whether these issues are resolved in GP 0.7.x vs 0.8.
 
 Given the exceptionally long silence in this channel, perhaps this is a good time to get the GP Editorial Board to make a judgement on this non-gas-related issue, and start to design a process around this? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-03-19 19:17</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Is there a good reason why the GP uses compact encoding for ticket entry index instead of having it be a u8?</div>
+<div class='msg'><time>2026-03-19 20:23</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: <code>SANE_MAX_PACKAGE_SIZE</code> is this somewhere declared in some spec? Because this is something all implementations should use the same value? </div>
+<div class='msg'><time>2026-03-19 20:24</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: <a href="https://docs.rs/jam-std-common/latest/jam_std_common/constant.SANE_MAX_PACKAGE_SIZE.html" target="_blank" rel="noopener">https://docs.rs/jam-std-common/latest/jam_std_common/constant.SANE_MAX_PACKAGE_SIZE.html</a> declared here right now in the jam-std-common crate. </div>
+<div class='msg'><time>2026-03-19 20:38</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: <a href="https://graypaper.fluffylabs.dev/#/ab2cdbd/448c00448c00?v=0.7.2" target="_blank" rel="noopener">https://graypaper.fluffylabs.dev/#/ab2cdbd/448c00448c00?v=0.7.2</a> has for W_B =  13,791,360: The maximum size of the concatenated variable-size blobs, extrinsics and imported segments of a work-package, in octets. See equation 14.5.  </div>
+<div class='msg reply'><time>2026-03-19 20:38</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Yea that is for work bundle, i think for WP there is no limit?</div>
+<div class='msg reply'><time>2026-03-19 20:39</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: They gray paper doesn&#x27;t seem to mention any limit</div>
+<div class='msg reply'><time>2026-03-19 20:39</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But the Parity implementation for example uses this &quot;sane limit&quot; </div>
+<div class='msg reply'><time>2026-03-19 20:39</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Which kind of makes sense, because you otherwise you could force guarantors to download a lot of data</div>
+<div class='msg reply'><time>2026-03-19 20:39</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Before you can call <code>is_authorized</code> <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-03-19 20:52</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Builder =&gt; First Guarantor (CE133) is the place where work package (not bundle) is used [146 use bundle] -- in principle, it could have a WP limit but this limit would have to be less than WB (since work package bundles contain work packages) to be &quot;sane&quot;.
+
+Guarantor =&gt; Guarantor (CE134) and Auditor -&gt; Guarantor (CE147) is about the bundle, and should require W\_B; all erasure encoding/decoding (Assurer -&gt; Guarantor CE137, Auditor -&gt; Assurer CE138) is about work package bundles not work packages <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-03-19 20:54</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: sourabhniyogi: What you want to say by this? </div>
+<div class='msg reply'><time>2026-03-19 20:54</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: WB is the limit for work packages but would only apply for CE133. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-03-19 20:55</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah, but did you read what I wrote above? </div>
+<div class='msg reply'><time>2026-03-19 20:55</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: You can not make the work packge and work bundle limit the same</div>
+<div class='msg reply'><time>2026-03-19 20:58</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Which part of JAM NP (like which CE) has guarantors downloading work packages?</div>
+<div class='msg reply'><time>2026-03-19 20:58</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: The builder sending the work package to the guarantor? Or how else does it ends up there? </div>
+<div class='msg reply'><time>2026-03-19 20:59</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: CE133 is the only place where you could impose a WP limit -- <a href="https://github.com/zdave-parity/jam-np/blob/main/simple.md#ce-133-work-package-submission" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/blob/main/simple.md#ce-133-work-package-submission</a>
+
+If you had a limit, it would be no more than WB.  Why do you need to make it less than that?</div>
+<div class='msg reply'><time>2026-03-19 21:00</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: sourabhniyogi: Did you read what I wrote above? </div>
+<div class='msg reply'><time>2026-03-19 21:00</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: If <code>is_authorized</code> requires me to download 13MiB</div>
+<div class='msg reply'><time>2026-03-19 21:00</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: It is almost useless </div>
+<div class='msg reply'><time>2026-03-19 21:01</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: You can just DOS the guarantors with junk</div>
+<div class='msg reply'><time>2026-03-19 21:01</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: And they would first need to swallow 13MiB before they find out that it is junk</div>
+<div class='msg reply'><time>2026-03-19 21:03</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But yeah, CE133 should be  the place where the limit is imposed </div>
+<div class='msg reply'><time>2026-03-19 21:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: The parity implementation already does this</div>
+<div class='msg reply'><time>2026-03-19 21:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Which brings me back to my initial point, this limit should be documented</div>
+<div class='msg reply'><time>2026-03-19 21:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: And all should use the same </div>
+<div class='msg reply'><time>2026-03-19 21:05</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: Malicious builders can DOS validators by opening lots of QUIC connections.  If the limit for a WP was 10x lower than WB, does that help reduce DOS threats in practice?  </div>
+<div class='msg reply'><time>2026-03-19 21:09</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: The limit is 66x lower </div>
+<div class='msg reply'><time>2026-03-19 21:10</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: &gt; Malicious builders can DOS validators by opening lots of QUIC connections. 
+
+No one said that you do not also need to be protected against this </div>
+<div class='msg reply'><time>2026-03-19 21:10</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: (Not saying that this is easy)</div>
+<div class='msg reply'><time>2026-03-19 21:11</time>&ensp;<span class='u' style='color:#c67452'>sourabhniyogi</span>: It may be best to put it as a CE133 addition here? <a href="https://github.com/zdave-parity/jam-np/blob/main/simple.md#ce-133-work-package-submission" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/blob/main/simple.md#ce-133-work-package-submission</a></div>
+<div class='msg reply'><time>2026-03-19 21:11</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But limiting the WP size is much easier than protecting against DOS opening of connections </div>
+<div class='msg reply'><time>2026-03-19 21:11</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah I can do this </div>
+<div class='msg reply'><time>2026-03-19 21:20</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Yeah makes sense to specify a limit for CE133 explicitly, so builders don&#x27;t have to guess</div>
+<div class='msg reply'><time>2026-03-19 21:22</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: It helps against DoS a bit, I mean you can still send spam UDP packets but at least validators won&#x27;t spend as many CPU cycles dealing with them</div>
+<div class='msg reply'><time>2026-03-19 21:23</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Same limit should apply to CE146 FWIW</div>
+<div class='msg reply'><time>2026-03-19 21:26</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Why does CE133 exists at all? Because it the builder should always be able to send CE146 or not? </div>
+<div class='msg reply'><time>2026-03-19 21:29</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Well it was the original one. The original design idea was that guarantors would download imports. Builders downloading imports is not great as they won&#x27;t necessarily be able to connect and fetch them from validators quickly</div>
+<div class='msg reply'><time>2026-03-19 21:30</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: But maybe they just have the contents already and can send them</div>
+<div class='msg reply'><time>2026-03-19 21:31</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But builders need the imports to run the execution once. For &quot;send only builders&quot; (that do not check that the executions ends etc), it probably makes sense</div>
+<div class='msg reply'><time>2026-03-19 21:32</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Well builders don&#x27;t necessarily need to execute</div>
+<div class='msg reply'><time>2026-03-19 21:32</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Kind of depends on the service</div>
+<div class='msg reply'><time>2026-03-19 21:32</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah, this is what I meant as well</div>
+<div class='msg reply'><time>2026-03-19 21:43</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: CE146, I don&#x27;t get why the segment roots are coming before the work package? </div>
+<div class='msg reply'><time>2026-03-19 21:47</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Well they&#x27;re tiny and you can check them before the work-package if you want</div>
+<div class='msg reply'><time>2026-03-19 21:50</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah fine, just from the fact that it could have been aligned with CE133 would have made myself more happy :P But not that important</div>
+<div class='msg reply'><time>2026-03-19 21:52</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: <a href="https://github.com/zdave-parity/jam-np/pull/14" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/pull/14</a></div>
