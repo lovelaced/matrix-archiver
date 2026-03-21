@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#graypaper:polkadot.io</h1>
-<p><small>last updated 2026-03-20 04:00 UTC</small></p>
+<p><small>last updated 2026-03-21 03:54 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-17 20:29</time>&ensp;<span class='u' style='color:#da6aa2'>syed</span>: <a href="https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation" target="_blank" rel="noopener">https://matrix.to/#/!hyzRkDqDthePbodYFz:parity.io/$f_DMsIEcDXZegw6Sabnehzc-LrdDQkmq5MbxDDyoZxY?via=parity.io&amp;via=web3.foundation</a>
@@ -7099,3 +7099,43 @@ No one said that you do not also need to be protected against this </div>
 <div class='msg reply'><time>2026-03-19 21:47</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Well they&#x27;re tiny and you can check them before the work-package if you want</div>
 <div class='msg reply'><time>2026-03-19 21:50</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah fine, just from the fact that it could have been aligned with CE133 would have made myself more happy :P But not that important</div>
 <div class='msg reply'><time>2026-03-19 21:52</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: <a href="https://github.com/zdave-parity/jam-np/pull/14" target="_blank" rel="noopener">https://github.com/zdave-parity/jam-np/pull/14</a></div>
+<div class='msg'><time>2026-03-20 11:40</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: </div>
+<div class='msg'><time>2026-03-20 11:43</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: I would like to propose the following changes:
+
+- RefineContext, remove the lookup anchor timeslot. The node can just look this up or is there any particular reason we need to have it there?
+- RefineContext, add the lookup anchor post state root
+- Expose the full lookup anchor/anchor header via a host function to refine/is_authorized context</div>
+<div class='msg'><time>2026-03-20 12:01</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Lookup anchor is available to refine/is-auth via fetch already; the whole encoded WP is available</div>
+<div class='msg'><time>2026-03-20 12:02</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah but only the hash</div>
+<div class='msg'><time>2026-03-20 12:02</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Or not? </div>
+<div class='msg'><time>2026-03-20 12:02</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Oh you want the header of that block?</div>
+<div class='msg'><time>2026-03-20 12:02</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Sorry missed that</div>
+<div class='msg'><time>2026-03-20 12:02</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah. I could put it into the WP</div>
+<div class='msg'><time>2026-03-20 12:02</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But the guarantoor needs to have it any way around</div>
+<div class='msg'><time>2026-03-20 12:06</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Well it probably will do, not sure it&#x27;s strictly true that it needs to have the header</div>
+<div class='msg'><time>2026-03-20 12:08</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Probably the timeslot per anchor is enough, but no need to have this part of the refinecontext inside teh WP</div>
+<div class='msg'><time>2026-03-20 12:09</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Anchor header cannot be made available as auditors may not have it</div>
+<div class='msg'><time>2026-03-20 12:10</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Why?</div>
+<div class='msg'><time>2026-03-20 12:10</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Could include in bundle I guess</div>
+<div class='msg'><time>2026-03-20 12:11</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But if you don&#x27;t see any big blockers for this, I will continue writing the parachain service plan. Assuming the stuff will be available. Then we can check the final document if my assumptions make sense</div>
+<div class='msg'><time>2026-03-20 12:12</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: We can probably make lookup anchor header available I would guess</div>
+<div class='msg'><time>2026-03-20 12:15</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Maybe don&#x27;t assume anchor header can be fetched. Lookup anchor is finalized so we assume everyone can get that. Auditing can happen outside of block context in the case of a negative judgment so auditors don&#x27;t necessarily have the block that included the report or the anchor (which doesn&#x27;t need to be finalised)</div>
+<div class='msg'><time>2026-03-20 12:15</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: So I think we would need to include it in the bundle, in which case probably it&#x27;s better to just include what you need in the package</div>
+<div class='msg'><time>2026-03-20 12:15</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: I need the anchor timeslot :D In the &quot;worst case&quot; I can just add the header to teh WP</div>
+<div class='msg'><time>2026-03-20 12:18</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Hmm ok we can probably include that in the context and verify on-chain? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-03-20 12:19</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: I mean I would also verify this in the service refine function</div>
+<div class='msg'><time>2026-03-20 12:19</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: We have the hash of the anchor </div>
+<div class='msg'><time>2026-03-20 12:19</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: So that it easy</div>
+<div class='msg'><time>2026-03-20 12:19</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: My point is just that we would not need to add this to every WP</div>
+<div class='msg'><time>2026-03-20 12:20</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: I mean if you include the header in the package sure, thought you didn&#x27;t want to do that?</div>
+<div class='msg'><time>2026-03-20 12:20</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah, my point being that this could be an &quot;escape hatch&quot; </div>
+<div class='msg'><time>2026-03-20 12:20</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: If access to the header will not be available &quot;natively&quot; </div>
+<div class='msg'><time>2026-03-20 12:20</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &gt; &lt;@dave:parity.io&gt; Hmm ok we can probably include that in the context and verify on-chain?
+
+I was proposing this to avoid that</div>
+<div class='msg'><time>2026-03-20 12:21</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But if we add it to the context, we also add it to the WP? </div>
+<div class='msg'><time>2026-03-20 12:21</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Making the anchor header available natively I think would mean including it in the bundle meaning everyone would pay for it even if they didn&#x27;t use it</div>
+<div class='msg'><time>2026-03-20 12:21</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: &gt; &lt;@bkchr:parity.io&gt; But if we add it to the context, we also add it to the WP? 
+
+Yes but you don&#x27;t need to include the whole header in the context, just the timeslot</div>
+<div class='msg'><time>2026-03-20 12:22</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: The timeslot can be trivially verified on-chain</div>
