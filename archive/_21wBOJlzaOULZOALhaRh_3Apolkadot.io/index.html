@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-05-04 04:30 UTC</small></p>
+<p><small>last updated 2026-05-05 04:16 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12750,3 +12750,11 @@ I will continue to communicate any information that I have on this topic, or ans
 <div class='msg'><time>2026-05-03 21:43</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: The web app is almost finished. We just need to clean it up a little bit. I&#x27;m on it. </div>
 <div class='msg'><time>2026-05-03 21:44</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Great to hear !</div>
 <div class='msg'><time>2026-05-03 21:44</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: There was already some disussion started by davxy this week around the fuzzer docker images configuration</div>
+<div class='msg'><time>2026-05-04 13:16</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Some of you already asked for &quot;target hardware requirements&quot; for the fuzzer, to ensure that the fuzzing does work as expected. I would actually like to reverse this and ask on how much memory you need. CPU should not be that important, in the worst case it just takes longer. Did not took a close look, but I would assume that 64GB should be enough for the fuzzer machine? If not, please tell us/me early :) </div>
+<div class='msg'><time>2026-05-04 13:20</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: Tiny spec?</div>
+<div class='msg'><time>2026-05-04 13:23</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Full and tiny</div>
+<div class='msg'><time>2026-05-04 13:24</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: tiny 64gb is enough for jampy; full maybe, but we never had a single full trace to test, idk for sure</div>
+<div class='msg'><time>2026-05-04 13:28</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Would depend how many fuzz sessions can be done in parallel. I think the current fuzzing had 8gb dedicated for each docker instance.</div>
+<div class='msg'><time>2026-05-04 13:30</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: The question is about max memory` requirements per session. So, we can ensure that we have enough memory available for the jobs </div>
+<div class='msg'><time>2026-05-04 13:44</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: So far 8GB was plenty for us, but I guess it depends on how many keys the fuzzer will add to the Trie. If the fuzzer starts to add millions of service keys then we will need more mem</div>
+<div class='msg'><time>2026-05-04 13:44</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: During normal fuzzing we use \&lt;200 MB ram last time i profiled it (with tiny&amp;full spec) <span class="edited">(edited)</span></div>
