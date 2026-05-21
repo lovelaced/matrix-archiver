@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-05-20 04:38 UTC</small></p>
+<p><small>last updated 2026-05-21 04:42 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -12919,3 +12919,82 @@ The revive thing doesn&#x27;t work here <span class="edited">(edited)</span></di
 <div class='msg'><time>2026-05-19 23:19</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &gt; &lt;@ascriv:matrix.org&gt; using parity signer app version 5.0.0
 
 worked after updating to newest version of polkadot vault</div>
+<div class='msg'><time>2026-05-20 05:46</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: now I started another session sinche the last was still terminated, but did I lost the spot in the queue? It says &quot;queued&quot; <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-20 08:09</time>&ensp;<span class='u' style='color:#5bdb7f'>r2rtnl</span>: Both of my submissions have been marked as “interrupted” after cumulatively processing more than 1.2 million blocks.
+
+I also cannot start a new one because I get the following message: “You already have an active fuzz session running. Wait for it to finish, or click Abort on the running submission, then re-submit.”</div>
+<div class='msg'><time>2026-05-20 09:59</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: image.png</div>
+<div class='msg'><time>2026-05-20 09:59</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: interrupted again without any reason</div>
+<div class='msg'><time>2026-05-20 11:16</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: I&#x27;m looking into this and it was maybe a hearbeat issue</div>
+<div class='msg'><time>2026-05-20 11:16</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: What is your team name? </div>
+<div class='msg'><time>2026-05-20 11:18</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: ok thx (y) anyway now it started again, please don&#x27;t stop :P there is still an issue with logs api call, they returns 410 with <code>{&amp;quot;error&amp;quot;:&amp;quot;Session owner unknown or offline&amp;quot;}</code></div>
+<div class='msg'><time>2026-05-20 11:32</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Have you restarted it? </div>
+<div class='msg'><time>2026-05-20 11:32</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Or was it automatically restarted? </div>
+<div class='msg'><time>2026-05-20 11:32</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Automatically or? </div>
+<div class='msg'><time>2026-05-20 11:35</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2026-05-20 at 6.35.49 AM.png</div>
+<div class='msg'><time>2026-05-20 11:36</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: getting this after attempting to download report</div>
+<div class='msg'><time>2026-05-20 11:36</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: Same here</div>
+<div class='msg'><time>2026-05-20 11:46</time>&ensp;<span class='u' style='color:#97df72'>libingjiang</span>: same here.</div>
+<div class='msg'><time>2026-05-20 11:47</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: bingjiang li | Jambda: Can you give me the session id </div>
+<div class='msg'><time>2026-05-20 11:50</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: the last restarted automatically after being &quot;interrupted&quot;</div>
+<div class='msg'><time>2026-05-20 11:51</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Can you try again to download</div>
+<div class='msg'><time>2026-05-20 11:51</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Or check the logs</div>
+<div class='msg'><time>2026-05-20 11:51</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Please do a hard refresh before</div>
+<div class='msg'><time>2026-05-20 11:52</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: now the logs are working again, the fuzzing is running, so everything seems ok now</div>
+<div class='msg'><time>2026-05-20 11:52</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Perfect</div>
+<div class='msg'><time>2026-05-20 11:52</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: We now also have 11 fuzzer machines, so we have more running in parallel</div>
+<div class='msg'><time>2026-05-20 12:08</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2026-05-20 at 7.08.35 AM.png</div>
+<div class='msg'><time>2026-05-20 12:08</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: also getting this when downloading report. should i just restart?</div>
+<div class='msg'><time>2026-05-20 12:10</time>&ensp;<span class='u' style='color:#97df72'>libingjiang</span>: After restarting, it looks like it’s back to normal.</div>
+<div class='msg'><time>2026-05-20 12:25</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Please try again, it should work</div>
+<div class='msg'><time>2026-05-20 12:25</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: works now, thanks</div>
+<div class='msg'><time>2026-05-20 14:54</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: Hi,
+We had an error (quite early at 6,599 / 1,000,000) with <code>InvalidEpochMark</code>
+Basti.await can we have a trace of the error please ? : )
+(The team is jam4s) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-20 15:03</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: Actually it was interrupted =&gt; was it interrupted because of failure or because of something else ?
+Basically the question is: Do we need to fix something or it was just the runner and we just need to relaunch ? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-20 15:03</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Relaunch it </div>
+<div class='msg'><time>2026-05-20 15:03</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Interrupted is not your fault </div>
+<div class='msg'><time>2026-05-20 15:04</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: thanks : ) <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-20 15:10</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: After the <code>L2a</code>, will it go to <code>L2b</code> on its own or do i have to nudge it? It seems to wait for <code>L2b</code> but not starting</div>
+<div class='msg reply'><time>2026-05-20 15:22</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Are you sure? From the admin UI it looks like the job is running</div>
+<div class='msg reply'><time>2026-05-20 15:32</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Screenshot 2026-05-20 at 17.32.24.png</div>
+<div class='msg'><time>2026-05-20 17:00</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: if we fail on L2b, the next try will start from scratch at L2a? Or will it skip L2a and go right to L2b? If so, maybe there should be a way to skip it, otherwise we need to wait for hours for something that already passed, just to get feedback on the next stage. Does it make sense?</div>
+<div class='msg'><time>2026-05-20 17:50</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Every run uses a different random seed, so it could theoretically still find something </div>
+<div class='msg'><time>2026-05-20 18:03</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Maybe we could required a full “unsegmented” run for passing M1, but before that, could allow for segmented runs to help with iteration speed?</div>
+<div class='msg'><time>2026-05-20 18:15</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Maybe @davxy could provide more traces for you to run this locally. I did not follow the process up to this point, but I had thought that you already had enough testing vectors. </div>
+<div class='msg'><time>2026-05-20 18:18</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I think the biggest gap is probably “full” test vectors </div>
+<div class='msg'><time>2026-05-20 18:20</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: yep, we don&#x27;t have any trace in &quot;full&quot; spec</div>
+<div class='msg'><time>2026-05-20 18:31</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: Traces for the full spec have not been shared. I&#x27;ll try to prepare a batch for you tomorrow.
+
+Where do you think is the best place to host all these traces? The jam-conformance repo is already getting quite large, and including full traces will make it even worse. Any suggestions?
+
+Github LFS is not an option as AFAIK has download quotas limits</div>
+<div class='msg reply'><time>2026-05-20 19:23</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: could be a tar file at github releases</div>
+<div class='msg reply'><time>2026-05-20 20:24</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: S3 or Google Cloud Storage</div>
+<div class='msg reply'><time>2026-05-20 20:55</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: bulletin chain 🙃</div>
+<div class='msg'><time>2026-05-20 18:35</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: how about:
+
+1. repo only contains manifest.json (for each trace, path + sha + size) + fetch script
+2. use cloudflare R2 for object store</div>
+<div class='msg'><time>2026-05-20 18:41</time>&ensp;<span class='u' style='color:#5bdb7f'>r2rtnl</span>: davxy: How much storage do you expect the full test vectors to take? If we are speaking about another couple of GBs, then, in my view, adding them directly to the repo should be fine.</div>
+<div class='msg'><time>2026-05-20 19:06</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: What are the common reasons to get <code>Timeout waiting for peer</code> that others have encountered ?
+
+<pre><code class='sh'>2026-05-20 16:28:44 [s=15438] fuzz::fuzzer  Failed sending block to to target: Timeout waiting for peer
+2026-05-20 16:28:44 [s=15438] fuzz::fuzzer  Terminating after 50365 steps with result: Err(RemoteCommunication(Timeout))
+</code></pre></div>
+<div class='msg'><time>2026-05-20 19:13</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: In case a team has issues only in full spec, we will always have to wait many hours to see failing results (supposing tiny is working). Our run takes 6 hours. The fuzzer will still run all phases. I am suggesting just that the order (that now is fixed) changes, starting from the phase the team failed in the last run - and running those passed phases in the end. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-20 19:20</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: image.png</div>
+<div class='msg'><time>2026-05-20 19:23</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: Basti.await: I was AFK, so I did not see the announcement about the fuzzer. I just registered. I assumed that the release of an event requiring everyone&#x27;s participation would be announced in advance, allowing everyone to prepare for it. Or did I miss this announcement earlier? What is the procedure here? I am a bit in the dark.</div>
+<div class='msg'><time>2026-05-20 19:34</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: IPFS</div>
+<div class='msg'><time>2026-05-20 20:59</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Again, I was not assuming that the fuzzing is a debugging utility and more just a check up to continue to the next stage.</div>
+<div class='msg'><time>2026-05-20 22:06</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: what&#x27;s the hardware config of the fuzz machines? I remember JAM built a data center last years</div>
+<div class='msg reply'><time>2026-05-21 02:36</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: <pre><code class=''>INFO socket=/tmp/jam_fuzz/fuzz.sock, vm=compiler, cpu=&quot;AMD Ryzen Threadripper PRO 7995WX 96-Cores&quot;     
+  (96 cores), ram=251.2 GB 
+</code></pre>
+
+got it, much more than I need... <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-20 22:07</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: glad to see the fuzz infra works, finally we have automation</div>
+<div class='msg'><time>2026-05-20 22:17</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: Screenshot 2026-05-20 at 23.16.44.png</div>
+<div class='msg'><time>2026-05-20 22:17</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: when I try to download full session for my run I get this error</div>
