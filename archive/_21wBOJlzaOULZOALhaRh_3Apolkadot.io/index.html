@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-05-22 04:37 UTC</small></p>
+<p><small>last updated 2026-05-23 04:28 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -13103,3 +13103,148 @@ This will take some time 🙈</div>
 <div class='msg'><time>2026-05-21 18:49</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>:  registered as well</div>
 <div class='msg'><time>2026-05-21 19:21</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah that will continue after the &quot;unpause&quot; </div>
 <div class='msg'><time>2026-05-21 22:34</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: I guess it could be too late to do refactor to the fuzzer but it really should be just multiple independent worker process and a main controller process so that restart the controller does not need to impact the workers. The workers must already be running on separate machine right? So restart the controller server shouldn&#x27;t impact the worker machines?</div>
+<div class='msg'><time>2026-05-22 04:50</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: when will the fuzzer unpause, will it introduces sort of parallel fuzzing for all 4 stages instead of blocking sequence? what happens to the teams passing the 4 stages, can teams re-use the fuzzer to test sort of new updates <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 05:06</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: &gt; &lt;@xlchen:matrix.org&gt; I guess it could be too late to do refactor to the fuzzer but it really should be just multiple independent worker process and a main controller process so that restart the controller does not need to impact the workers. The workers must already be running on separate machine right? So restart the controller server shouldn&#x27;t impact the worker machines?
+
+When I talk about the fuzzers, I mean the worker. There are the fuzzer workers and the web logic itself </div>
+<div class='msg'><time>2026-05-22 05:34</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: is there a planned eta for the unpause?</div>
+<div class='msg'><time>2026-05-22 05:58</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: &gt; &lt;@dakkk:matrix.org&gt; is there a planned eta for the unpause?
+
+I wanted to wait for your run </div>
+<div class='msg'><time>2026-05-22 05:58</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yesterday evening it was still 17h</div>
+<div class='msg'><time>2026-05-22 05:59</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: it never been 17h, it was 9 on start; it finished this night at 2.45 UTC+1</div>
+<div class='msg'><time>2026-05-22 06:00</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: &gt; &lt;@dakkk:matrix.org&gt; it never been 17h, it was 9 on start; it finished this night at 2.45 UTC+1
+
+Hmm. Maybe I then mixed you up. I will check when I&#x27;m at my pc </div>
+<div class='msg'><time>2026-05-22 06:00</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Or it got faster towards the end </div>
+<div class='msg'><time>2026-05-22 06:00</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: this is mine: </div>
+<div class='msg'><time>2026-05-22 06:00</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: image.png</div>
+<div class='msg'><time>2026-05-22 06:01</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: the eta was always correct in the UI</div>
+<div class='msg'><time>2026-05-22 06:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Okay I talked about pyjamaz </div>
+<div class='msg'><time>2026-05-22 06:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: They still need ~8h</div>
+<div class='msg'><time>2026-05-22 06:08</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Yes that’s us. I appreciate this Basti.await </div>
+<div class='msg'><time>2026-05-22 06:12</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Our friends from tesseract now need more than 198 days. We will not wait for them 🙈 </div>
+<div class='msg'><time>2026-05-22 06:17</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: I realized that elixir runs insanely fast once it can allocate enough resources, any elixir guy can explain the tech? danicuki | Jamixir Oliver Tale-Yazdi ? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 06:18</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: the benchmarks on <a href="https://fluffylabs.dev/jam-testing/" target="_blank" rel="noopener">https://fluffylabs.dev/jam-testing/</a> seems completly wrong, pyjamaz should be way faster than jampy</div>
+<div class='msg'><time>2026-05-22 06:19</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Any reason you believe pyjamaz is not faster than JamPy? dakkk | JamPy </div>
+<div class='msg'><time>2026-05-22 06:20</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: as the env can allocate 96 cores, 256GB memory things become totally different</div>
+<div class='msg'><time>2026-05-22 06:20</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: basti told us your pyjamaz needed more than 17h, jampy spent 9; maybe they&#x27;re in different phases</div>
+<div class='msg'><time>2026-05-22 06:21</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: L2a ~ 24h
+L2b ~ 36h
+</div>
+<div class='msg'><time>2026-05-22 06:44</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: curious if you have parallel execution on processing extrinsic? guess jampy has but pyjamz doesn&#x27;t
+
+if I&#x27;m not mistaken, the limit of the execution speed is mainly capped by the crypto related stuffs, since we are using the same libraries, we mostly have the similar speed whatever language we are using, the diff could be just pvm and the parallel execution of per extrinsic + either doing batch_verifying for sigs</div>
+<div class='msg'><time>2026-05-22 06:44</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: the cap is the pvm execution; I&#x27;m running accumulation in parallel, but even if jampy tiny fuzzing is faster, my full fuzzing is slower than pygiamaz <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 06:45</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: not sure about it, we almost have the fastest pvm execution except polkajam, it takes us ~6h for l2a, similar as other interp implementations, as I can see from our history chat, either turboJam or JavaJam or GrayMatter, takes the same time, so I don&#x27;t think PVM limits a lot at the fuzzer&#x27;s env <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 06:53</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: it depends, I think; if your pvms have similar performance, and the accumulation doesn&#x27;t include heavy loads or a large number of services, then you&#x27;re probably right</div>
+<div class='msg'><time>2026-05-22 07:00</time>&ensp;<span class='u' style='color:#4068cd'>0xjunha</span>: I registered two days ago and it is under review. Is there a way to see the queue status?</div>
+<div class='msg reply'><time>2026-05-22 07:01</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: What is the name of your team? </div>
+<div class='msg reply'><time>2026-05-22 07:01</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: I&#x27;m not aware of all teams and do not approve all of them </div>
+<div class='msg reply'><time>2026-05-22 07:01</time>&ensp;<span class='u' style='color:#4068cd'>0xjunha</span>: Screenshot 2026-05-22 at 4.01.44 PM.png</div>
+<div class='msg reply'><time>2026-05-22 07:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: I have approved you </div>
+<div class='msg reply'><time>2026-05-22 07:04</time>&ensp;<span class='u' style='color:#4068cd'>0xjunha</span>: Wow that&#x27;s great Thanks!</div>
+<div class='msg'><time>2026-05-22 07:02</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: I have batch verification for signatures, but no batch execution per graypaper join points for extrinsic, except that and a deeper compiler refactor I wont&#x27; do, I believe I have done all of the possible perf updates I can have, so I doubt that sort of parallel computation matters more at the fuzzer machine, since it has 96 cores, per core is slower, and spreading computation matters more, and this is exactly where elixir shines <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 07:09</time>&ensp;<span class='u' style='color:#4068cd'>0xjunha</span>: Screenshot 2026-05-22 at 4.08.25 PM.png</div>
+<div class='msg reply'><time>2026-05-22 07:09</time>&ensp;<span class='u' style='color:#4068cd'>0xjunha</span>: fwiw found a typo in the hover - 100,000 vs. 1M</div>
+<div class='msg'><time>2026-05-22 07:24</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: &gt; &lt;@bkchr:parity.io&gt; Congrats and enjoy the party 
+
+I registered yesterday night, can i get the approval please?</div>
+<div class='msg'><time>2026-05-22 07:53</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Yes I think elixer is the exception regarding performance. At least ours is as expected when comparing to the obvious faster ones. </div>
+<div class='msg'><time>2026-05-22 08:12</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: Curious, do you accumulate services in parallel?</div>
+<div class='msg'><time>2026-05-22 08:19</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Yes we parallelize where we can. 5-10 slower than the fastest meets expectations imo and goes beyond expectations of the relative performance benchmark.</div>
+<div class='msg'><time>2026-05-22 08:31</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: All other things being equal perhaps pyjamaz being lower on the fallback benchmark explains our higher per step overhead in comparison to the faster ones and graymatter (elixir). The benchmark seems to show that our PVM should run significantly faster than graymatter’s. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 08:32</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Anyway we need about 6 more hours on L2b. Thank you for your patience. 🙏🏻 <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 09:10</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: davxy: 0.2.2 ark-vrf seeems to be compatible with 0.1.1 (in terms of spec) can you confirm?</div>
+<div class='msg'><time>2026-05-22 09:15</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: The spec includes a guideline for deterministic nonce generation. In 0.1.1, the proposed nonce generation was vulnerable. As a result, 0.2.x produces different signatures, while still remaining compatible: signatures from 0.1.x can be verified by 0.2.x and vice versa.
+</div>
+<div class='msg'><time>2026-05-22 09:17</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: so it&#x27;s almost a dropin replacement (apart from some changes <code>RingBuilderPcsParams</code>). 0.3+ does not look like compatible to me <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 09:19</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: versions 0.3+ are not compatible, as the scheme was improved. For JAM, we will continue using 0.2 for now (at least for v0.7.2) to avoid disrupting existing test vectors and related artifacts.
+</div>
+<div class='msg'><time>2026-05-22 09:21</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: We could consider adopting the new version in 0.8, but it is not urgent</div>
+<div class='msg'><time>2026-05-22 09:35</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: Now I am interested in what kinds of blocks are being fed into the fuzzer since we did not spend time optimizing GrayMatter at all.  
+We do have parallel accumulate but a slow single core PVM. Only thing I paid attention to was I/O latency against the Linux socket since that is on the hot path and overall memory usage</div>
+<div class='msg reply'><time>2026-05-22 09:37</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: It&#x27;s said that elixir auto dispatch computation &amp; lightweight concurrency to different cores is that true? if so at the 96 cores machine, you guys just write as normal? and the magic just happens?
+
+what a slow single core PVM do you mean? I thought in the PVM interpreter, you can drain the 96 cores as well <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-22 11:59</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Is there such a thing as a multi-core PVM? (:</div>
+<div class='msg reply'><time>2026-05-22 12:04</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Nevertheless, trying to accelerate your PVMs using multiple cores is probably not the best use of your time. This is still a work-in-progress, but beyond the current GP 0.8 (0.9? depending how fast I can get it prototyped and specced) we&#x27;ll want to tightly control what goes into the L3 cache of the core executing a given PVM instance, and considering how many VMs we want to run in parallel and the current hardware landscape we won&#x27;t actually have many extra cores to spare.</div>
+<div class='msg reply'><time>2026-05-22 12:11</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: at this point, there could be actually an inverse one 😂 with NUMA adapted or not, I just realized that our execution got maximum ~30x ratio slower on the fuzzer machine comparing with the report I have from the jam-conformance repo, likely caused by that I didn&#x27;t handle NUMA that our virtual memory of PVM got played by the 96 cores <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-22 12:13</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Do you run your PVMs in a separate process?</div>
+<div class='msg reply'><time>2026-05-22 12:16</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: good question, I actually load my compiled bytes in memory, allocate with mmap then execute</div>
+<div class='msg reply'><time>2026-05-22 12:17</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: So you do it within the same process?</div>
+<div class='msg reply'><time>2026-05-22 12:17</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: yes, but for batch execution, I have a rayon wrapper outside</div>
+<div class='msg reply'><time>2026-05-22 12:18</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: I don&#x27;t want to spawn a process to handle it, feels dirty, but this actually inspires me a lot as well ...</div>
+<div class='msg reply'><time>2026-05-22 12:18</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: Well, you don&#x27;t have to spawn a new process (and it&#x27;s probably easier if you don&#x27;t.)</div>
+<div class='msg reply'><time>2026-05-22 12:20</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: I&#x27;m about to try to bind cores first when NUMA is available not sure if it helps, that I&#x27;m eager to see my fuzz getting failed then I can deploy a new version of spacejam on it )) <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-22 12:21</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: I&#x27;d be surprised if that would make such a colossal difference. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-22 12:22</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: (Although we <em>will</em> require people to properly bind their PVMs to appropriate cores for M3/M4, but that&#x27;s more of a &quot;this is needed so that the gas cost model doesn&#x27;t break when attacked&quot; and less of a &quot;it will make it extremely slow in the average case&quot;)</div>
+<div class='msg reply'><time>2026-05-22 14:13</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: I meant more in the other way if some teams have a global singleton PVM that serializes all execution.  
+PVM it self is single threaded for sure</div>
+<div class='msg reply'><time>2026-05-22 14:14</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: It must be something about the workload that favours our impl, no clue honestly.  
+But we do everything functional, so parallelism / reversions are very cheap so far.
+
+will change when actually maintaining a Trie etc</div>
+<div class='msg'><time>2026-05-22 13:17</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: So the queue will be unpaused once all current sessions are finished and an upgrade of the conformance tool is done. Is that the idea here? Just asking as we are still on queued status. </div>
+<div class='msg'><time>2026-05-22 13:18</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yes</div>
+<div class='msg'><time>2026-05-22 13:18</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Less than 1h for our L2b to finish. </div>
+<div class='msg'><time>2026-05-22 14:09</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: L2b for pyjamaz has finished Basti.await </div>
+<div class='msg'><time>2026-05-22 14:10</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah seen it already, I&#x27;m working on it :D </div>
+<div class='msg'><time>2026-05-22 16:30</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Sorry for the delay, but we are back!</div>
+<div class='msg reply'><time>2026-05-22 16:44</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: what does the label &quot;interrupted&quot; mean? and there is no report to download</div>
+<div class='msg reply'><time>2026-05-22 16:50</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Same message for pyjamaz: “interrupted” without any signs of error or downloadable report. Please advise. </div>
+<div class='msg reply'><time>2026-05-22 16:50</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: They are still running if you click on them</div>
+<div class='msg reply'><time>2026-05-22 16:53</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: &gt; &lt;@bkchr:parity.io&gt; They are still running if you click on them
+
+This is not visible for us in the UI. But if you say it is still running then no intervention is needed I suppose. Nothing to click on. </div>
+<div class='msg reply'><time>2026-05-22 16:57</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: image.png</div>
+<div class='msg reply'><time>2026-05-22 16:58</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Link please</div>
+<div class='msg reply'><time>2026-05-22 17:00</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: we&#x27;ve been stuck at 3196 for a while
+
+<a href="https://fuzz.jamtoaster.network/submissions/t-0x4c448aa63cefe8ca36ce65ef0e8a8a8c4186d68b905eaf79468f90d6ead9707a-0-1-2-pre-7-05adc87b" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0x4c448aa63cefe8ca36ce65ef0e8a8a8c4186d68b905eaf79468f90d6ead9707a-0-1-2-pre-7-05adc87b</a></div>
+<div class='msg reply'><time>2026-05-22 17:03</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: They are back to queued </div>
+<div class='msg reply'><time>2026-05-22 17:57</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: after <code>queued</code>, it still hangs, if abort &amp; re-submit can get a fresh healthy status? <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 16:30</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Fuzzers are running again</div>
+<div class='msg'><time>2026-05-22 16:49</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: As requested <code>submissions/</code> pages are now public and do not requirea login</div>
+<div class='msg'><time>2026-05-22 16:54</time>&ensp;<span class='u' style='color:#5bdb7f'>r2rtnl</span>: Basti.await: Did you get a chance to look into the attestation publication issue? Noticed that JavaJam and &lt;del&gt;Gossamer&lt;/del&gt;GrayMatter use ghcr.io, while TurboJam uses docker.io — could be registry-specific. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-22 16:54</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: r2rtnl: please give me the submissions link</div>
+<div class='msg reply'><time>2026-05-22 16:55</time>&ensp;<span class='u' style='color:#5bdb7f'>r2rtnl</span>: <a href="https://fuzz.jamtoaster.network/submissions/t-0x988068f9f4a32beb4122c7fe8f3ecd2fb42339682511cbbc6f82cc4e6ef89b25-v0-2-8-919fe30e" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0x988068f9f4a32beb4122c7fe8f3ecd2fb42339682511cbbc6f82cc4e6ef89b25-v0-2-8-919fe30e</a></div>
+<div class='msg'><time>2026-05-22 18:04</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: why does downloading the report yield 502? <a href="https://fuzz.jamtoaster.network/api/public/submissions/t-0xc6d054f89721795d9ca72e95a3dd476820cd380f577fd9ab4b835a510e75800a-main-61a862f-741d82ab" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/api/public/submissions/t-0xc6d054f89721795d9ca72e95a3dd476820cd380f577fd9ab4b835a510e75800a-main-61a862f-741d82ab</a></div>
+<div class='msg'><time>2026-05-22 18:07</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2026-05-22 at 1.07.29 PM.png</div>
+<div class='msg'><time>2026-05-22 18:07</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: my l2b is still in queued state</div>
+<div class='msg'><time>2026-05-22 18:12</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: my L2a as well just restarted mine</div>
+<div class='msg'><time>2026-05-22 18:15</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: guess i&#x27;ll restart</div>
+<div class='msg'><time>2026-05-22 18:17</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Queued just means that all fuzzers are doing other work <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 18:18</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: oops</div>
+<div class='msg'><time>2026-05-22 18:19</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: i figured since it was queue before the restart it should have been started unless there was a bug</div>
+<div class='msg'><time>2026-05-22 18:20</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: Damn i stopped mine as well Thinking it was ok :) lol</div>
+<div class='msg'><time>2026-05-22 18:22</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2026-05-22 at 1.22.11 PM.png</div>
+<div class='msg'><time>2026-05-22 18:22</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: actually i&#x27;m not able to abort my queued submission <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-22 18:23</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2026-05-22 at 1.23.17 PM.png</div>
+<div class='msg'><time>2026-05-22 18:23</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &quot;session owner unknown or offline&quot; @[Basti.await] </div>
+<div class='msg'><time>2026-05-22 18:24</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: Screenshot 2026-05-22 at 1.24.23 PM.png</div>
+<div class='msg'><time>2026-05-22 19:58</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: ^all good, L2b running now, dunno what that was</div>
+<div class='msg'><time>2026-05-22 20:17</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: image.png</div>
+<div class='msg'><time>2026-05-22 20:18</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: We can&#x27;t restart a process, the preflight failed this time (it passed on previous runs) saying stale state
+But because of this we CANNOT submit any new run 🥲 Can you check on it please Basti.await  ?</div>
+<div class='msg'><time>2026-05-22 21:32</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: image.png</div>
+<div class='msg'><time>2026-05-22 21:33</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: FYI I suspect all the machines are busy at the moment and once one comes free will continue the next phase. </div>
+<div class='msg reply'><time>2026-05-22 21:37</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Think that’s right. It goes queued when there’s no free spots. Just have to wait. </div>
+<div class='msg'><time>2026-05-22 21:57</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: Basti.await: I&#x27;m trying to start the fuzzer, but it says that I have another fuzzing session even if I don&#x27;t. Can you have a look a it?</div>
+<div class='msg'><time>2026-05-22 21:58</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: image.png</div>
+<div class='msg'><time>2026-05-23 00:41</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Try again</div>
+<div class='msg reply'><time>2026-05-23 01:10</time>&ensp;<span class='u' style='color:#97df72'>libingjiang</span>: Same here. I can’t restart it either. It shows: You already have an active fuzz session running. Wait for it to finish, or click Abort on the running submission, then re-submit.
+
+<a href="https://fuzz.jamtoaster.network/submissions/t-0x4a88912aadd2b981a2c472731f696ae05d8274bfe77c18957fac97b52ac0f761-v0-2-5-3d30261b" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0x4a88912aadd2b981a2c472731f696ae05d8274bfe77c18957fac97b52ac0f761-v0-2-5-3d30261b</a></div>
+<div class='msg reply'><time>2026-05-23 03:02</time>&ensp;<span class='u' style='color:#5adda3'>shwchg</span>: Basti.await: 
+Same issue here. We can’t submit a new one either.
+It was blocked by this submission:
+<a href="https://fuzz.jamtoaster.network/submissions/t-0xe6b912626c9dfa3cd9e65b4412b19eb9d123edb1aa22d492a58a88091c483a7a-dd342fb6-3a57a736" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0xe6b912626c9dfa3cd9e65b4412b19eb9d123edb1aa22d492a58a88091c483a7a-dd342fb6-3a57a736</a>
+
+I tried to resubmit it after a while, but I got <code>hourly submission limit exceeded</code>, even though there was no active submission. <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-23 00:41</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: @all, if you have an issue, please just post the link to the submissions page</div>
+<div class='msg'><time>2026-05-23 00:41</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: This is easier for me than any screenshot</div>
+<div class='msg'><time>2026-05-23 02:06</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: <a href="https://fuzz.jamtoaster.network/submissions/t-0x4c448aa63cefe8ca36ce65ef0e8a8a8c4186d68b905eaf79468f90d6ead9707a-0-1-2-pre-7-05adc87b" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0x4c448aa63cefe8ca36ce65ef0e8a8a8c4186d68b905eaf79468f90d6ead9707a-0-1-2-pre-7-05adc87b</a>
+
+likely our L3a was triggered by accident while L2b was running (and revealed a real bug I can reproduce), but after L2b finished, it just refreshes to <code>queued</code>, not sure if this is by design <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-23 02:32</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: besides, there are duplicated publish results blocks in my UI with different suite hashes, same link <span class="edited">(edited)</span></div>
