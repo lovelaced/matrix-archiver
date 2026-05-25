@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-05-24 04:39 UTC</small></p>
+<p><small>last updated 2026-05-25 04:44 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -13297,6 +13297,10 @@ Error: &quot;Authorize failed: Some lanes haven&#x27;t completed yet — wait fo
 <div class='msg'><time>2026-05-23 14:24</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: L3a started for me before L2b finished, figured this isn&#x27;t expected behavior so wanted to flag</div>
 <div class='msg'><time>2026-05-23 18:02</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: what causes?:
 {&quot;error&quot;:&quot;missing Authorization: JAM-Envelope &lt;base64&gt;&quot;}</div>
+<div class='msg reply'><time>2026-05-24 06:16</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: Basti.await: happens when trying to download the report or logs for me</div>
+<div class='msg reply'><time>2026-05-24 07:32</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Same <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-24 07:32</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Console gets filled with unauthorised errors</div>
+<div class='msg reply'><time>2026-05-24 11:48</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Still not able to download reports. :/</div>
 <div class='msg'><time>2026-05-23 20:27</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &gt; &lt;@emielsebastiaan:matrix.org&gt; After successfully finishing we re unable to publish the result. 
 &gt; Error: &quot;Authorize failed: Some lanes haven&#x27;t completed yet — wait for the chain to finish.&quot;
 &gt; <a href="https://fuzz.jamtoaster.network/submissions/t-0xcefbf7cfe1ffa3a8eb3af4bbf220281a230b3d075bd9842c9cae84b6e1fc5b13-v0-1-50-gp0-7-2-da35d663" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0xcefbf7cfe1ffa3a8eb3af4bbf220281a230b3d075bd9842c9cae84b6e1fc5b13-v0-1-50-gp0-7-2-da35d663</a>
@@ -13304,3 +13308,43 @@ Error: &quot;Authorize failed: Some lanes haven&#x27;t completed yet — wait fo
 Getting the same </div>
 <div class='msg'><time>2026-05-23 21:09</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: same here</div>
 <div class='msg'><time>2026-05-23 21:10</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: Screenshot 2026-05-23 at 22.09.37.png</div>
+<div class='msg'><time>2026-05-24 08:31</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: Anyone found a workaround? I am using chrome btw maybe other browsers pass the Auth header? can&#x27;t really try now</div>
+<div class='msg'><time>2026-05-24 08:37</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: also i noticed that my submission is now accessible in incognito... was not the case before <a href="https://fuzz.jamtoaster.network/submissions/t-0xb4ac19c9a723477c0b31ef41dd0cfd9539a3a8d763e6a6c4c96eba6eba5e4d7f-2ef512ec-9b5bdbc6" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0xb4ac19c9a723477c0b31ef41dd0cfd9539a3a8d763e6a6c4c96eba6eba5e4d7f-2ef512ec-9b5bdbc6</a></div>
+<div class='msg'><time>2026-05-24 08:38</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: yes, I can access it as well; indeed it is useful so I can monitor my submission while afk 
+
+btw this is jampy, for par condicio; notfy me when I&#x27;ll fail, I&#x27;m going to see america&#x27;s cup 😁: <a href="https://fuzz.jamtoaster.network/submissions/t-0xf438d9b7ede483d500c3b9b32a40943233c27c61c6b8d5e92dc1e16ff2da6310-0-7-2-330e2cdf" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0xf438d9b7ede483d500c3b9b32a40943233c27c61c6b8d5e92dc1e16ff2da6310-0-7-2-330e2cdf</a> <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-05-24 10:49</time>&ensp;<span class='u' style='color:#4cbfa8'>xlchen</span>: same here. <a href="https://fuzz.jamtoaster.network/submissions/t-0x8e851ed992228f2268ee8c614fe6075d3800060ae14098e0309413a0a81c4470-sha-6388e37-83481857" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0x8e851ed992228f2268ee8c614fe6075d3800060ae14098e0309413a0a81c4470-sha-6388e37-83481857</a></div>
+<div class='msg'><time>2026-05-24 12:30</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: Mine is a little different and shows <code>Authorize failed: Failed to assemble combined suite report</code> ...  suite endpoint shows ```{
+    &quot;error&quot;: &quot;Authorize failed: Failed to assemble combined suite report&quot;,
+    &quot;detail&quot;: {
+        &quot;error&quot;: &quot;Failed to assemble combined suite report&quot;,
+        &quot;detail&quot;: {
+            &quot;kind&quot;: &quot;lane-fetch-failed&quot;,
+            &quot;preset&quot;: &quot;L2a&quot;,
+            &quot;sessionId&quot;: &quot;a11652c85b98ca1838cdb77dae6a735d&quot;,
+            &quot;reason&quot;: &quot;fetch error: fetch failed&quot;
+        }
+    }
+}```
+
+hopefully this helps debugging</div>
+<div class='msg'><time>2026-05-24 20:53</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Should be fixed. At least for the report of tomusdrw it works now for me</div>
+<div class='msg'><time>2026-05-24 20:53</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Please also try again</div>
+<div class='msg'><time>2026-05-24 20:55</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: </div>
+<div class='msg'><time>2026-05-24 20:56</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: Yup, report works, thanks! Downloading full session fails though, but the error is different - the file exceeds 2Gs and the backend refuses to provide it.</div>
+<div class='msg reply'><time>2026-05-24 21:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Do you need the full session? </div>
+<div class='msg reply'><time>2026-05-24 21:06</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: A proper fix requires to restart the fuzzer binaries to stream the data. </div>
+<div class='msg'><time>2026-05-24 20:57</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: I just tried. Still the &quot;Authorize failed: Some lanes haven&#x27;t completed yet — wait for the chain to finish.&quot; Error.</div>
+<div class='msg'><time>2026-05-24 20:57</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Please give me the link</div>
+<div class='msg'><time>2026-05-24 20:58</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: <a href="https://fuzz.jamtoaster.network/submissions/t-0x1c29671fc7140b513379355ecf0d94bf4ad1cada3ef94537c98fe68f59869700-gp0-7-2-202605210901-bec3fa2-ccda34c4" target="_blank" rel="noopener">Authorize failed: Some lanes haven&#x27;t completed yet — wait for the chain to finish.</a></div>
+<div class='msg'><time>2026-05-24 21:10</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: <a href="https://fuzz.jamtoaster.network/submissions/t-0xfa6a0cb290729b119117d01854e8dc5bac29dbab75729a5c5b5ba20c7baef24b-sha-6a324b5-e495e30c" target="_blank" rel="noopener">https://fuzz.jamtoaster.network/submissions/t-0xfa6a0cb290729b119117d01854e8dc5bac29dbab75729a5c5b5ba20c7baef24b-sha-6a324b5-e495e30c</a>
+
+Authorize failed: Failed to assemble combined suite report</div>
+<div class='msg'><time>2026-05-24 21:11</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: also have two &quot;publish results&quot; sections, one stuck in &quot;waiting for L2a to start&quot;, one &quot;ready to publish&quot;</div>
+<div class='msg'><time>2026-05-24 21:26</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: </div>
+<div class='msg'><time>2026-05-24 22:05</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Please try again</div>
+<div class='msg'><time>2026-05-24 22:14</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: image.png</div>
+<div class='msg'><time>2026-05-24 22:24</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: &gt; &lt;@bkchr:parity.io&gt; Please try again
+
+all good now, thanks!</div>
+<div class='msg'><time>2026-05-24 23:36</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: All good on our end too. Thank you. </div>
