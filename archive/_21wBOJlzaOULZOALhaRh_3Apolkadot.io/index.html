@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-05-28 04:39 UTC</small></p>
+<p><small>last updated 2026-05-29 04:41 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -13445,6 +13445,9 @@ I should put that more prominent into the Ui </div>
 <div class='msg reply'><time>2026-05-26 11:00</time>&ensp;<span class='u' style='color:#b94d2e'>milawords</span>: Could every JAM team that would like to attend please respond with the number of implementers who would be joining from their team?</div>
 <div class='msg reply'><time>2026-05-26 15:07</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: We’ll be at web3 summit with the entire team. Is there an agenda for the meeting? We don’t have too much to report from our end tbh. I guess our attendance depends on agenda and attendance of others. </div>
 <div class='msg reply'><time>2026-05-26 17:31</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: JamZig⚡ would like to attend with in total 2 team members</div>
+<div class='msg reply'><time>2026-05-28 08:52</time>&ensp;<span class='u' style='color:#48d03d'>tomusdrw</span>: Typeberry: 2 team members, we already bought tickets though.</div>
+<div class='msg reply'><time>2026-05-28 08:59</time>&ensp;<span class='u' style='color:#44c3b0'>polykrate</span>: Jotl would like to attend with one team member </div>
+<div class='msg reply'><time>2026-05-28 13:01</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: 3/4 members and we already have tickets</div>
 <div class='msg'><time>2026-05-27 02:10</time>&ensp;<span class='u' style='color:#91cf52'>dimartiro</span>: Hey all 👋 — question for whoever&#x27;s working on finality.
 
 The GP (§18) defines the BEEFY commitment itself, and the beefy root (the MMR super-peak) is part of the STF, so that side is well-defined and conformance-tested (<code>bad_beefy_mmr</code>). What I <em>can&#x27;t</em> find is anything in JAMNP-S about **distributing** those signed commitments over the network — the CE stream kinds I see stop around 145 (judgment publication), with nothing for finality.
@@ -13460,6 +13463,11 @@ Mainly trying to avoid each team picking different numbers/formats and silently 
 <div class='msg reply'><time>2026-05-27 13:25</time>&ensp;<span class='u' style='color:#91cf52'>dimartiro</span>: Is a network protocol for BEEFY signature distribution planned? Without one we can&#x27;t exchange signatures to reach the 2/3+1 threshold, which blocks M2 right?</div>
 <div class='msg reply'><time>2026-05-27 13:33</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: Sure. But BEEFY is separate to GRANDPA, it is not necessary for finality</div>
 <div class='msg reply'><time>2026-05-27 13:35</time>&ensp;<span class='u' style='color:#c65779'>dave</span>: AIUI it runs after finality to produce shorter proofs of finality</div>
+<div class='msg reply'><time>2026-05-28 11:59</time>&ensp;<span class='u' style='color:#91cf52'>dimartiro</span>: Right — got that BEEFY is separate from GRANDPA and runs after finality. My concern is still scoped to two things:
+
+  - Is BEEFY signature distribution required for M2?
+  - If it is required, how do we implement it without a spec? Without a defined CE stream-kind and wire format, every team will pick different ones and silently fail to interop.</div>
+<div class='msg reply'><time>2026-05-28 12:00</time>&ensp;<span class='u' style='color:#91cf52'>dimartiro</span>: Please let me know if I&#x27;m missing something</div>
 <div class='msg'><time>2026-05-27 10:21</time>&ensp;<span class='u' style='color:#7a48c8'>sparky000</span>: Hey, I have a question: is anyone working on implementing the Move language for the JAM protocol?</div>
 <div class='msg'><time>2026-05-27 10:51</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Did somebody restart the fuzzing jobs? Last night i left it it was on step 300k, today checking in its started again from 10k</div>
 <div class='msg'><time>2026-05-27 10:51</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah it was me. Sorry we had to do this because of some misconfiguration of the fuzzer</div>
@@ -13481,3 +13489,34 @@ As recommended in <a href="https://matrix.to/#/!wBOJlzaOULZOALhaRh:polkadot.io/$
 </div>
 <div class='msg reply'><time>2026-05-27 23:58</time>&ensp;<span class='u' style='color:#5844d2'>anaelleltd</span>: If you have any questions, please post them in this thread. </div>
 <div class='msg reply'><time>2026-05-27 23:58</time>&ensp;<span class='u' style='color:#5844d2'>anaelleltd</span>: Thank you!</div>
+<div class='msg'><time>2026-05-28 05:43</time>&ensp;<span class='u' style='color:#5dd07c'>knight1205</span>: Hi, how much time and memory roughly, teams took in l2b and l3a? just curious as we had some issues earlier (fixed now) and will help us find any further issues. <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-05-28 05:46</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: l2b ~20h, l3a ~2h</div>
+<div class='msg reply'><time>2026-05-28 13:03</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: and memory is about 10GB for L2B without using any disk cache</div>
+<div class='msg'><time>2026-05-28 23:01</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: </div>
+<div class='msg'><time>2026-05-28 23:02</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: &gt; &lt;@anaelleltd:matrix.org&gt; **JAM Prize Fellowship evaluations - Update 1**
+&gt; 
+&gt; The <a href="https://fuzz.jamtoaster.network/" target="_blank" rel="noopener">JAM Submission app</a> was released on 19th May and is now available for all JAM implementers to register their team, submit their implementation, and run the conformance fuzzer on demand. 
+&gt; 
+&gt; 14/24 teams have already successfully passed all M1 conformance tests and obtained their attestations. They are currently awaiting an interview with the Polkadot Technical Fellowship.
+&gt; 
+&gt; <a href="https://polkadottechnicalfellowship.notion.site/2ef96f88d0a78051b94ef4a6d6c9be8c?v=2ef96f88d0a78036b33a000c2cb9a0b1" target="_blank" rel="noopener">A tracker</a> is available with an overview of the overall process and future expected steps. Please note that the number assigned to each team is based on the date their initial PR was submitted in the <a href="https://github.com/w3f/jam-milestone-delivery/pulls" target="_blank" rel="noopener">JAM milestone delivery repo</a>. 
+&gt; 
+&gt; As recommended in <a href="https://matrix.to/#/!wBOJlzaOULZOALhaRh:polkadot.io/$Da2rATuW6LbaY19qFVEVzMLN8coJWzYdolfxWuYPuEI?via=polkadot.io&amp;via=matrix.org&amp;via=parity.io" target="_blank" rel="noopener">this announcement</a>, interviews for M1 evaluations will be scheduled as per the following guidelines:
+&gt; - **Priority group 1:** The 7 teams whose implementations passed all W3F fuzzing tests between 4th February and 2nd March 2026.
+&gt; - **Priority group 2:** The 2 teams whose implementations were being fuzzed by W3F prior to 24th March 2026.
+&gt; - **Priority group 3:** All the remaining teams, in the order of attestation timestamps.
+&gt; 
+&gt; <em>Advance notice: While we will endeavour to get back to you with an interview date and time as soon as possible, scheduling depends on Fellows’ availability, which will likely be reduced during Web3 summit (June) and the EU summer holidays (July and August).</em>
+&gt; 
+
+Thank you. The tracker is genuinely useful and appreciated.
+
+Regarding the interview schedule, no problem.
+
+We’ve only been waiting since December, so what’s another summer?</div>
+<div class='msg'><time>2026-05-28 23:20</time>&ensp;<span class='u' style='color:#4977cf'>danicuki</span>: That said, it would be wonderful if a few interview slots could be found before the holidays, so implementers could also enjoy the summer with a bit more certainty about what comes next.</div>
+<div class='msg reply'><time>2026-05-28 23:38</time>&ensp;<span class='u' style='color:#5844d2'>anaelleltd</span>: Agreed that interviews need to start ASAP to get the ball rolling for good. I will do my best to get this sorted for Priority  group 1. 🙏</div>
+<div class='msg'><time>2026-05-28 23:32</time>&ensp;<span class='u' style='color:#da5c80'>jan</span>: &gt; We&#x27;ve only been waiting since December, so what&#x27;s another summer?
+
+While I have no authority over non-technical matters within Parity and the Fellowship, I think this needs to be said: on behalf of Parity and the Fellowship, we&#x27;re sorry. We&#x27;ve obviously screwed up with the M1 milestone process so far. I sincerely hope this doesn&#x27;t sour you (as in, all of JAM implementers) on JAM, and that you&#x27;ll continue with future milestones.</div>
+<div class='msg'><time>2026-05-29 03:02</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: It happens. I would personally feel better if it was made clear what exactly went wrong, something like a post mortem, and why this won’t repeat for M2</div>
