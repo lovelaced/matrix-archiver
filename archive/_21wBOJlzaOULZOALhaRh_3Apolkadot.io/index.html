@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-07-03 06:40 UTC</small></p>
+<p><small>last updated 2026-07-04 06:28 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -13894,4 +13894,7 @@ Not every validator is running the <code>refine</code>. They are only running th
 My idea behind this is that Jamswap could be public good of JAM - chain. We need real world services to start running realistic cross client test nets. What if JAM backs this one and there&#x27;s a DEX on JAM that doesn&#x27;t attempt to exploit high fees to make money? Polkadot has always been about the long game
 
 Collective effort on making certain esstial services well done / using those same servises to test the consensus of all our clients? very cool <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-07-03 06:55</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But if every validator would run this, they could not be running other services. Can you not build this as a normal service?</div>
+<div class='msg reply'><time>2026-07-03 15:14</time>&ensp;<span class='u' style='color:#b85ace'>abutlabs</span>: Good catch — the docs are updated. Every validator was never meant to run refine: each validator only stores the service&#x27;s state and re-executes accumulate (settlement) on block import — refine just runs on the core&#x27;s 3 assigned guarantors - The repo is less than a week old, so there&#x27;s obviously still a lot to think through. This will run as a normal service though</div>
+<div class='msg reply'><time>2026-07-03 18:08</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Okay good 👍 </div>
 <div class='msg'><time>2026-07-02 23:36</time>&ensp;<span class='u' style='color:#b85ace'>abutlabs</span>: </div>
