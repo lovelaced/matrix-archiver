@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-08-18 03:54 UTC</small></p>
+<p><small>last updated 2026-08-19 03:55 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -14014,3 +14014,68 @@ Please mention it. As rank 2 is always just requires a written justification, I 
 <div class='msg reply'><time>2026-08-17 10:12</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Ahh yeah, M1 includes both interviews </div>
 <div class='msg'><time>2026-08-15 17:54</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: As most high ranked technical fellows are also part of parity, is the interview going to be with parity members mostly?</div>
 <div class='msg'><time>2026-08-17 09:01</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: People who finished the initial rounds, can help with the later rounds </div>
+<div class='msg'><time>2026-08-18 10:58</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: Hello guys, a practical help question regarding a specific requirement:
+
+&gt; Any team that is developing its implementation in private needs to provide a history of their github commits on-chain.
+&gt; This means submitting a remark on-chain for each commit pushed on their repo.
+
+ Has any team a script to share that takes care of doing that for all commits ? (We have way too many commits, not feasible one by one)</div>
+<div class='msg'><time>2026-08-18 11:01</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: the point of commit history onchain is timestamping, if you put all the hashes now it is pointless I suppose</div>
+<div class='msg'><time>2026-08-18 11:08</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah </div>
+<div class='msg'><time>2026-08-18 11:08</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: so if at this case, we have to public our repo?</div>
+<div class='msg'><time>2026-08-18 11:09</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: To check/verify someone needs to have access at least </div>
+<div class='msg reply'><time>2026-08-18 11:10</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: if invite you or gav to the repo would work, I have already sent the invitations</div>
+<div class='msg'><time>2026-08-18 11:09</time>&ensp;<span class='u' style='color:#be2950'>clearloop</span>: I just made a batch of our commit hashes here with timestamp in the message <a href="https://assethub-polkadot.subscan.io/extrinsic/19603303-3" target="_blank" rel="noopener">https://assethub-polkadot.subscan.io/extrinsic/19603303-3</a></div>
+<div class='msg'><time>2026-08-18 11:21</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: submitting every commit on chain would not have been practical ... we have 277 commits, I don&#x27;t know other teams how many commits they have...</div>
+<div class='msg'><time>2026-08-18 11:21</time>&ensp;<span class='u' style='color:#db4dca'>celadari</span>: Would be easier to give access to the repo to reviewers</div>
+<div class='msg reply'><time>2026-08-18 11:23</time>&ensp;<span class='u' style='color:#d5d64d'>alexandre.balde</span>: You can do both: submit a remark with a small ordered sample of your 277 commits along with the timestamp for each, as well as give access. Whoever is given access can confirm.</div>
+<div class='msg'><time>2026-08-18 11:25</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: &gt; &lt;@celadari:matrix.org&gt; submitting every commit on chain would not have been practical ... we have 277 commits, I don&#x27;t know other teams how many commits they have...
+
+It was not about every commit. But seeing a timeline that is clear because your remark is timely bound by the Blockchain. </div>
+<div class='msg'><time>2026-08-18 11:26</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: But I would not stress about it for people who have worked on this since some time now and are not unknown <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-08-18 11:29</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: There was remark commit github action that was shared here around early 2025</div>
+<div class='msg'><time>2026-08-18 11:33</time>&ensp;<span class='u' style='color:#817ecb'>ycc3741</span>: If our repositories are public, do we still need to submit the commit hashes on-chain?
+</div>
+<div class='msg'><time>2026-08-18 11:35</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Just because you repo is public, it doesn&#x27;t proof anything</div>
+<div class='msg'><time>2026-08-18 11:35</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I guess only some of us were there back then</div>
+<div class='msg'><time>2026-08-18 11:35</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I am not sure it answers properly but i do believe in here there was someone asking this 1y ago more or less and someone from parity i think said it was ok </div>
+<div class='msg'><time>2026-08-18 11:36</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: But i don&#x27;t remember the specifics </div>
+<div class='msg'><time>2026-08-18 11:36</time>&ensp;<span class='u' style='color:#817ecb'>ycc3741</span>: We have several thousand commits in our repositories, so putting all of them on-chain seems a bit impractical.
+Do we need to put all of them on-chain, or is there another way we should handle this?
+
+We were a bit confused because Rule 16 seems to mention on-chain commit hashes specifically for code developed in private.
+</div>
+<div class='msg'><time>2026-08-18 11:37</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I believe it was mentioned that gh has a way to fetch unforgeable timestampted data that could more or less prove that the history is genuine, but I dont remember who asked here </div>
+<div class='msg'><time>2026-08-18 11:37</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: If that works, it is kind of fine </div>
+<div class='msg'><time>2026-08-18 11:37</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Again, you don&#x27;t need all commits put out there</div>
+<div class='msg'><time>2026-08-18 11:38</time>&ensp;<span class='u' style='color:#817ecb'>ycc3741</span>: Got it. So which commits would we need to put on-chain, and what would be the recommended way to handle this for a repository with a long commit history?
+</div>
+<div class='msg'><time>2026-08-18 11:38</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: i just had a few of my commits in blockchain (you can see it&#x27;s in notion) i think the idea was to prove that you worked on it at that time etc. SO every some number of commits (or when i felt like i committed a big feature) i had it committed on chain</div>
+<div class='msg'><time>2026-08-18 11:40</time>&ensp;<span class='u' style='color:#c457c5'>vinsystems</span>: &gt; &lt;@gav:polkadot.io&gt; Fellowship will be looking for evidence that the team coded the software organically. That it’s not a port or AI adjusted version of some other team’s software. To this extent it’s important for the teams to demonstrate an organic development process. Regular, sensibly-sized commits are one way of doing this and we assume GitHub is reasonably corruption-resistant (git alone obviously isn’t). But if you don’t want to use GitHub then make sure you credibly timestamp the commits elsewhere such as on a public blockchain. 
+
+Gavin said this ☝️</div>
+<div class='msg'><time>2026-08-18 11:41</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: Timestamps of git commits can be spoofed even when published on GitHub. Timestamps of GitHub Pull requests and GitHub Releases cannot be spoofed. So that should be sufficiently able to provide public evidence on an organically developed code base. </div>
+<div class='msg'><time>2026-08-18 11:42</time>&ensp;<span class='u' style='color:#817ecb'>ycc3741</span>: We have both the GitHub PRs and Releases preserved for our repositories. 
+In that case, would those be sufficient as public evidence of our organic development history, or do we still need to put anything on-chain?
+</div>
+<div class='msg'><time>2026-08-18 11:44</time>&ensp;<span class='u' style='color:#5c84c9'>prematurata</span>: I believe, but don&#x27;t take my words on it, that also gh ci actions are collectable via api and bring commit Shas with it along with the telemetry (start time etc)</div>
+<div class='msg'><time>2026-08-18 11:44</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Now it would be any way too late for it. </div>
+<div class='msg'><time>2026-08-18 11:49</time>&ensp;<span class='u' style='color:#cdc232'>oliver.tale-yazdi</span>: We remarked every master commit since inception of our repo to prove non-modified history with this: <a href="https://github.com/JamBrains/remark-commit" target="_blank" rel="noopener">https://github.com/JamBrains/remark-commit</a> 
+You can see the account here: <a href="https://collectives-polkadot.subscan.io/account/1jamyjYe97qPPtdeYVcUosPwc2Bv1Y6zNEMtzPW8a2z2abN" target="_blank" rel="noopener">https://collectives-polkadot.subscan.io/account/1jamyjYe97qPPtdeYVcUosPwc2Bv1Y6zNEMtzPW8a2z2abN</a>   
+it goes back to 2024-06-18 <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-08-18 11:52</time>&ensp;<span class='u' style='color:#817ecb'>ycc3741</span>: Just to make sure we understand the rules correctly: 
+Rule 14 mentions a clear Git history and publicly timestamped commits, 
+and Rule 15 says that timestamps may be provided by pushing code to GitHub on a timely basis. 
+Rule 16 mentions on-chain commit hashes specifically for code developed in private.
+
+Since our code was developed publicly on GitHub, with a clear Git history as well as PR and Release records, would these be sufficient evidence for the development history without additional on-chain timestamping? Or is there any other action you would recommend we take to provide sufficient evidence?
+
+</div>
+<div class='msg'><time>2026-08-18 12:00</time>&ensp;<span class='u' style='color:#5e86de'>boymaas</span>: I interpreted the code as development in &quot;private,&quot; referring to teams who did not push it to any third party like Github. 
+
+In my case, I pushed to GitHub with pull requests, assuming the pull requests serve as timestamp proof since you cannot alter the time or date of a pull request on GitHub.</div>
+<div class='msg'><time>2026-08-18 12:00</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yeah if these timestamps can not be faked, I think it is fine</div>
+<div class='msg'><time>2026-08-18 12:00</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: In the end the idea is just to proof that you not just build everything yesterday</div>
+<div class='msg'><time>2026-08-18 12:01</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Which is also generally important if we assume that you faked it</div>
+<div class='msg'><time>2026-08-18 12:08</time>&ensp;<span class='u' style='color:#817ecb'>ycc3741</span>: Got it, that makes sense. Thanks for clarifying!
+</div>
