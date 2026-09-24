@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-09-23 08:30 UTC</small></p>
+<p><small>last updated 2026-09-24 08:23 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -14223,6 +14223,7 @@ I am sure there will be many people outside Parity eager to contribute and make 
 <div class='msg'><time>2026-09-15 19:26</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: PSA: the next nightly of the PolkaJam node will implement GP 0.8.0. There may still be some rough edges, so anyone interested in cross-testing is welcome to try the 0.8 test vectors from this <a href="https://github.com/davxy/jam-test-vectors/pull/112" target="_blank" rel="noopener">PR</a>, or drop a message in the jam-conformance <a href="https://github.com/davxy/jam-conformance/issues" target="_blank" rel="noopener">repo</a> <span class="edited">(edited)</span></div>
 <div class='msg reply'><time>2026-09-18 19:50</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: Hey, what&#x27;s the best repo to report a potential polkajam issue in? Been doing cross testing today between javajam and polkajam and found two discrepancies.</div>
 <div class='msg reply'><time>2026-09-19 08:46</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: @davxy? </div>
+<div class='msg reply'><time>2026-09-23 14:24</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: is there some kind of public test network where can we connect our impl?</div>
 <div class='msg'><time>2026-09-18 07:29</time>&ensp;<span class='u' style='color:#a23bc7'>emielsebastiaan</span>: We have now published a full position paper setting out our view on where Kusama should go next:
 
 A Proposal for a Kusama Future on JAM Prime: <a href="https://forum.polkadot.network/t/a-proposal-for-a-kusama-future-on-jam-prime/18683" target="_blank" rel="noopener">https://forum.polkadot.network/t/a-proposal-for-a-kusama-future-on-jam-prime/18683</a></div>
@@ -14242,3 +14243,4 @@ Which polkajam commit or nightly do you run?
 </div>
 <div class='msg reply'><time>2026-09-22 00:29</time>&ensp;<span class='u' style='color:#d470bf'>jaymansfield</span>: You&#x27;re right I checked again and both our nodes reach the invoke with the same gas and both fail the pre-check. My mistake, sorry for the noise. The one remaining difference is the result code for that case: you report ∞, we report ⊚.  Can you check to see if for GP 14.13 you perform the if |e| ≠ m_e before the r ∉ B check? Thanks!</div>
 <div class='msg reply'><time>2026-09-22 13:44</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: Fixed upstream. I&#x27;ll ping you as soon as it lands on nightly. Thanks for the report <span class="edited">(edited)</span></div>
+<div class='msg reply'><time>2026-09-23 14:57</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Which work package did you test against? Can i join the party as well?</div>
