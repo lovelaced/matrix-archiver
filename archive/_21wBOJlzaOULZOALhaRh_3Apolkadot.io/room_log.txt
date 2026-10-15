@@ -1,5 +1,5 @@
 # room: #jam:polkadot.io
-# exported: 2026-10-14 08:37 UTC
+# exported: 2026-10-15 08:13 UTC
 2024-04-20 02:08 johnjiao123: 
 2024-04-20 02:09 johnjiao123: 
 2024-05-30 21:48 nradko: Hey everyone,
@@ -14425,6 +14425,11 @@ If you need a blank invoice template, one is here (but you don't need to use it 
 2026-10-13 17:40 prematurata: Congrats all. Also is there any news about fellowship inclusion? It's been a while now
 2026-10-13 18:10 dakkk: can we submit it even if the referenda is still deciding or do we have to wait? [edited]
 2026-10-13 20:21 bkchr: I had to move the call by 1 hour to 12pm. Sorry for the short notice
+  ↳ 2026-10-14 10:50 hitchhooker: is this internal? even cant be found
+  ↳ 2026-10-14 16:09 luke_jamixir: https://calendar.app.google/zzXMMzqKSEFZ9jVKA
+  ↳ 2026-10-14 16:13 bkchr: > <@hitchhooker:matrix.org> is this internal? even cant be found
+
+https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=NDhpZG01Y2VoNjViZGpkOXR2cXZ2Z2NwaTIgY19hYTQ3OTIxMjcyYzExNGQ3YzViNDUzMmU4ZDQyOTMyYzZlZTdmNDkyNDRlMDA5YjYyODM1ZTVjZDU1MjI5OWY0QGc&tmsrc=c_aa47921272c114d7c5b4532e8d42932c6ee7f49244e009b62835e5cd552299f4%40group.calendar.google.com
 2026-10-13 21:25 bkchr: https://collectives.subsquare.io/fellowship/referenda/651
 https://collectives.subsquare.io/fellowship/referenda/652
 https://collectives.subsquare.io/fellowship/referenda/653
@@ -14433,3 +14438,18 @@ https://collectives.subsquare.io/fellowship/referenda/655
 https://collectives.subsquare.io/fellowship/referenda/656
 2026-10-13 21:26 bkchr: Anoter round of proposals :) Congrats to the people that have passed the M3 interviews so far
 2026-10-13 21:26 bkchr: If someone has some DOT available on collectives, please help with the decision deposits :P 
+2026-10-15 06:51 luke_jamixir: the Jam submission app has been down for  while now (https://fuzz.jamtoaster.network/). anyone else noticed? who can revive it? also curios, lets say a team has made change and boosted performance, will they be able to resubmit in order to check the performance on the fuzzer?
+2026-10-15 06:52 bkchr: The fuzzer is not a benchmarking machine
+2026-10-15 06:52 bkchr: The toaster right now is in maitenance AFAIK and thus, the fuzzer is down 
+2026-10-15 06:54 bkchr: The thing is a dumb program that tests your implementation, but it doesn't run it loops etc to get proper timings
+2026-10-15 06:55 bkchr: If someone wants to write a benchmarking tool, we could probably get this running on the toaster.
+2026-10-15 06:58 luke_jamixir: I don't remember the details. been a while. but didn't we bench already using the test vectors? https://paritytech.github.io/jam-conformance-dashboard/
+2026-10-15 06:59 bkchr: I'm not saying that the test vectors are a problem
+2026-10-15 06:59 bkchr: Just that there is a difference between a fuzzer and a benchmarking tool 
+2026-10-15 07:04 luke_jamixir: True, but still, It be nice if , on the base of what already exists, teams could re submit their binaries / dockers to benched  and that dashboard would reflect ongoing results, rather then be stale and depend on Davide
+2026-10-15 07:05 bkchr: Yes, maybe davxy can shime in and tell us how much this dashboard is already automatic. 
+2026-10-15 07:52 shimonchick: I was considering building something like the fuzzer but for networking messages, in order to test errors/handling in unusual cases or spam attempts on my node. Would someone be interested if I polished and deployed it?
+2026-10-15 07:57 luke_jamixir: Yes. sounds like a  good idea
+2026-10-15 07:58 bkchr: what you are describing is the M2 fuzzer :D And we will need help. Javier already started looking into it. https://github.com/paritytech/jam-m2-conformance
+
+Right now this still depends on polkajam, we still need to find a way for you to reasonable contribute 
