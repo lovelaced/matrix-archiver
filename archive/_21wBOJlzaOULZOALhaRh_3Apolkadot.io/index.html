@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-10-15 08:13 UTC</small></p>
+<p><small>last updated 2026-10-17 07:43 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -14323,6 +14323,8 @@ If you need a blank invoice template, one is here (but you don&#x27;t need to us
 <a href="https://collectives.subsquare.io/fellowship/referenda/656" target="_blank" rel="noopener">https://collectives.subsquare.io/fellowship/referenda/656</a></div>
 <div class='msg'><time>2026-10-13 21:26</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Anoter round of proposals :) Congrats to the people that have passed the M3 interviews so far</div>
 <div class='msg'><time>2026-10-13 21:26</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: If someone has some DOT available on collectives, please help with the decision deposits :P </div>
+<div class='msg'><time>2026-10-14 06:05</time>&ensp;<span class='u' style='color:#d09079'>bill</span>: Ah sorry, please wait until the referendum it is confirmed on-chain</div>
+<div class='msg'><time>2026-10-14 06:05</time>&ensp;<span class='u' style='color:#d09079'>bill</span>: Also - if anyone has any issues with the submission, please email jam@web3.foundation. This lets us keep track of things. Thanks!</div>
 <div class='msg'><time>2026-10-15 06:51</time>&ensp;<span class='u' style='color:#2962d0'>luke_jamixir</span>: the Jam submission app has been down for  while now (<a href="https://fuzz.jamtoaster.network/)." target="_blank" rel="noopener">https://fuzz.jamtoaster.network/).</a> anyone else noticed? who can revive it? also curios, lets say a team has made change and boosted performance, will they be able to resubmit in order to check the performance on the fuzzer?</div>
 <div class='msg'><time>2026-10-15 06:52</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: The fuzzer is not a benchmarking machine</div>
 <div class='msg'><time>2026-10-15 06:52</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: The toaster right now is in maitenance AFAIK and thus, the fuzzer is down </div>
@@ -14338,3 +14340,15 @@ If you need a blank invoice template, one is here (but you don&#x27;t need to us
 <div class='msg'><time>2026-10-15 07:58</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: what you are describing is the M2 fuzzer :D And we will need help. Javier already started looking into it. <a href="https://github.com/paritytech/jam-m2-conformance" target="_blank" rel="noopener">https://github.com/paritytech/jam-m2-conformance</a>
 
 Right now this still depends on polkajam, we still need to find a way for you to reasonable contribute </div>
+<div class='msg reply'><time>2026-10-15 09:32</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Cool. do you accept PRs? Some teams have already been testing locally against polkajam binaries on guaraneeing/auditing/availability side. I could help on P2-4</div>
+<div class='msg reply'><time>2026-10-15 11:57</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Best to coordinate with Javier, but yeah we will want you to help as much as possible </div>
+<div class='msg'><time>2026-10-15 10:03</time>&ensp;<span class='u' style='color:#2962d0'>luke_jamixir</span>: the paracahin service AMA is now. right? is this the correct link? <a href="https://meet.google.com/oey-cfog-htb" target="_blank" rel="noopener">https://meet.google.com/oey-cfog-htb</a></div>
+<div class='msg'><time>2026-10-15 10:04</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yes, I will join in a moment</div>
+<div class='msg'><time>2026-10-15 12:08</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: I&#x27;m not involved in running or maintaining the _self-service_ web app running on the fuzz.jamtoaster.network. I mainly maintain the <a href="https://github.com/davxy/jam-conformance/tree/main/scripts" target="_blank" rel="noopener">scripts</a> used by the backend.
+But I can give some inputs about about fuzzing and the vectors published in jam-conformance repo.
+My proposal is to release the polkajam-fuzz binary as soon as we step into M2 territory. The fuzzer is mostly relevant for M1 evaluation, so after that there&#x27;s not much reason to keep it &quot;secret&quot;. Then you can fuzz your implementation independently, and maybe improve the workflow scripts or build some other tools on top of it.
+
+FWIW I&#x27;ll publish soon a new batch for 0.8 <span class="edited">(edited)</span></div>
+<div class='msg'><time>2026-10-15 12:15</time>&ensp;<span class='u' style='color:#c9419d'>davxy</span>: AFAIK, the performance dashboard data is (automatically?) picked from the results published <a href="https://github.com/davxy/jam-conformance/tree/main/fuzz-perf" target="_blank" rel="noopener">here</a>.
+
+These results are generated by running some of the <a href="https://github.com/davxy/jam-test-vectors/tree/master/traces" target="_blank" rel="noopener">jam-test-vector traces</a> on the target using the fuzzer, which handles communication and collects statistics. The fuzzer can replay a given set of traces.</div>
