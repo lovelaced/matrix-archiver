@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-11-22 11:10 UTC</small></p>
+<p><small>last updated 2026-11-23 12:19 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -14419,3 +14419,4 @@ Sent you a message on this</div>
 <div class='msg'><time>2026-11-15 02:44</time>&ensp;<span class='u' style='color:#bd5ab8'>philoniare</span>: Hi all, seeing a permanent GRANDPA finality stall with polkajam v0.8.0 <code>polkajam 0.1.29</code> on a local dev network: 6 validators (<code>--chain dev --finality-mode grandpa</code>). From <code>grandpa=trace</code> logs: a block is authored a few ms before the prevote timers fire, 4 validators have imported it and prevote for it, the other 2 prevote for its parent and drop the 4 prevotes (&quot;Ignoring message targeting … lower than round base&quot;). Those 2 never precommit, the other 4 give 4 precommits where 5 are needed, and the round never completes. After that it&#x27;s &quot;finality lagging&quot; and fallback to AURA every epoch. Happened in 3 of 7 runs. The dropped prevotes don&#x27;t seem to be reconsidered once the block is imported (inferred from logs). Our voter keeps such votes and re-tallies them when the block arrives, like Substrate&#x27;s &quot;until imported&quot; queue. Is this known, or already fixed in a nightly? Happy to share the full trace logs.</div>
 <div class='msg'><time>2026-11-21 17:03</time>&ensp;<span class='u' style='color:#cc752f'>supported</span>: </div>
 <div class='msg'><time>2026-11-22 10:46</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: Correct me if I&#x27;m mistaken, but now with the 0.8+ dynamic validator size, we could programmatically scale the network up and down based on demand? Having benefit of lower idle network cost when there isn&#x27;t much coretime utilisation </div>
+<div class='msg'><time>2026-11-22 21:39</time>&ensp;<span class='u' style='color:#cd6fc8'>bkchr</span>: Yes, this is the reason for this kind of feature</div>
