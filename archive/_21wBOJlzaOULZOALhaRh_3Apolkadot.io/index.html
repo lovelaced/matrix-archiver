@@ -20,7 +20,7 @@ em{font-style:italic}
 }
 </style>
 <h1>#jam:polkadot.io</h1>
-<p><small>last updated 2026-11-27 12:04 UTC</small></p>
+<p><small>last updated 2026-11-28 11:38 UTC</small></p>
 <p><a href='room_log.txt'>⇩ plaintext</a> · <a href='../../'>⇦ all rooms</a></p>
 <hr>
 <div class='msg'><time>2024-04-20 02:08</time>&ensp;<span class='u' style='color:#d0709e'>johnjiao123</span>: </div>
@@ -14436,3 +14436,16 @@ Please refer to this <a href="https://polkadottechnicalfellowship.notion.site/2e
 </div>
 <div class='msg reply'><time>2026-11-27 11:58</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: Thank you for the update Anaelle. 
 The M2 fuzzer cannot be used by us since it requires the polkajam source code, right?</div>
+<div class='msg reply'><time>2026-11-27 12:05</time>&ensp;<span class='u' style='color:#cf85c2'>shimonchick</span>: dakkk | JamPy: yeah, unfortunately for now they&#x27;re not decoupled. I did a fork of the repo and used my implementation as an oracle, to test the harness. It still had some issues when i checked 2 weeks ago</div>
+<div class='msg reply'><time>2026-11-27 12:10</time>&ensp;<span class='u' style='color:#d5d64d'>alexandre.balde</span>: Is this because your team implemented its own version of the PVM, or some other reason?</div>
+<div class='msg reply'><time>2026-11-27 12:18</time>&ensp;<span class='u' style='color:#bfaf39'>dakkk</span>: What do you mean? I implemented the PVM, but it doesn&#x27;t make any difference</div>
+<div class='msg'><time>2026-11-27 23:43</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: </div>
+<div class='msg'><time>2026-11-28 00:37</time>&ensp;<span class='u' style='color:#4036ac'>ascriv</span>: I&#x27;ve been building jam-lean, an executable model of the Gray Paper (v0.8.1) in Lean 4, and it now has a companion book covering every section of the paper:
+
+📖 <a href="https://ascrivener.github.io/jam-lean/book/" target="_blank" rel="noopener">https://ascrivener.github.io/jam-lean/book/</a>
+
+some uses of this project:
+- as an executable version of the gray paper it can help a lot with conformance 
+- we can now prove, in lean, certain aspects of the protocol itself behave the way we’d like
+- since the pvm is modeled, we can similarly prove services behave the way we’d like by making proofs about their compiled pvm code
+- ambitious: a jam node implementation itself can be proven to be correct (compared to the model) <span class="edited">(edited)</span></div>

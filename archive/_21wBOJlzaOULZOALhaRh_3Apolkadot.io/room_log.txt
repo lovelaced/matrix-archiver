@@ -1,5 +1,5 @@
 # room: #jam:polkadot.io
-# exported: 2026-11-27 12:04 UTC
+# exported: 2026-11-28 11:38 UTC
 2024-04-20 02:08 johnjiao123: 
 2024-04-20 02:09 johnjiao123: 
 2024-05-30 21:48 nradko: Hey everyone,
@@ -14551,3 +14551,16 @@ Please refer to this [tracker](https://polkadottechnicalfellowship.notion.site/2
 
   ↳ 2026-11-27 11:58 dakkk: Thank you for the update Anaelle. 
 The M2 fuzzer cannot be used by us since it requires the polkajam source code, right?
+  ↳ 2026-11-27 12:05 shimonchick: dakkk | JamPy: yeah, unfortunately for now they're not decoupled. I did a fork of the repo and used my implementation as an oracle, to test the harness. It still had some issues when i checked 2 weeks ago
+  ↳ 2026-11-27 12:10 alexandre.balde: Is this because your team implemented its own version of the PVM, or some other reason?
+  ↳ 2026-11-27 12:18 dakkk: What do you mean? I implemented the PVM, but it doesn't make any difference
+2026-11-27 23:43 ascriv: 
+2026-11-28 00:37 ascriv: I've been building jam-lean, an executable model of the Gray Paper (v0.8.1) in Lean 4, and it now has a companion book covering every section of the paper:
+
+📖 https://ascrivener.github.io/jam-lean/book/
+
+some uses of this project:
+- as an executable version of the gray paper it can help a lot with conformance 
+- we can now prove, in lean, certain aspects of the protocol itself behave the way we’d like
+- since the pvm is modeled, we can similarly prove services behave the way we’d like by making proofs about their compiled pvm code
+- ambitious: a jam node implementation itself can be proven to be correct (compared to the model) [edited]
